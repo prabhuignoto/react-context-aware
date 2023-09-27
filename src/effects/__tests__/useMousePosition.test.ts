@@ -2,7 +2,8 @@
 import { act, renderHook } from "@testing-library/react-hooks";
 import { RefObject } from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { MousePositionProps, useMousePosition } from "../useMousePosition"; // Update the path accordingly
+import { MousePositionProps } from "../mouse-position.model";
+import { useMousePosition } from "../useMousePosition"; // Update the path accordingly
 
 describe("useMousePosition", () => {
   // Create a fake element and ref to use for tests

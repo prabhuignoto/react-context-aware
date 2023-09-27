@@ -1,16 +1,6 @@
-import { ReactNode, RefObject, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import PointerSVG from "../assets/pointer.svg";
-import { Props } from "./core.model";
-import { MouseMovementDirection } from "./mouse-position.model";
-
-export type MousePointerProps = {
-  icon?: ReactNode;
-  container: RefObject<HTMLElement>;
-  mouseX: number;
-  mouseY: number;
-  direction: MouseMovementDirection;
-  isActive?: boolean;
-} & Props;
+import { MousePointerProps } from "./mouse-pointer.model";
 
 export type MousePointerFunction = (props: MousePointerProps) => void;
 
@@ -18,8 +8,8 @@ const useMousePointer: MousePointerFunction = ({
   container,
   mouseX,
   mouseY,
-  pointerSize = 14,
   isActive = false,
+  pointerStyle = { color: "#000", size: 20 }
   // pointerColor = "#000",
 }) => {
   const pointerRef = useRef<HTMLSpanElement>();
@@ -40,23 +30,25 @@ const useMousePointer: MousePointerFunction = ({
 
   useEffect(() => {
     const parent = container.current;
+    const { color, size } = pointerStyle;
 
     if (parent) {
       const element = document.createElement("span");
       element.innerHTML = `
-        <img src="${PointerSVG}"/>
+        <img src="${PointerSVG}" />
       `;
       pointerRef.current = element;
       element.style.cssText = `
         position: absolute;
         top: ${mouseY > -1 ? mouseY : 0}px;
         left: ${mouseX > -1 ? mouseX : 0}px;
-        width: ${pointerSize}px;
-        height: ${pointerSize}px;
+        width: ${size}px;
+        height: ${size}px;
         border-radius: 50%;
         z-index: 999999;
         pointer-events: none;
         display: none;
+        fill: ${color};
         `;
 
       parent.appendChild(element);

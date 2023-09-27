@@ -6,8 +6,16 @@ function App() {
   const ref = useRef<HTMLDivElement>(null);
   useMouseSelection({
     targetRef: ref,
-    pointerSize: 20,
-    pointerColor: "rgba(0, 123, 255, 1.0)",
+    pointerStyle: {
+      color: "red",
+      size: 20,
+    },
+    selectionStyle: {
+      backgroundColor: "rgba(0, 123, 255, 0.1)",
+      borderColor: "rgba(0, 123, 255, 0.5)",
+      borderStyle: "solid",
+      borderWidth: 0,
+    },
   });
 
   return (

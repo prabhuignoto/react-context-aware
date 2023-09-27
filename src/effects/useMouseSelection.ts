@@ -9,8 +9,13 @@ import { getSelectionDiv } from "./utils";
 
 const useMouseSelection: MouseSelectionFunction = ({
   targetRef,
-  pointerSize = 14,
-  pointerColor = "#000",
+  pointerStyle = { color: "#000", size: 20 },
+  selectionStyle = {
+    backgroundColor: "rgba(0,0,0,0.2)",
+    borderColor: "rgba(0,0,0,0.5)",
+    borderStyle: "dotted",
+    borderWidth: 1,
+  },
 }) => {
   const pressed = useRef(false);
   const targetElement = useRef<HTMLElement>();
@@ -39,8 +44,7 @@ const useMouseSelection: MouseSelectionFunction = ({
     mouseX,
     mouseY,
     direction,
-    pointerSize,
-    pointerColor,
+    pointerStyle,
     isActive,
   });
 
@@ -121,7 +125,11 @@ const useMouseSelection: MouseSelectionFunction = ({
 
       element.style.cursor = "none";
 
-      const span = getSelectionDiv();
+      const span = getSelectionDiv(
+        {
+          ...selectionStyle,
+        }
+      );
       selectionRef.current = span;
       element.appendChild(span);
     }

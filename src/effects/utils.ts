@@ -1,3 +1,5 @@
+import { SelectionStyle } from "./core.model";
+
 const getDirection = (movX: number, movY: number) => {
   if (movX === 0 && movY === 0) {
     return null;
@@ -27,14 +29,22 @@ const getDirection = (movX: number, movY: number) => {
   }
 };
 
-const getSelectionDiv = () => {
+const getSelectionDiv = (
+  style: SelectionStyle = {
+    backgroundColor: "rgba(0, 123, 255, 0.1)",
+    borderColor: "rgba(0, 123, 255, 0.5)",
+    borderStyle: "dotted",
+    borderWidth: 1,
+  }
+) => {
   const span = document.createElement("span");
+  const { backgroundColor, borderColor, borderStyle, borderWidth } = style;
   span.style.cssText = `
         position: absolute;
         z-index: 99999;
         display: block;
-        background: rgba(0, 123, 255, 0.1);
-        border: 1px solid rgba(0, 123, 255, 0.5);
+        background: ${backgroundColor};
+        border: ${borderWidth}px ${borderStyle} ${borderColor};
       `;
 
   return span;
