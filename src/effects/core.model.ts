@@ -1,6 +1,7 @@
 export interface Props {
   pointerStyle?: PointerStyle;
   selectionStyle?: SelectionStyle;
+  status?: PointerStatus;
 }
 
 export interface PointerStyle {
@@ -14,3 +15,5 @@ export interface SelectionStyle {
   borderColor: string;
   borderWidth?: number;
 }
+
+export type PointerStatus = "busy" | "error" | "disabled" | "default" | "text" | "hyperlink";

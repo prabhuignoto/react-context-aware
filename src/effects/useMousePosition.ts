@@ -1,7 +1,8 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { PointerStatus } from "./core.model";
 import {
-  MoousePositionType,
   MousePositionFunction,
+  MousePositionType,
 } from "./mouse-position.model";
 import { getDirection } from "./utils";
 
@@ -14,12 +15,14 @@ import { getDirection } from "./utils";
 const useMousePosition: MousePositionFunction = (props) => {
   const { targetRef } = props;
   const [isActive, setIsActive] = useState(false);
+  const activePointerStatus = useRef<PointerStatus>("default");
 
-  const [position, setPosition] = useState<MoousePositionType>({
+  const [position, setPosition] = useState<MousePositionType>({
     x: -1,
     y: -1,
     direction: null,
     isActive: false,
+    pointerStatus: "default",
   });
 
   /**
@@ -27,25 +30,39 @@ const useMousePosition: MousePositionFunction = (props) => {
    * @param ev - The mousemove event.
    */
   const handleMouseMove = (ev: MouseEvent) => {
-    const movX = ev.movementX;
-    const movY = ev.movementY;
     const target = targetRef.current;
 
     if (target) {
+      const movX = ev.movementX;
+      const movY = ev.movementY;
       const { offsetLeft, offsetTop } = target;
-      setPosition({
+      setPosition((prev) => ({
+        ...prev,
         x: ev.clientX - offsetLeft,
         y: ev.clientY - offsetTop,
         direction: getDirection(movX, movY),
         isActive: true,
-      });
+      }));
     }
   };
 
   /**
    * Handles the mouseenter event and sets the isActive state to true.
    */
-  const handleMouseEnter = useCallback(() => {
+  const handleMouseEnter = useCallback((ev: MouseEvent) => {
+    const target = ev.target as HTMLElement;
+
+    if (target.tagName === "A" || target.tagName === "BUTTON") {
+      activePointerStatus.current = "hyperlink";
+      setPosition((prev) => ({ ...prev, pointerStatus: "hyperlink" }));
+    } else if (target.tagName === "INPUT" || target.tagName === "TEXTAREA") {
+      setPosition((prev) => ({ ...prev, pointerStatus: "text" }));
+      activePointerStatus.current = "text";
+    } else {
+      setPosition((prev) => ({ ...prev, pointerStatus: "default" }));
+      activePointerStatus.current = "default";
+    }
+
     setIsActive(true);
   }, []);
 

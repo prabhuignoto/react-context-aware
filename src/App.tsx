@@ -6,9 +6,10 @@ function App() {
   const ref = useRef<HTMLDivElement>(null);
   useMouseSelection({
     targetRef: ref,
+    status: "default",
     pointerStyle: {
       color: "red",
-      size: 20,
+      size: 50,
     },
     selectionStyle: {
       backgroundColor: "rgba(0, 123, 255, 0.1)",
@@ -43,6 +44,13 @@ function App() {
           transition: "background 0.2s ease-in-out",
         }}
       ></span> */}
+      <input type="text" />
+
+      <button>Click me</button>
+
+      <textarea name="" id="" cols={30} rows={10}></textarea>
+
+      <a href="https://google.com">Google</a>
     </div>
   );
 }

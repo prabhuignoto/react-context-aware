@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { selectionStyleDefaults } from "./default";
 import {
   MouseSelectionDimensions,
   MouseSelectionFunction,
@@ -10,12 +11,8 @@ import { getSelectionDiv } from "./utils";
 const useMouseSelection: MouseSelectionFunction = ({
   targetRef,
   pointerStyle = { color: "#000", size: 20 },
-  selectionStyle = {
-    backgroundColor: "rgba(0,0,0,0.2)",
-    borderColor: "rgba(0,0,0,0.5)",
-    borderStyle: "dotted",
-    borderWidth: 1,
-  },
+  selectionStyle = selectionStyleDefaults,
+  status = "default",
 }) => {
   const pressed = useRef(false);
   const targetElement = useRef<HTMLElement>();
@@ -25,6 +22,7 @@ const useMouseSelection: MouseSelectionFunction = ({
     y: mouseY,
     direction,
     isActive,
+    pointerStatus,
   } = useMousePosition({ targetRef });
 
   const startMousePosition = useRef<{ x: number; y: number }>({
@@ -46,20 +44,23 @@ const useMouseSelection: MouseSelectionFunction = ({
     direction,
     pointerStyle,
     isActive,
+    status: pointerStatus,
   });
 
   const handleMouseDown = useCallback(
     (ev: MouseEvent) => {
-      pressed.current = true;
-      const { clientX, clientY } = ev;
-      const target = targetRef.current;
+      if (status === "default") {
+        pressed.current = true;
+        const { clientX, clientY } = ev;
+        const target = targetRef.current;
 
-      if (target) {
-        const { offsetLeft, offsetTop } = target;
-        startMousePosition.current = {
-          x: clientX - offsetLeft,
-          y: clientY - offsetTop,
-        };
+        if (target) {
+          const { offsetLeft, offsetTop } = target;
+          startMousePosition.current = {
+            x: clientX - offsetLeft,
+            y: clientY - offsetTop,
+          };
+        }
       }
     },
     [mouseX, mouseY]
@@ -125,22 +126,23 @@ const useMouseSelection: MouseSelectionFunction = ({
 
       element.style.cursor = "none";
 
-      const span = getSelectionDiv(
-        {
-          ...selectionStyle,
-        }
-      );
+      element.querySelectorAll("a, input, textarea, button").forEach((el) => {
+        const ele = el as HTMLElement;
+        ele.style.cursor = "none";
+      });
+
+      const span = getSelectionDiv({
+        ...selectionStyle,
+      });
       selectionRef.current = span;
       element.appendChild(span);
     }
 
     return () => {
       if (targetElement) {
-        targetElement.current?.removeEventListener(
-          "mousedown",
-          handleMouseDown
-        );
-        targetElement.current?.removeEventListener("mouseup", handleMouseUp);
+        const element = targetElement.current as HTMLElement;
+        element?.removeEventListener("mousedown", handleMouseDown);
+        element?.removeEventListener("mouseup", handleMouseUp);
       }
     };
   }, [targetRef]);
