@@ -6,6 +6,7 @@ import PointerSVG from "../assets/pointer.svg";
 import TextSVG from "../assets/text.svg";
 import { pointerStyleDefaults } from "./default";
 import { MousePointerProps } from "./mouse-pointer.model";
+import styles from './styles.module.scss';
 
 export type MousePointerFunction = (props: MousePointerProps) => void;
 
@@ -49,15 +50,11 @@ const useMousePointer: MousePointerFunction = ({
   const getImage = useMemo(() => {
     return (
       <img
+      style={{
+        ""
+      }}
         src={getSVG}
-        style={{
-          fill: "red",
-          width: "50%",
-          height: "50%",
-          left: 0,
-          top: 0,
-          position: "absolute",
-        }}
+        className={styles.img}
       />
     );
   }, [getSVG]);

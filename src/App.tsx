@@ -9,7 +9,7 @@ function App() {
     status: "default",
     pointerStyle: {
       color: "red",
-      size: 25,
+      size: 20,
     },
     selectionStyle: {
       backgroundColor: "rgba(0, 123, 255, 0.1)",

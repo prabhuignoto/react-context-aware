@@ -126,6 +126,10 @@ const useMouseSelection: MouseSelectionFunction = ({
 
       element.style.cursor = "none";
 
+      element.addEventListener("contextmenu", (ev) => {
+        ev.preventDefault();
+      }); 
+
       element.querySelectorAll("a, input, textarea, button").forEach((el) => {
         const ele = el as HTMLElement;
         ele.style.cursor = "none";
