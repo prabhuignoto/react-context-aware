@@ -47,7 +47,19 @@ const useMousePointer: MousePointerFunction = ({
   }, [status]);
 
   const getImage = useMemo(() => {
-    return <img src={getSVG} style={{ maxWidth: "100%", maxHeight: "100%" }} />;
+    return (
+      <img
+        src={getSVG}
+        style={{
+          fill: "red",
+          width: "50%",
+          height: "50%",
+          left: 0,
+          top: 0,
+          position: "absolute",
+        }}
+      />
+    );
   }, [getSVG]);
 
   useEffect(() => {
@@ -61,22 +73,23 @@ const useMousePointer: MousePointerFunction = ({
     const parent = container.current;
     const { color, size } = pointerStyle;
 
-    if (parent) {
+    if (parent && size) {
       const element = document.createElement("span");
       element.innerHTML = ReactDOMServer.renderToString(getImage);
       pointerRef.current = element;
       element.style.cssText = `
         position: absolute;
-        top: ${mouseY > -1 ? mouseY : 0}px;
-        left: ${mouseX > -1 ? mouseX : 0}px;
+        top: ${mouseY > -1 ? mouseY - size : 0}px;
+        left: ${mouseX > -1 ? mouseX - size : 0}px;
         width: ${size}px;
         height: ${size}px;
-        border-radius: 50%;
         z-index: 999999;
         pointer-events: none;
         display: none;
         fill: ${color};
         user-select: none;
+        color: ${color};
+        padding: 0;
         `;
 
       parent.appendChild(element);

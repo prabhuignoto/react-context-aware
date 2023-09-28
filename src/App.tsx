@@ -9,7 +9,7 @@ function App() {
     status: "default",
     pointerStyle: {
       color: "red",
-      size: 50,
+      size: 25,
     },
     selectionStyle: {
       backgroundColor: "rgba(0, 123, 255, 0.1)",
@@ -24,9 +24,9 @@ function App() {
       style={{
         width: "70vw",
         height: "70vh",
-        border: "1px solid red",
         display: "flex",
         justifyContent: "center",
+        border: "1px solid red",
         alignItems: "center",
         position: "relative",
       }}
