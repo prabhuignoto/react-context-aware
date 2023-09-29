@@ -50,9 +50,6 @@ const useMousePointer: MousePointerFunction = ({
   const getImage = useMemo(() => {
     return (
       <img
-      style={{
-        ""
-      }}
         src={getSVG}
         className={styles.img}
       />
@@ -95,3 +92,4 @@ const useMousePointer: MousePointerFunction = ({
 };
 
 export { useMousePointer };
+

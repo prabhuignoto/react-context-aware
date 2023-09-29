@@ -4,6 +4,7 @@ import {
   MouseSelectionDimensions,
   MouseSelectionFunction,
 } from "./mouse-selection.model";
+import { useContextMenu } from "./useContextMenu";
 import { useMousePointer } from "./useMousePointer";
 import { useMousePosition } from "./useMousePosition";
 import { getSelectionDiv } from "./utils";
@@ -13,6 +14,7 @@ const useMouseSelection: MouseSelectionFunction = ({
   pointerStyle = { color: "#000", size: 20 },
   selectionStyle = selectionStyleDefaults,
   status = "default",
+  contextMenu,
 }) => {
   const pressed = useRef(false);
   const targetElement = useRef<HTMLElement>();
@@ -24,7 +26,6 @@ const useMouseSelection: MouseSelectionFunction = ({
     isActive,
     pointerStatus,
   } = useMousePosition({ targetRef });
-
   const startMousePosition = useRef<{ x: number; y: number }>({
     x: mouseX,
     y: mouseY,
@@ -35,6 +36,12 @@ const useMouseSelection: MouseSelectionFunction = ({
     height: 0,
     flipX: false,
     flipY: false,
+  });
+
+  useContextMenu({
+    target: targetRef,
+    contextMenuOptions: contextMenu,
+    close: isActive,
   });
 
   useMousePointer({
@@ -125,10 +132,6 @@ const useMouseSelection: MouseSelectionFunction = ({
       element.addEventListener("mouseup", handleMouseUp);
 
       element.style.cursor = "none";
-
-      element.addEventListener("contextmenu", (ev) => {
-        ev.preventDefault();
-      }); 
 
       element.querySelectorAll("a, input, textarea, button").forEach((el) => {
         const ele = el as HTMLElement;

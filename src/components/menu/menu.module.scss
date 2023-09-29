@@ -1,0 +1,34 @@
+.menu {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  padding: 0.2rem;
+  width: 100%;
+}
+
+.menu_item {
+  display: flex;
+  place-items: center;
+  place-content: flex-start;
+  width: 100%;
+  color: #000;
+  position: relative;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  padding-left: 0.5rem;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.1);
+    color: #000;
+  }
+
+  &::after:not(:last-child) {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background: #000;
+    opacity: 0.2;
+  }
+}

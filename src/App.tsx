@@ -11,6 +11,19 @@ function App() {
       color: "red",
       size: 20,
     },
+    contextMenu: {
+      items: [
+        {
+          name: "Copy",
+        },
+        {
+          name: "Cut",
+        },
+        {
+          name: "Paste",
+        },
+      ],
+    },
     selectionStyle: {
       backgroundColor: "rgba(0, 123, 255, 0.1)",
       borderColor: "rgba(0, 123, 255, 0.5)",
@@ -32,25 +45,10 @@ function App() {
       }}
       ref={ref}
     >
-      {/* <span
-        style={{
-          width: `${width}px`,
-          height: `${height}px`,
-          position: "absolute",
-          left: flipX ? x - width : x,
-          top: flipY ? y - height : y,
-          background: "rgba(0, 123, 255, 0.5)",
-          border: "1px solid rgba(0, 123, 255, 0.6)",
-          transition: "background 0.2s ease-in-out",
-        }}
-      ></span> */}
-      <input type="text" />
-
+      {/* <input type="text" />
       <button>Click me</button>
-
       <textarea name="" id="" cols={30} rows={10}></textarea>
-
-      <a href="https://google.com">Google</a>
+      <a href="https://google.com">Google</a> */}
     </div>
   );
 }

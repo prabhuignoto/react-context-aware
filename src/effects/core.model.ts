@@ -1,7 +1,14 @@
+import { MenuItemModel } from "../components/menu/menu.model";
+
 export interface Props {
   pointerStyle?: PointerStyle;
   selectionStyle?: SelectionStyle;
   status?: PointerStatus;
+  contextMenu?: ContextMenuOptions;
+}
+
+export interface ContextMenuOptions {
+  items: MenuItemModel[];
 }
 
 export interface PointerStyle {
@@ -16,4 +23,10 @@ export interface SelectionStyle {
   borderWidth?: number;
 }
 
-export type PointerStatus = "busy" | "error" | "disabled" | "default" | "text" | "hyperlink";
+export type PointerStatus =
+  | "busy"
+  | "error"
+  | "disabled"
+  | "default"
+  | "text"
+  | "hyperlink";

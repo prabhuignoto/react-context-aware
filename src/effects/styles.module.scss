@@ -11,3 +11,18 @@
   place-content: center;
   place-items: center;
 }
+
+.context_menu_placeholder {
+  position: absolute;
+  z-index: 9999;
+  visibility: hidden;
+  width: 200px;
+  min-height: 300px;
+  display: flex;
+  place-items: flex-start;
+  justify-items: flex-start;
+  border: 1px solid red;
+  border-radius: 6px;
+  // background: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
