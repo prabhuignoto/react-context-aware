@@ -7,6 +7,7 @@ import {
 import { useContextMenu } from "./useContextMenu";
 import { useMousePointer } from "./useMousePointer";
 import { useMousePosition } from "./useMousePosition";
+import { useMouseWheel } from "./useMouseWheel";
 import { getSelectionDiv } from "./utils";
 
 const useMouseSelection: MouseSelectionFunction = ({
@@ -51,6 +52,10 @@ const useMouseSelection: MouseSelectionFunction = ({
     pointerStyle,
     isActive,
     status: pointerStatus,
+  });
+
+  useMouseWheel({
+    targetRef,
   });
 
   const handleMouseDown = useCallback(

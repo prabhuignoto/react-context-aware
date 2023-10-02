@@ -26,7 +26,6 @@ const getDirection: (x: number, y: number) => MouseMovementDirection = (
       ? "up"
       : "down";
 
-  console.log(direction);
   // Return the direction
   return direction as MouseMovementDirection;
 };

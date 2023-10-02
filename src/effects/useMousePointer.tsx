@@ -7,6 +7,7 @@ import TextSVG from "../assets/text.svg";
 import { pointerStyleDefaults } from "./default";
 import { MousePointerProps } from "./mouse-pointer.model";
 import styles from "./styles.module.scss";
+import { useMouseWheel } from "./useMouseWheel";
 
 export type MousePointerFunction = (props: MousePointerProps) => void;
 
@@ -19,6 +20,12 @@ const useMousePointer: MousePointerFunction = ({
   status = "default",
 }) => {
   const pointerRef = useRef<HTMLSpanElement>();
+
+  const { scaleFactor } = useMouseWheel({
+    targetRef: container,
+    minScaleFactor: 0.5,
+    maxScaleFactor: 3.0,
+  });
 
   useEffect(() => {
     const pointer = pointerRef.current;
@@ -57,6 +64,15 @@ const useMousePointer: MousePointerFunction = ({
       pointerElement.innerHTML = ReactDOMServer.renderToString(getImage);
     }
   }, [status]);
+
+  useEffect(() => {
+    const pointerElement = pointerRef.current;
+    const { size } = pointerStyle;
+
+    if (pointerElement && size) {
+      pointerElement.style.transform = `scale(${scaleFactor})`;
+    }
+  }, [scaleFactor]);
 
   useEffect(() => {
     const parent = container.current;
