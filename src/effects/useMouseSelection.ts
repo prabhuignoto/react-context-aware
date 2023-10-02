@@ -41,7 +41,6 @@ const useMouseSelection: MouseSelectionFunction = ({
   useContextMenu({
     target: targetRef,
     contextMenuOptions: contextMenu,
-    close: isActive,
   });
 
   useMousePointer({

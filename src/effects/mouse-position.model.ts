@@ -5,16 +5,7 @@ export interface MousePositionProps {
   targetRef: RefObject<HTMLElement>;
 }
 
-export type MouseMovementDirection =
-  | "left"
-  | "right"
-  | "up"
-  | "down"
-  | null
-  | "top left"
-  | "top right"
-  | "bottom left"
-  | "bottom right";
+export type MouseMovementDirection = "left" | "right" | "up" | "down" | null;
 
 export type MousePositionType = {
   x: number;

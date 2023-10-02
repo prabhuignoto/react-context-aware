@@ -1,32 +1,34 @@
 import { SelectionStyle } from "./core.model";
+import { MouseMovementDirection } from "./mouse-position.model";
 
-const getDirection = (movX: number, movY: number) => {
+const getDirection: (x: number, y: number) => MouseMovementDirection = (
+  movX,
+  movY
+) => {
+  // If the mouse movement is zero, return null
   if (movX === 0 && movY === 0) {
     return null;
   }
 
-  switch (Math.sign(movX)) {
-    case -1:
-      switch (Math.sign(movY)) {
-        case -1:
-          return "top left";
-        case 1:
-          return "bottom left";
-        default:
-          return "left";
-      }
-    case 1:
-      switch (Math.sign(movY)) {
-        case -1:
-          return "top right";
-        case 1:
-          return "bottom right";
-        default:
-          return "right";
-      }
-    default:
-      return null;
-  }
+  // Get the absolute value of the mouse movement in the X and Y axes
+  const absMovX = Math.abs(movX);
+  const absMovY = Math.abs(movY);
+
+  let direction = null;
+
+  // Determine the direction of the mouse movement
+  direction =
+    absMovX > absMovY
+      ? movX < 0
+        ? "left"
+        : "right"
+      : movY < 0
+      ? "up"
+      : "down";
+
+  console.log(direction);
+  // Return the direction
+  return direction as MouseMovementDirection;
 };
 
 const getSelectionDiv = (
