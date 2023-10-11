@@ -183,11 +183,12 @@ const useMouseSelection: MouseSelectionFunction = ({
 
   useEffect(() => {
     const selection = selectionRef.current;
+    const { size } = pointerStyle;
     const { height, width, x, flipX, flipY, y } = returnValue;
 
-    if (selection) {
-      selection.style.width = `${width}px`;
-      selection.style.height = `${height}px`;
+    if (selection && size) {
+      selection.style.width = `${width + size / 2}px`;
+      selection.style.height = `${height + size / 2}px`;
       selection.style.left = (flipX ? x - width : x) + "px";
       selection.style.top = (flipY ? y - height : y) + "px";
     }

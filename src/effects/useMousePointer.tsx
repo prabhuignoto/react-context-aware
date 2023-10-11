@@ -29,12 +29,13 @@ const useMousePointer: MousePointerFunction = ({
 
   useEffect(() => {
     const pointer = pointerRef.current;
+    const { size } = pointerStyle;
 
-    if (!pointer) return;
+    if (!pointer || !size) return;
 
     if (isActive) {
-      pointer.style.top = `${mouseY}px`;
-      pointer.style.left = `${mouseX}px`;
+      pointer.style.top = `${mouseY + size / 2}px`;
+      pointer.style.left = `${mouseX + size / 2}px`;
       pointer.style.display = "block";
     } else if (!isActive) {
       pointer.style.display = "none";
