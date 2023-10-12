@@ -187,8 +187,8 @@ const useMouseSelection: MouseSelectionFunction = ({
     const { height, width, x, flipX, flipY, y } = returnValue;
 
     if (selection && size) {
-      selection.style.width = `${width + size / 2}px`;
-      selection.style.height = `${height + size / 2}px`;
+      selection.style.width = `${width}px`;
+      selection.style.height = `${height}px`;
       selection.style.left = (flipX ? x - width : x) + "px";
       selection.style.top = (flipY ? y - height : y) + "px";
     }

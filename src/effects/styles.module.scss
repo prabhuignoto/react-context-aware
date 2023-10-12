@@ -16,13 +16,27 @@
   position: absolute;
   z-index: 9999;
   visibility: hidden;
+  opacity: 0;
+  transform: scale(0.8);
   width: 200px;
   min-height: 300px;
   display: flex;
   place-items: flex-start;
   justify-items: flex-start;
-  border: 1px solid red;
-  border-radius: 6px;
-  // background: #fff;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+
+  border-radius: 8px; /* Rounded borders */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+  transition: transform 0.1s ease-in-out, opacity 0.1s ease;
+}
+
+.menu_open {
+  visibility: visible;
+  transform: scale(1);
+  opacity: 1;
+}
+
+.menu_close {
+  visibility: hidden;
+  transform: scale(0.8);
+  opacity: 0;
 }

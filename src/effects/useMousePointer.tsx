@@ -34,8 +34,8 @@ const useMousePointer: MousePointerFunction = ({
     if (!pointer || !size) return;
 
     if (isActive) {
-      pointer.style.top = `${mouseY + size / 2}px`;
-      pointer.style.left = `${mouseX + size / 2}px`;
+      pointer.style.top = `${mouseY}px`;
+      pointer.style.left = `${mouseX}px`;
       pointer.style.display = "block";
     } else if (!isActive) {
       pointer.style.display = "none";
