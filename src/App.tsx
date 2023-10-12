@@ -20,6 +20,9 @@ function App() {
           name: "Cut",
         },
         {
+          divider: true,
+        },
+        {
           name: "Paste",
         },
       ],

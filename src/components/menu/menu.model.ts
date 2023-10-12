@@ -6,6 +6,7 @@ export interface MenuItemModel {
   icon?: ReactNode;
   onClick?: (id?: string) => void;
   selected?: boolean;
+  divider?: boolean;
 }
 
 export interface MenuModel {
