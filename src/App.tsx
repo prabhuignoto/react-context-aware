@@ -24,6 +24,13 @@ function App() {
         },
         {
           name: "Paste",
+          disabled: true,
+        },
+        {
+          name: "Delete",
+        },
+        {
+          name: "Select All",
         },
       ],
     },

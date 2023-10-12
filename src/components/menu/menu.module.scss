@@ -33,6 +33,11 @@
     background: #000;
     opacity: 0.2;
   }
+
+  &.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 }
 
 .divider {

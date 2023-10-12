@@ -9,6 +9,7 @@ const MenuItem: FunctionComponent<MenuItemModel> = ({
   icon,
   onClick,
   divider,
+  disabled
 }) => {
   const handleClick = () => {
     onClick?.(id);
@@ -16,6 +17,7 @@ const MenuItem: FunctionComponent<MenuItemModel> = ({
 
   const itemClass = cls(style.menu_item, {
     [style.divider]: divider,
+    [style.disabled]: disabled
   });
 
   return (

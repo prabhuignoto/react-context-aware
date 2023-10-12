@@ -7,6 +7,7 @@ export interface MenuItemModel {
   onClick?: (id?: string) => void;
   selected?: boolean;
   divider?: boolean;
+  disabled?: boolean;
 }
 
 export interface MenuModel {
