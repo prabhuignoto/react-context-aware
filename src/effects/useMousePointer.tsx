@@ -69,7 +69,7 @@ const useMousePointer: MousePointerFunction = ({
 
   useEffect(() => {
     const parent = container.current;
-    const { color, size } = pointerStyle;
+    const { size } = pointerStyle;
 
     if (parent && size && getSVG) {
       const element = document.createElement("span");
@@ -84,9 +84,9 @@ const useMousePointer: MousePointerFunction = ({
         z-index: 999999;
         pointer-events: none;
         display: none;
-        fill: ${color};
+        fill: var(--rc-context-menu-primary);
         user-select: none;
-        color: ${color};
+        color: var(--rc-context-menu-primary);
         padding: 0;
         `;
 

@@ -23,6 +23,10 @@ function App() {
       color: "blue",
       size: 20,
     },
+    theme: {
+      primary: "purple",
+      secondary: "blue",
+    },
     contextMenu: {
       items: [
         {
