@@ -1,7 +1,7 @@
+import cls from "classnames";
 import { FunctionComponent } from "react";
 import { MenuItemModel } from "./menu.model";
 import style from "./menu.module.scss";
-import cls from "classnames";
 
 const MenuItem: FunctionComponent<MenuItemModel> = ({
   name,
@@ -9,7 +9,7 @@ const MenuItem: FunctionComponent<MenuItemModel> = ({
   icon,
   onClick,
   divider,
-  disabled
+  disabled,
 }) => {
   const handleClick = () => {
     onClick?.(id);
@@ -17,7 +17,7 @@ const MenuItem: FunctionComponent<MenuItemModel> = ({
 
   const itemClass = cls(style.menu_item, {
     [style.divider]: divider,
-    [style.disabled]: disabled
+    [style.disabled]: disabled,
   });
 
   return (
@@ -26,7 +26,7 @@ const MenuItem: FunctionComponent<MenuItemModel> = ({
         <hr className={style.divider} />
       ) : (
         <>
-          <span className={style.icon}>{icon}</span>
+          {icon ? <span className={style.icon}>{icon}</span> : null}
           <span className={style.label}>{name}</span>
         </>
       )}

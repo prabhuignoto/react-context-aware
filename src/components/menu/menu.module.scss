@@ -1,7 +1,7 @@
 .menu {
   display: flex;
   flex-direction: column;
-  place-items: center;
+  place-items: flex-start;
   padding: 0.2rem;
   width: 100%;
 }
@@ -17,7 +17,8 @@
   &:not(.divider) {
     padding-top: 0.25rem;
     padding-bottom: 0.25rem;
-    padding-left: 0.5rem;
+    padding-left: 0.25rem;
+    width: calc(100% - 0.25rem);
   }
 
   &:hover {
@@ -47,4 +48,17 @@
   height: 1px;
   padding: 0;
   border: 0;
+}
+
+.icon {
+  width: 1rem;
+  height: 1rem;
+  display: flex;
+  place-items: center;
+  margin-right: 0.5rem;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
 }

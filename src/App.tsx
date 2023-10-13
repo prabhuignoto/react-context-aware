@@ -1,3 +1,4 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef } from "react";
 import "./App.css";
 import { useMouseSelection } from "./effects/useMouseSelection";
@@ -18,6 +19,7 @@ function App() {
         },
         {
           name: "Cut",
+          icon: <FontAwesomeIcon icon="coconut" size="2x" />,
         },
         {
           divider: true,
