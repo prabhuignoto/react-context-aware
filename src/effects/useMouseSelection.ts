@@ -27,7 +27,7 @@ const useMouseSelection: MouseSelectionFunction = ({
   status = "default",
   contextMenu,
   theme = defaultTheme,
-  icons = defaultIcons
+  icons = defaultIcons,
 }) => {
   const pressed = useRef(false);
   const targetElement = useRef<HTMLElement>();
@@ -73,7 +73,7 @@ const useMouseSelection: MouseSelectionFunction = ({
     pointerStyle,
     isActive,
     status: pointerStatus,
-    icons
+    icons,
   });
 
   // setup mouse wheel
@@ -81,13 +81,24 @@ const useMouseSelection: MouseSelectionFunction = ({
     targetRef,
   });
 
+  const isSpecialTag = useCallback((el: HTMLElement) => {
+    const { tagName } = el;
+    return (
+      tagName === "INPUT" ||
+      tagName === "TEXTAREA" ||
+      tagName === "BUTTON" ||
+      tagName === "A"
+    );
+  }, []);
+
   /**
    * A callback function that handles the mouse down event.
    * @param ev - The mouse event object.
    */
   const handleMouseDown = useCallback(
     (ev: MouseEvent) => {
-      if (status === "default") {
+      const element = ev.target as HTMLElement;
+      if (status === "default" && !isSpecialTag(element)) {
         ev.preventDefault();
         pressed.current = true;
         const { clientX, clientY } = ev;
