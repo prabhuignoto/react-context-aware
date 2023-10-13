@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { selectionStyleDefaults } from "./default";
 import {
   MouseSelectionDimensions,
   MouseSelectionFunction,
-} from "./mouse-selection.model";
+} from "../models/mouse-selection.model";
+import { selectionStyleDefaults } from "./default";
 import { useContextMenu } from "./useContextMenu";
 import { useMousePointer } from "./useMousePointer";
 import { useMousePosition } from "./useMousePosition";

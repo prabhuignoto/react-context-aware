@@ -1,7 +1,17 @@
+import { library } from "@fortawesome/fontawesome-svg-core";
+import {
+  faCheck,
+  faCoffee,
+  faCopy,
+  faCut,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRef } from "react";
 import "./App.css";
 import { useMouseSelection } from "./effects/useMouseSelection";
+
+library.add(faCoffee, faCopy, faCut, faTrash, faCheck);
 
 function App() {
   const ref = useRef<HTMLDivElement>(null);
@@ -16,10 +26,11 @@ function App() {
       items: [
         {
           name: "Copy",
+          icon: <FontAwesomeIcon icon="copy" size="2x" />,
         },
         {
           name: "Cut",
-          icon: <FontAwesomeIcon icon="coconut" size="2x" />,
+          icon: <FontAwesomeIcon icon="cut" size="2x" />,
         },
         {
           divider: true,
@@ -27,9 +38,11 @@ function App() {
         {
           name: "Paste",
           disabled: true,
+          icon: <FontAwesomeIcon icon="paste" size="2x" />,
         },
         {
           name: "Delete",
+          icon: <FontAwesomeIcon icon="trash" size="2x" />,
         },
         {
           name: "Select All",

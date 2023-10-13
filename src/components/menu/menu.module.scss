@@ -23,6 +23,7 @@
 
   &:hover {
     background: rgba(0, 0, 0, 0.1);
+    border-radius: 2px;
   }
 
   &::after:not(:last-child) {
@@ -55,7 +56,8 @@
   height: 1rem;
   display: flex;
   place-items: center;
-  margin-right: 0.5rem;
+  margin-right: 0.25rem;
+  color: #ccc;
 
   svg {
     width: 100%;

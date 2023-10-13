@@ -1,5 +1,5 @@
-import { SelectionStyle } from "./core.model";
-import { MouseMovementDirection } from "./mouse-position.model";
+import { SelectionStyle } from "../models/core.model";
+import { MouseMovementDirection } from "../models/mouse-position.model";
 
 const getDirection: (x: number, y: number) => MouseMovementDirection = (
   movX,

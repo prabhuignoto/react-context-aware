@@ -7,7 +7,7 @@
 import { useEffect, useRef, useState } from "react";
 import { renderToString } from "react-dom/server";
 import { Menu } from "../components/menu";
-import { useContextMenuFunction } from "./context-menu.model";
+import { useContextMenuFunction } from "../models/context-menu.model";
 import styles from "./styles.module.scss";
 
 /**
@@ -78,11 +78,13 @@ const useContextMenu: useContextMenuFunction = ({
         <Menu {...contextMenuOptions} onSelect={onSelect} />
       );
 
+      // createPortal(<Menu {...contextMenuOptions} onSelect={onSelect} />, _target);
+
       if (!_target.contains(_placeholder)) {
         _target.append(_placeholder);
       }
     }
-  }, [target, contextMenuOptions]);
+  }, [target]);
 
   // Update the placeholder class when the context menu state changes
   useEffect(() => {

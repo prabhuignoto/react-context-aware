@@ -1,4 +1,4 @@
-import { PointerStyle, SelectionStyle } from "./core.model";
+import { PointerStyle, SelectionStyle } from "../models/core.model";
 
 export const selectionStyleDefaults: SelectionStyle = {
   backgroundColor: "rgba(0,0,0,0.2)",

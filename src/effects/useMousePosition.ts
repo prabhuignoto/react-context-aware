@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { PointerStatus } from "./core.model";
+import { PointerStatus } from "../models/core.model";
 import {
   MousePositionFunction,
   MousePositionType,
-} from "./mouse-position.model";
+} from "../models/mouse-position.model";
 import { getDirection } from "./utils";
 
 /**

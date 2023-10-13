@@ -9,6 +9,7 @@ const Menu: FunctionComponent<MenuModel> = ({ items, onSelect }) => {
     items.map((item) => ({ ...item, isOpen: false, id: nanoid() }))
   );
 
+
   const handleSelection = (id?: string) => {
     if (id) {
       setMenuItems((prev) =>

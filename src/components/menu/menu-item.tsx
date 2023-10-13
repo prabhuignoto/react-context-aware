@@ -15,6 +15,8 @@ const MenuItem: FunctionComponent<MenuItemModel> = ({
     onClick?.(id);
   };
 
+  console.log(icon);
+
   const itemClass = cls(style.menu_item, {
     [style.divider]: divider,
     [style.disabled]: disabled,

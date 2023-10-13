@@ -4,8 +4,8 @@ import HandUpSVG from "../assets/hand-up.svg";
 import BusySVG from "../assets/hour-glass.svg";
 import PointerSVG from "../assets/pointer.svg";
 import TextSVG from "../assets/text.svg";
+import { MousePointerProps } from "../models/mouse-pointer.model";
 import { pointerStyleDefaults } from "./default";
-import { MousePointerProps } from "./mouse-pointer.model";
 import styles from "./styles.module.scss";
 import { useMouseWheel } from "./useMouseWheel";
 
