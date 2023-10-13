@@ -4,6 +4,7 @@ import {
   faCoffee,
   faCopy,
   faCut,
+  faPaste,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,7 +12,7 @@ import { useRef } from "react";
 import "./App.css";
 import { useMouseSelection } from "./effects/useMouseSelection";
 
-library.add(faCoffee, faCopy, faCut, faTrash, faCheck);
+library.add(faCoffee, faCopy, faCut, faTrash, faCheck, faPaste);
 
 function App() {
   const ref = useRef<HTMLDivElement>(null);
@@ -19,7 +20,7 @@ function App() {
     targetRef: ref,
     status: "default",
     pointerStyle: {
-      color: "red",
+      color: "blue",
       size: 20,
     },
     contextMenu: {
@@ -37,7 +38,6 @@ function App() {
         },
         {
           name: "Paste",
-          disabled: true,
           icon: <FontAwesomeIcon icon="paste" size="2x" />,
         },
         {
@@ -46,6 +46,7 @@ function App() {
         },
         {
           name: "Select All",
+          disabled: true,
         },
       ],
     },
@@ -70,10 +71,10 @@ function App() {
       }}
       ref={ref}
     >
-      {/* <input type="text" />
-      <button>Click me</button>
+      <input type="text" />
+      <button onClick={() => alert("red")}>Click me</button>
       <textarea name="" id="" cols={30} rows={10}></textarea>
-      <a href="https://google.com">Google</a> */}
+      <a href="https://google.com">Google</a>
     </div>
   );
 }

@@ -1,12 +1,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import ReactDOMServer from "react-dom/server";
-import HandUpSVG from "../assets/hand-up.svg";
-import BusySVG from "../assets/hour-glass.svg";
-import PointerSVG from "../assets/pointer.svg";
-import TextSVG from "../assets/text.svg";
 import { MousePointerProps } from "../models/mouse-pointer.model";
-import { pointerStyleDefaults } from "./default";
-import styles from "./styles.module.scss";
+import { defaultIcons, pointerStyleDefaults } from "./default";
 import { useMouseWheel } from "./useMouseWheel";
 
 export type MousePointerFunction = (props: MousePointerProps) => void;
@@ -18,6 +13,7 @@ const useMousePointer: MousePointerFunction = ({
   isActive = false,
   pointerStyle = pointerStyleDefaults,
   status = "default",
+  icons = defaultIcons,
 }) => {
   const pointerRef = useRef<HTMLSpanElement>();
 
@@ -45,26 +41,22 @@ const useMousePointer: MousePointerFunction = ({
   const getSVG = useMemo(() => {
     switch (status) {
       case "busy":
-        return BusySVG;
+        return icons?.busy;
       case "text":
-        return TextSVG;
+        return icons?.text;
       case "hyperlink":
-        return HandUpSVG;
+        return icons?.hyperlink;
       default:
-        return PointerSVG;
+        return icons?.pointer;
     }
-  }, [status]);
-
-  const getImage = useMemo(() => {
-    return <img src={getSVG} className={styles.img} />;
-  }, [getSVG]);
+  }, [status, icons]);
 
   useEffect(() => {
     const pointerElement = pointerRef.current;
-    if (status && pointerElement) {
-      pointerElement.innerHTML = ReactDOMServer.renderToString(getImage);
+    if (status && pointerElement && getSVG) {
+      pointerElement.innerHTML = ReactDOMServer.renderToString(getSVG);
     }
-  }, [status]);
+  }, [status, getSVG]);
 
   useEffect(() => {
     const pointerElement = pointerRef.current;
@@ -79,9 +71,9 @@ const useMousePointer: MousePointerFunction = ({
     const parent = container.current;
     const { color, size } = pointerStyle;
 
-    if (parent && size) {
+    if (parent && size && getSVG) {
       const element = document.createElement("span");
-      element.innerHTML = ReactDOMServer.renderToString(getImage);
+      element.innerHTML = ReactDOMServer.renderToString(getSVG);
       pointerRef.current = element;
       element.style.cssText = `
         position: absolute;

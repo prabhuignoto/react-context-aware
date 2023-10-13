@@ -3,9 +3,7 @@
   max-height: 100%;
   position: absolute;
   left: 0;
-  fill: #ff0000;
   top: 0;
-  color: red;
 
   display: flex;
   place-content: center;
@@ -28,6 +26,7 @@
   border-radius: 8px; /* Rounded borders */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
   transition: transform 0.1s ease-in-out, opacity 0.1s ease;
+  background: #fff;
 }
 
 .menu_open {

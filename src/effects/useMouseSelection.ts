@@ -3,33 +3,38 @@ import {
   MouseSelectionDimensions,
   MouseSelectionFunction,
 } from "../models/mouse-selection.model";
-import { selectionStyleDefaults } from "./default";
+import { defaultIcons, defaultTheme, selectionStyleDefaults } from "./default";
 import { useContextMenu } from "./useContextMenu";
 import { useMousePointer } from "./useMousePointer";
 import { useMousePosition } from "./useMousePosition";
 import { useMouseWheel } from "./useMouseWheel";
+import { useTheme } from "./useTheme";
 import { getSelectionDiv } from "./utils";
 
+/**
+ * A custom hook that enables mouse selection on a target element.
+ * @param targetRef - A React ref object that points to the target element.
+ * @param pointerStyle - An object that defines the style of the mouse pointer.
+ * @param selectionStyle - An object that defines the style of the selection box.
+ * @param status - A string that defines the status of the mouse selection.
+ * @param contextMenu - An object that defines the context menu options.
+ * @returns An object that contains the dimensions and position of the mouse selection.
+ */
 const useMouseSelection: MouseSelectionFunction = ({
   targetRef,
   pointerStyle = { color: "#000", size: 20 },
   selectionStyle = selectionStyleDefaults,
   status = "default",
   contextMenu,
+  theme = defaultTheme,
+  icons = defaultIcons
 }) => {
   const pressed = useRef(false);
   const targetElement = useRef<HTMLElement>();
   const selectionRef = useRef<HTMLSpanElement>();
-  const {
-    x: mouseX,
-    y: mouseY,
-    direction,
-    isActive,
-    pointerStatus,
-  } = useMousePosition({ targetRef });
   const startMousePosition = useRef<{ x: number; y: number }>({
-    x: mouseX,
-    y: mouseY,
+    x: 0,
+    y: 0,
   });
 
   const [dimensions, setDimensions] = useState<MouseSelectionDimensions>({
@@ -39,11 +44,27 @@ const useMouseSelection: MouseSelectionFunction = ({
     flipY: false,
   });
 
+  const {
+    x: mouseX,
+    y: mouseY,
+    direction,
+    isActive,
+    pointerStatus,
+  } = useMousePosition({ targetRef });
+
+  // setup context menu
   useContextMenu({
     target: targetRef,
     contextMenuOptions: contextMenu,
   });
 
+  // Apply theme to the target element.
+  useTheme({
+    target: targetElement.current,
+    theme,
+  });
+
+  // Update mouse pointer style.
   useMousePointer({
     container: targetRef,
     mouseX,
@@ -52,15 +73,22 @@ const useMouseSelection: MouseSelectionFunction = ({
     pointerStyle,
     isActive,
     status: pointerStatus,
+    icons
   });
 
+  // setup mouse wheel
   useMouseWheel({
     targetRef,
   });
 
+  /**
+   * A callback function that handles the mouse down event.
+   * @param ev - The mouse event object.
+   */
   const handleMouseDown = useCallback(
     (ev: MouseEvent) => {
       if (status === "default") {
+        ev.preventDefault();
         pressed.current = true;
         const { clientX, clientY } = ev;
         const target = targetRef.current;
@@ -77,6 +105,9 @@ const useMouseSelection: MouseSelectionFunction = ({
     [mouseX, mouseY]
   );
 
+  /**
+   * A callback function that handles the mouse up event.
+   */
   const handleMouseUp = useCallback(() => {
     pressed.current = false;
     startMousePosition.current = {
@@ -146,7 +177,10 @@ const useMouseSelection: MouseSelectionFunction = ({
         ...selectionStyle,
       });
       selectionRef.current = span;
-      element.appendChild(span);
+
+      if (!element.contains(span)) {
+        element.appendChild(span);
+      }
     }
 
     return () => {
@@ -157,6 +191,19 @@ const useMouseSelection: MouseSelectionFunction = ({
       }
     };
   }, [targetRef]);
+
+  useEffect(() => {
+    const selection = selectionRef.current;
+    const { size } = pointerStyle;
+    const { height, width, x, flipX, flipY, y } = returnValue;
+
+    if (selection && size) {
+      selection.style.width = `${width}px`;
+      selection.style.height = `${height}px`;
+      selection.style.left = (flipX ? x - width : x) + "px";
+      selection.style.top = (flipY ? y - height : y) + "px";
+    }
+  }, [dimensions, pointerStyle, selectionRef, startMousePosition, isActive]);
 
   const returnValue = useMemo(() => {
     const { width, height, flipX, flipY } = dimensions;
@@ -180,19 +227,6 @@ const useMouseSelection: MouseSelectionFunction = ({
       };
     }
   }, [dimensions, startMousePosition, isActive]);
-
-  useEffect(() => {
-    const selection = selectionRef.current;
-    const { size } = pointerStyle;
-    const { height, width, x, flipX, flipY, y } = returnValue;
-
-    if (selection && size) {
-      selection.style.width = `${width}px`;
-      selection.style.height = `${height}px`;
-      selection.style.left = (flipX ? x - width : x) + "px";
-      selection.style.top = (flipY ? y - height : y) + "px";
-    }
-  }, [returnValue, selectionRef]);
 };
 
 export { useMouseSelection };

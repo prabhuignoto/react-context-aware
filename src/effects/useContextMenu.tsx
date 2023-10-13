@@ -74,11 +74,10 @@ const useContextMenu: useContextMenuFunction = ({
     const _target = target.current;
 
     if (_placeholder && contextMenuOptions && _target) {
+      _placeholder.style.zIndex = "9999";
       menuHTMLstring.current = renderToString(
         <Menu {...contextMenuOptions} onSelect={onSelect} />
       );
-
-      // createPortal(<Menu {...contextMenuOptions} onSelect={onSelect} />, _target);
 
       if (!_target.contains(_placeholder)) {
         _target.append(_placeholder);
