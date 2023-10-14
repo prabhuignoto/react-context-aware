@@ -9,4 +9,5 @@ export type MousePointerProps = {
   mouseY: number;
   direction: MouseMovementDirection;
   isActive?: boolean;
+  isBeingSelected?: boolean;
 } & Props;

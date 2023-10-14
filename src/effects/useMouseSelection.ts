@@ -36,6 +36,7 @@ const useMouseSelection: MouseSelectionFunction = ({
     x: 0,
     y: 0,
   });
+  const [isSelected, setIsSelected] = useState(false);
 
   const [dimensions, setDimensions] = useState<MouseSelectionDimensions>({
     width: 0,
@@ -50,7 +51,7 @@ const useMouseSelection: MouseSelectionFunction = ({
     direction,
     isActive,
     pointerStatus,
-  } = useMousePosition({ targetRef });
+  } = useMousePosition({ targetRef, isSelected });
 
   // setup context menu
   useContextMenu({
@@ -74,6 +75,7 @@ const useMouseSelection: MouseSelectionFunction = ({
     isActive,
     status: pointerStatus,
     icons,
+    isBeingSelected: isSelected,
   });
 
   // setup mouse wheel
@@ -98,6 +100,8 @@ const useMouseSelection: MouseSelectionFunction = ({
   const handleMouseDown = useCallback(
     (ev: MouseEvent) => {
       const element = ev.target as HTMLElement;
+      setIsSelected(true);
+
       if (status === "default" && !isSpecialTag(element)) {
         ev.preventDefault();
         pressed.current = true;
@@ -120,15 +124,18 @@ const useMouseSelection: MouseSelectionFunction = ({
    * A callback function that handles the mouse up event.
    */
   const handleMouseUp = useCallback(() => {
-    pressed.current = false;
-    startMousePosition.current = {
-      x: 0,
-      y: 0,
-    };
-    setDimensions({
-      width: 0,
-      height: 0,
-    });
+    if (pressed.current) {
+      pressed.current = false;
+      startMousePosition.current = {
+        x: 0,
+        y: 0,
+      };
+      setDimensions({
+        width: 0,
+        height: 0,
+      });
+    }
+    setIsSelected(false);
   }, []);
 
   useEffect(() => {
@@ -201,7 +208,7 @@ const useMouseSelection: MouseSelectionFunction = ({
         element?.removeEventListener("mouseup", handleMouseUp);
       }
     };
-  }, [targetRef]);
+  }, [targetElement]);
 
   useEffect(() => {
     const selection = selectionRef.current;

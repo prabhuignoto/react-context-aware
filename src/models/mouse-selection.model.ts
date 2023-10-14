@@ -3,6 +3,7 @@ import { Props } from "./core.model";
 
 export interface MouseSelectionProps extends Props {
   targetRef: RefObject<HTMLElement>;
+  currentScaleFactor: number;
 }
 
 export type MouseSelectionReturnType = {

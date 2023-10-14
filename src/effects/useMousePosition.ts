@@ -13,7 +13,7 @@ import { getDirection } from "./utils";
  * @returns An object containing the current position of the mouse and whether the mouse is active or not.
  */
 const useMousePosition: MousePositionFunction = (props) => {
-  const { targetRef } = props;
+  const { targetRef, isSelected } = props;
   const [isActive, setIsActive] = useState(false);
   const activePointerStatus = useRef<PointerStatus>("default");
 
@@ -49,8 +49,12 @@ const useMousePosition: MousePositionFunction = (props) => {
   /**
    * Handles the mouseenter event and sets the isActive state to true.
    */
-  const handleMouseEnter = useCallback((ev: MouseEvent) => {
+  const handleMouseEnter = (ev: MouseEvent) => {
     const target = ev.target as HTMLElement;
+
+    if (isSelected) {
+      return;
+    }
 
     if (target.tagName === "A" || target.tagName === "BUTTON") {
       activePointerStatus.current = "hyperlink";
@@ -64,7 +68,7 @@ const useMousePosition: MousePositionFunction = (props) => {
     }
 
     setIsActive(true);
-  }, []);
+  };
 
   /**
    * Handles the mouseleave event and sets the isActive state to false.

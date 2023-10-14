@@ -14,6 +14,7 @@ const useMousePointer: MousePointerFunction = ({
   pointerStyle = pointerStyleDefaults,
   status = "default",
   icons = defaultIcons,
+  isBeingSelected,
 }) => {
   const pointerRef = useRef<HTMLSpanElement>();
 
@@ -39,6 +40,10 @@ const useMousePointer: MousePointerFunction = ({
   }, [mouseX, mouseY, isActive, pointerRef]);
 
   const getSVG = useMemo(() => {
+    if (isBeingSelected) {
+      return;
+    }
+
     switch (status) {
       case "busy":
         return icons?.busy;
@@ -49,7 +54,7 @@ const useMousePointer: MousePointerFunction = ({
       default:
         return icons?.pointer;
     }
-  }, [status, icons]);
+  }, [status, icons, isBeingSelected]);
 
   useEffect(() => {
     const pointerElement = pointerRef.current;
@@ -85,8 +90,8 @@ const useMousePointer: MousePointerFunction = ({
         pointer-events: none;
         display: none;
         fill: var(--rc-context-menu-primary);
-        user-select: none;
         color: var(--rc-context-menu-primary);
+        user-select: none;
         padding: 0;
         `;
 

@@ -3,6 +3,7 @@ import { PointerStatus } from "./core.model";
 
 export interface MousePositionProps {
   targetRef: RefObject<HTMLElement>;
+  isSelected?: boolean;
 }
 
 export type MouseMovementDirection = "left" | "right" | "up" | "down" | null;
