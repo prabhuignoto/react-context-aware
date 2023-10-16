@@ -12,6 +12,10 @@ const useTheme: (p: useThemeProps) => void = ({ target, theme }) => {
       const element = target;
       element.style.setProperty("--rc-context-menu-primary", theme.primary);
       element.style.setProperty("--rc-context-menu-secondary", theme.secondary);
+      element.style.setProperty(
+        "--rc-context-menu-icon-size",
+        theme.iconSize || "1.25rem"
+      );
     }
   }, [target, theme]);
 };

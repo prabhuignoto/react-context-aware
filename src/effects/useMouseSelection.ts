@@ -28,6 +28,7 @@ const useMouseSelection: MouseSelectionFunction = ({
   contextMenu,
   theme = defaultTheme,
   icons = defaultIcons,
+  toolbar = { icons: [] },
 }) => {
   const pressed = useRef(false);
   const targetElement = useRef<HTMLElement>();

@@ -2,42 +2,70 @@ import { ReactElement, ReactNode } from "react";
 import { MenuItemModel } from "../components/menu/menu.model";
 import { Theme } from "../theme";
 
-export interface Props {
-  pointerStyle?: PointerStyle;
-  selectionStyle?: SelectionStyle;
-  status?: PointerStatus;
-  contextMenu?: ContextMenuOptions;
-  theme?: Theme;
-  icons?: {
-    pointer?: ReactElement;
-    text?: ReactElement;
-    hyperlink?: ReactElement;
-    disabled?: ReactElement;
-    busy?: ReactElement;
-    error?: ReactElement;
-  };
-}
-
 export interface ContextMenuOptions {
   items: MenuItemModel[];
 }
 
 export interface PointerStyle {
-  size?: number;
   color: string;
-}
-
-export interface SelectionStyle {
-  backgroundColor: string;
-  borderStyle: "dotted" | "solid" | "dashed";
-  borderColor: string;
-  borderWidth?: number;
+  size?: number;
 }
 
 export type PointerStatus =
   | "busy"
-  | "error"
-  | "disabled"
   | "default"
-  | "text"
-  | "hyperlink";
+  | "disabled"
+  | "error"
+  | "hyperlink"
+  | "text";
+
+/**
+ * Props interface for the core component.
+ */
+export interface Props {
+  /**
+   * Options for the context menu.
+   */
+  contextMenu?: ContextMenuOptions;
+  /**
+   * Icons to be used in the component.
+   */
+  icons?: {
+    busy?: ReactElement;
+    disabled?: ReactElement;
+    error?: ReactElement;
+    hyperlink?: ReactElement;
+    pointer?: ReactElement;
+    text?: ReactElement;
+  };
+  /**
+   * Style for the pointer.
+   */
+  pointerStyle?: PointerStyle;
+  /**
+   * Style for the selection.
+   */
+  selectionStyle?: SelectionStyle;
+  /**
+   * Status of the pointer.
+   */
+  status?: PointerStatus;
+  /**
+   * Theme for the component.
+   */
+  theme?: Theme;
+  toolbar?: {
+    icons: {
+      name: string;
+      icon: ReactNode;
+    }[];
+    onSelect: (name: string) => void;
+  };
+}
+
+export interface SelectionStyle {
+  backgroundColor: string;
+  borderColor: string;
+  borderStyle: "dashed" | "dotted" | "solid";
+  borderWidth?: number;
+}
