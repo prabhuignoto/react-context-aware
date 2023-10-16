@@ -3,6 +3,7 @@
   flex-direction: column;
   place-items: flex-start;
   width: 100%;
+  padding: 0.1rem;
 }
 
 .toolbar_wrapper {
@@ -19,10 +20,9 @@
   display: flex;
   flex-direction: column;
   place-items: flex-start;
-  padding: 0.2rem;
   width: 100%;
   margin: 0;
-  border: 1px sooid #ccc;
+  padding: 0;
   border-radius: 4px;
 }
 
