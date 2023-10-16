@@ -1,10 +1,13 @@
 .toolbar {
     display: flex;
     place-items: center;
+    width: 100%;
+    padding: 0;
+    margin: 0;
 }
 
 .toolbar_item {
-    margin: 0 0.5rem;
+    margin: 0 0.1rem;
     display: flex;
     place-items: center;
 }
@@ -14,9 +17,15 @@
     place-items: center;
     width: var(--rc-context-menu-icon-size);
     height: var(--rc-context-menu-icon-size);
+    color: var(--rc-context-menu-primary);
+    margin-right: 0.5rem;
+    background: #f5f5f5;
+    padding: 0.25rem;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px #e0e0e0;
+}
 
-    svg {
-        width: 100%;
-        height: 100%;
-    }
+.icon svg {
+    width: 100%;
+    height: 100%;
 }

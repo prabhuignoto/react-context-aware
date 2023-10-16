@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { Props } from "../../models/core.model";
 
 export interface MenuItemModel {
   id?: string;
@@ -10,7 +11,7 @@ export interface MenuItemModel {
   disabled?: boolean;
 }
 
-export interface MenuModel {
+export type MenuModel = {
   items: MenuItemModel[];
   onSelect: (item: MenuItemModel) => void;
-}
+} & Pick<Props, "toolbar">;

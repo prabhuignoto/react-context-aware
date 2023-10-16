@@ -12,7 +12,9 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({ items = [] }) => {
   return (
     <ul className={styles.toolbar}>
       {items.map((item, index) => (
-        <li key={index}>{item.icon}</li>
+        <li key={index} className={styles.toolbar_item}>
+          <span className={styles.icon}>{item.icon}</span>
+        </li>
       ))}
     </ul>
   );

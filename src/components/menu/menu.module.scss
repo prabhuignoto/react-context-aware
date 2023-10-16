@@ -1,9 +1,29 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  place-items: flex-start;
+  width: 100%;
+}
+
+.toolbar_wrapper {
+  margin: 0.2rem 0;
+  width: 100%;
+}
+
+.menu_wrapper {
+  margin: 0.5rem 0;
+  width: 100%;
+}
+
 .menu {
   display: flex;
   flex-direction: column;
   place-items: flex-start;
   padding: 0.2rem;
   width: 100%;
+  margin: 0;
+  border: 1px sooid #ccc;
+  border-radius: 4px;
 }
 
 .menu_item {
@@ -58,6 +78,7 @@
   place-items: center;
   margin-right: 0.25rem;
   color: var(--rc-context-menu-primary);
+  padding: 0.5rem;
 
   svg {
     width: 100%;

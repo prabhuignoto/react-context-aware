@@ -28,7 +28,7 @@ const useMouseSelection: MouseSelectionFunction = ({
   contextMenu,
   theme = defaultTheme,
   icons = defaultIcons,
-  toolbar = { icons: [] },
+  toolbar,
 }) => {
   const pressed = useRef(false);
   const targetElement = useRef<HTMLElement>();
@@ -58,6 +58,7 @@ const useMouseSelection: MouseSelectionFunction = ({
   useContextMenu({
     target: targetRef,
     contextMenuOptions: contextMenu,
+    toolbar,
   });
 
   // Apply theme to the target element.

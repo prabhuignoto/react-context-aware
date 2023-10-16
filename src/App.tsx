@@ -1,10 +1,15 @@
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
+  faAreaChart,
+  faBagShopping,
   faCheck,
   faCoffee,
   faCopy,
   faCut,
+  faEarth,
+  faGear,
   faPaste,
+  faSave,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,7 +17,20 @@ import { useRef } from "react";
 import "./App.css";
 import { useMouseSelection } from "./effects/useMouseSelection";
 
-library.add(faCoffee, faCopy, faCut, faTrash, faCheck, faPaste);
+library.add(
+  faCoffee,
+  faCopy,
+  faCut,
+  faTrash,
+  faCheck,
+  faPaste,
+  faAreaChart,
+  faBagShopping,
+  faEarth,
+  faGear,
+  faSave,
+  faTrash
+);
 
 function App() {
   const ref = useRef<HTMLDivElement>(null);
@@ -24,8 +42,23 @@ function App() {
       size: 20,
     },
     theme: {
-      primary: "purple",
-      secondary: "blue",
+      primary: "#007FFF",
+      secondary: "#6495ED",
+      iconSize: "1.1rem",
+    },
+    toolbar: {
+      icons: [
+        { name: "gear", icon: <FontAwesomeIcon icon="gear" size="2x" /> },
+        { name: "earth", icon: <FontAwesomeIcon icon="earth" size="2x" /> },
+        { name: "coffee", icon: <FontAwesomeIcon icon="coffee" size="2x" /> },
+        {
+          name: "area-chart",
+          icon: <FontAwesomeIcon icon="area-chart" size="2x" />,
+        },
+      ],
+      onSelect: (item) => {
+        console.log(item);
+      },
     },
     contextMenu: {
       items: [
@@ -51,6 +84,17 @@ function App() {
         {
           name: "Select All",
           disabled: true,
+        },
+        {
+          divider: true,
+        },
+        {
+          name: "Save",
+          icon: <FontAwesomeIcon icon="save" size="2x" />,
+        },
+        {
+          name: "Discard",
+          icon: <FontAwesomeIcon icon="trash" size="2x" />,
         },
       ],
     },

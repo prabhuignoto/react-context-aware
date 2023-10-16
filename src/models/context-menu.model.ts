@@ -1,5 +1,5 @@
 import { RefObject } from "react";
-import { ContextMenuOptions } from "./core.model";
+import { ContextMenuOptions, Props } from "./core.model";
 /**
  * The props for the `useContextMenu` hook.
  */
@@ -12,7 +12,7 @@ type UseContextMenuProps = {
    * An optional object containing options for the context menu.
    */
   contextMenuOptions?: ContextMenuOptions;
-};
+} & Pick<Props, "toolbar">;
 
 /**
  * The signature of the `useContextMenu` hook.
