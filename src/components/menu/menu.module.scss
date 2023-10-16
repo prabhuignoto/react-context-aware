@@ -85,3 +85,9 @@
     height: 100%;
   }
 }
+
+.label {
+  font-size: var(--rc-context-menu-font-size);
+  display: flex;
+  place-items: flex-start;
+}

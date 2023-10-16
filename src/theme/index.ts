@@ -2,6 +2,7 @@ export type Theme = {
   primary: string;
   secondary: string;
   iconSize?: string;
+  fontSize?: string;
 };
 
 export const BlueTheme: Theme = {

@@ -41,7 +41,7 @@ const useMouseWheel: UseMouseWheelFunction = ({
         });
       }
     }, 10),
-    []
+    [],
   );
 
   useEffect(() => {

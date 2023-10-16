@@ -1,5 +1,5 @@
 import { FunctionComponent, ReactNode } from "react";
-import styles from "./toolbar.module.css";
+import styles from "./toolbar.module.scss";
 
 export type ToolbarProps = {
   items: {

@@ -29,7 +29,7 @@ library.add(
   faEarth,
   faGear,
   faSave,
-  faTrash
+  faTrash,
 );
 
 function App() {
@@ -64,22 +64,22 @@ function App() {
       items: [
         {
           name: "Copy",
-          icon: <FontAwesomeIcon icon="copy" size="2x" />,
+          // icon: <FontAwesomeIcon icon="copy" size="2x" />,
         },
         {
           name: "Cut",
-          icon: <FontAwesomeIcon icon="cut" size="2x" />,
+          // icon: <FontAwesomeIcon icon="cut" size="2x" />,
         },
         {
           divider: true,
         },
         {
           name: "Paste",
-          icon: <FontAwesomeIcon icon="paste" size="2x" />,
+          // icon: <FontAwesomeIcon icon="paste" size="2x" />,
         },
         {
           name: "Delete",
-          icon: <FontAwesomeIcon icon="trash" size="2x" />,
+          // icon: <FontAwesomeIcon icon="trash" size="2x" />,
         },
         {
           name: "Select All",
@@ -90,11 +90,11 @@ function App() {
         },
         {
           name: "Save",
-          icon: <FontAwesomeIcon icon="save" size="2x" />,
+          // icon: <FontAwesomeIcon icon="save" size="2x" />,
         },
         {
           name: "Discard",
-          icon: <FontAwesomeIcon icon="trash" size="2x" />,
+          // icon: <FontAwesomeIcon icon="trash" size="2x" />,
         },
       ],
     },

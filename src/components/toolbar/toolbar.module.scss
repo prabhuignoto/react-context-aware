@@ -1,0 +1,30 @@
+.toolbar {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  place-items: center;
+  width: 100%;
+}
+
+.toolbar_item {
+  display: flex;
+  margin: 0 0.1rem;
+  place-items: center;
+}
+
+.icon {
+  background: var(--rc-context-menu-primary);
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  height: var(--rc-context-menu-icon-size);
+  margin-right: 0.5rem;
+  padding: 0.25rem;
+  place-items: center;
+  width: var(--rc-context-menu-icon-size);
+}
+
+.icon svg {
+  height: 100%;
+  width: 100%;
+}

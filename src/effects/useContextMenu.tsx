@@ -18,7 +18,7 @@ import styles from "./styles.module.scss";
 const useContextMenu: useContextMenuFunction = ({
   target,
   contextMenuOptions,
-  toolbar
+  toolbar,
 }) => {
   // Create a ref to store the HTML string of the context menu
   const menuHTMLstring = useRef<string>();
@@ -77,7 +77,7 @@ const useContextMenu: useContextMenuFunction = ({
     if (_placeholder && contextMenuOptions && _target) {
       _placeholder.style.zIndex = "9999";
       menuHTMLstring.current = renderToString(
-        <Menu {...contextMenuOptions} onSelect={onSelect} toolbar={toolbar} />
+        <Menu {...contextMenuOptions} onSelect={onSelect} toolbar={toolbar} />,
       );
 
       if (!_target.contains(_placeholder)) {

@@ -119,7 +119,7 @@ const useMouseSelection: MouseSelectionFunction = ({
         }
       }
     },
-    [mouseX, mouseY]
+    [mouseX, mouseY],
   );
 
   /**

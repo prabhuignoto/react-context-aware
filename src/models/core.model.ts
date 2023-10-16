@@ -61,6 +61,7 @@ export interface Props {
     }[];
     onSelect: (name: string) => void;
   };
+  darkMode?: boolean;
 }
 
 export interface SelectionStyle {

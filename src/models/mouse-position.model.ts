@@ -17,5 +17,5 @@ export type MousePositionType = {
 };
 
 export type MousePositionFunction = (
-  props: MousePositionProps
+  props: MousePositionProps,
 ) => MousePositionType;

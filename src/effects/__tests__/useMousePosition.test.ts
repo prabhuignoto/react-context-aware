@@ -25,14 +25,14 @@ describe("useMousePosition", () => {
 
   it("should return initial mouse position as { x: 0, y: 0 }", () => {
     const { result } = renderHook(() =>
-      useMousePosition({ targetRef } as MousePositionProps)
+      useMousePosition({ targetRef } as MousePositionProps),
     );
     expect(result.current).toEqual({ x: 0, y: 0 });
   });
 
   it("should update mouse position when mouse moves over the target element", () => {
     const { result } = renderHook(() =>
-      useMousePosition({ targetRef } as MousePositionProps)
+      useMousePosition({ targetRef } as MousePositionProps),
     );
 
     // Simulate mouse move
@@ -52,7 +52,7 @@ describe("useMousePosition", () => {
     document.body.appendChild(anotherElement);
 
     const { result } = renderHook(() =>
-      useMousePosition({ targetRef } as MousePositionProps)
+      useMousePosition({ targetRef } as MousePositionProps),
     );
 
     act(() => {
@@ -71,14 +71,14 @@ describe("useMousePosition", () => {
   it("should handle null targetRef gracefully", () => {
     const nullRef: RefObject<HTMLElement> = { current: null };
     const { result } = renderHook(() =>
-      useMousePosition({ targetRef: nullRef } as MousePositionProps)
+      useMousePosition({ targetRef: nullRef } as MousePositionProps),
     );
     expect(result.current).toEqual({ x: 0, y: 0 });
   });
 
   it("should cleanup event listener on unmount", () => {
     const { unmount } = renderHook(() =>
-      useMousePosition({ targetRef } as MousePositionProps)
+      useMousePosition({ targetRef } as MousePositionProps),
     );
 
     const spy = vi.spyOn(targetElement, "removeEventListener");

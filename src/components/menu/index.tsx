@@ -7,7 +7,7 @@ import styles from "./menu.module.scss";
 
 const Menu: FunctionComponent<MenuModel> = ({ items, onSelect, toolbar }) => {
   const [menuItems, setMenuItems] = useState(() =>
-    items.map((item) => ({ ...item, isOpen: false, id: nanoid() }))
+    items.map((item) => ({ ...item, isOpen: false, id: nanoid() })),
   );
 
   const handleSelection = (id?: string) => {
@@ -16,7 +16,7 @@ const Menu: FunctionComponent<MenuModel> = ({ items, onSelect, toolbar }) => {
         prev.map((item) => ({
           ...item,
           isOpen: item.id === id ? !item.isOpen : false,
-        }))
+        })),
       );
       const item = menuItems.find((item) => item.id === id);
 
