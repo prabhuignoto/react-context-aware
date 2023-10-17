@@ -29,6 +29,7 @@ const useMouseSelection: MouseSelectionFunction = ({
   theme = defaultTheme,
   icons = defaultIcons,
   toolbar,
+  darkMode,
 }) => {
   const pressed = useRef(false);
   const targetElement = useRef<HTMLElement>();
@@ -65,6 +66,7 @@ const useMouseSelection: MouseSelectionFunction = ({
   useTheme({
     target: targetElement.current,
     theme,
+    darkMode,
   });
 
   // Update mouse pointer style.

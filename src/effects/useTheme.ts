@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Theme } from "../theme";
+import { MenuTheme, Theme } from "../theme";
 
 type useThemeProps = {
   target?: HTMLElement;
@@ -22,18 +22,22 @@ const useTheme: (p: useThemeProps) => void = ({ target, theme, darkMode }) => {
         theme.fontSize || "1rem",
       );
 
-      if (theme.menuBackgroundColor) {
+      if (theme.darkMode || theme.defaultMode) {
+        const { menuBackgroundColor, menuColor, menuItemHoverColor } = (
+          darkMode ? theme.darkMode : theme.defaultMode
+        ) as MenuTheme;
         element.style.setProperty(
           "--rc-context-menu-background",
-          theme.menuBackgroundColor,
+          menuBackgroundColor,
+        );
+        element.style.setProperty("--rc-context-menu-color", menuColor);
+        element.style.setProperty(
+          "--rc-context-menu-item-hover-color",
+          menuItemHoverColor || menuColor,
         );
       }
-
-      if (theme.menuColor) {
-        element.style.setProperty("--rc-context-menu-color", theme.menuColor);
-      }
     }
-  }, [target, theme, darkMode]);
+  }, [target]);
 };
 
 export { useTheme };

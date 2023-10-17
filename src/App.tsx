@@ -41,10 +41,21 @@ function App() {
       color: "blue",
       size: 20,
     },
+    // darkMode: true,
     theme: {
       primary: "#007FFF",
       secondary: "#6495ED",
       iconSize: "1.1rem",
+      darkMode: {
+        menuBackgroundColor: "#1E1E1E",
+        menuColor: "#fff",
+        menuItemHoverColor: "#444",
+      },
+      defaultMode: {
+        menuBackgroundColor: "#fff",
+        menuColor: "#000",
+        menuItemHoverColor: "#f5f5f5",
+      },
     },
     toolbar: {
       icons: [

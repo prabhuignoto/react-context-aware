@@ -30,7 +30,10 @@ const useContextMenu: useContextMenuFunction = ({
   // Create a ref to track whether this is the first render of the component
   const isFirstRender = useRef(true);
 
-  const contextMenuDim = useRef<{ width: number; height: number }>({});
+  const contextMenuDim = useRef<{ width: number; height: number }>({
+    height: 0,
+    width: 0,
+  });
 
   // Handle the context menu event
   const handleContextMenu = (ev: MouseEvent) => {

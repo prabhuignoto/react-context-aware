@@ -1,10 +1,16 @@
+export type MenuTheme = {
+  menuBackgroundColor: string;
+  menuColor: string;
+  menuItemHoverColor?: string;
+};
+
 export type Theme = {
   primary: string;
   secondary: string;
   iconSize?: string;
   fontSize?: string;
-  menuBackgroundColor?: string;
-  menuColor?: string;
+  darkMode?: MenuTheme;
+  defaultMode?: MenuTheme;
 };
 
 export const BlueTheme: Theme = {

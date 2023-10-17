@@ -42,7 +42,7 @@
   }
 
   &:hover {
-    background: #f5f5f5;
+    background: var(--rc-context-menu-item-hover-color);
     border-radius: 2px;
   }
 
@@ -90,4 +90,5 @@
   font-size: var(--rc-context-menu-font-size);
   display: flex;
   place-items: flex-start;
+  color: var(--rc-context-menu-color);
 }

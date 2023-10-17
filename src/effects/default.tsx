@@ -19,6 +19,16 @@ export const pointerStyleDefaults: PointerStyle = {
 export const defaultTheme: Theme = {
   primary: "#000",
   secondary: "#ccc",
+  darkMode: {
+    menuBackgroundColor: "#000",
+    menuColor: "#ccc",
+    menuItemHoverColor: "#222",
+  },
+  defaultMode: {
+    menuBackgroundColor: "#fff",
+    menuColor: "#000",
+    menuItemHoverColor: "#f5f5f5",
+  },
 };
 
 type IconRecord =
