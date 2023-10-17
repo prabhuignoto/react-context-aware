@@ -1,9 +1,9 @@
 .wrapper {
   display: flex;
   flex-direction: column;
+  padding: 0.1rem;
   place-items: flex-start;
   width: 100%;
-  padding: 0.1rem;
 }
 
 .toolbar_wrapper {
@@ -17,28 +17,36 @@
 }
 
 .menu {
+  border-radius: 4px;
   display: flex;
   flex-direction: column;
-  place-items: flex-start;
-  width: 100%;
   margin: 0;
   padding: 0;
-  border-radius: 4px;
+  place-items: flex-start;
+  width: 100%;
 }
 
 .menu_item {
-  display: flex;
-  place-items: center;
-  place-content: flex-start;
-  width: 100%;
   color: #000;
+  display: flex;
+  place-content: flex-start;
+  place-items: center;
   position: relative;
+  width: 100%;
 
-  &:not(.divider) {
-    padding-top: 0.25rem;
-    padding-bottom: 0.25rem;
-    padding-left: 0.25rem;
-    width: calc(100% - 0.25rem);
+  &.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  &::after:not(:last-child) {
+    background: #000;
+    content: "";
+    display: block;
+    height: 1px;
+    opacity: 0.2;
+    position: absolute;
+    width: 100%;
   }
 
   &:hover {
@@ -46,49 +54,43 @@
     border-radius: 2px;
   }
 
-  &::after:not(:last-child) {
-    content: "";
-    display: block;
-    position: absolute;
-    width: 100%;
-    height: 1px;
-    background: #000;
-    opacity: 0.2;
-  }
-
-  &.disabled {
-    opacity: 0.5;
-    pointer-events: none;
+  &:not(.divider) {
+    padding-bottom: 0.25rem;
+    padding-left: 0.25rem;
+    padding-top: 0.25rem;
+    width: calc(100% - 0.25rem);
   }
 }
 
 .divider {
-  margin: 0.5rem 0;
   background: #e2e2e2;
-  width: 100%;
-  height: 1px;
-  padding: 0;
   border: 0;
+  height: 1px;
+  margin: 0.5rem 0;
+  padding: 0;
+  width: 100%;
 }
 
 .icon {
-  width: var(--rc-context-menu-icon-size, 1.2rem);
-  height: var(--rc-context-menu-icon-size, 1.2rem);
-  display: flex;
-  place-items: center;
-  margin-right: 0.25rem;
   color: var(--rc-context-menu-primary);
-  padding: 0.5rem;
+  display: flex;
+  height: var(--rc-context-menu-icon-size, 1.2rem);
+  margin-right: 0.5rem;
+  place-items: center;
+  width: var(--rc-context-menu-icon-size, 1.2rem);
 
   svg {
-    width: 100%;
     height: 100%;
+    width: 100%;
   }
 }
 
 .label {
-  font-size: var(--rc-context-menu-font-size);
-  display: flex;
-  place-items: flex-start;
   color: var(--rc-context-menu-color);
+  display: flex;
+  font-size: var(--rc-context-menu-font-size);
+  overflow: hidden;
+  place-items: flex-start;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

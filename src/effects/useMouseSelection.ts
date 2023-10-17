@@ -39,6 +39,9 @@ const useMouseSelection: MouseSelectionFunction = ({
     y: 0,
   });
   const [isSelected, setIsSelected] = useState(false);
+  const contextMenuPlaceholder = useRef<HTMLDivElement>(
+    document.createElement("div")
+  );
 
   const [dimensions, setDimensions] = useState<MouseSelectionDimensions>({
     width: 0,
@@ -47,19 +50,24 @@ const useMouseSelection: MouseSelectionFunction = ({
     flipY: false,
   });
 
+  // setup context menu
+  useContextMenu({
+    target: targetRef,
+    contextMenuOptions: contextMenu,
+    toolbar,
+    placeholder: contextMenuPlaceholder,
+  });
+
   const {
     x: mouseX,
     y: mouseY,
     direction,
     isActive,
     pointerStatus,
-  } = useMousePosition({ targetRef, isSelected });
-
-  // setup context menu
-  useContextMenu({
-    target: targetRef,
-    contextMenuOptions: contextMenu,
-    toolbar,
+  } = useMousePosition({
+    targetRef,
+    isSelected,
+    menuPlaceholder: contextMenuPlaceholder,
   });
 
   // Apply theme to the target element.
@@ -121,7 +129,7 @@ const useMouseSelection: MouseSelectionFunction = ({
         }
       }
     },
-    [mouseX, mouseY],
+    [mouseX, mouseY]
   );
 
   /**

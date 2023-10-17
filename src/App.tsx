@@ -29,7 +29,7 @@ library.add(
   faEarth,
   faGear,
   faSave,
-  faTrash,
+  faTrash
 );
 
 function App() {
@@ -79,14 +79,14 @@ function App() {
         },
         {
           name: "Cut",
-          // icon: <FontAwesomeIcon icon="cut" size="2x" />,
+          icon: <FontAwesomeIcon icon="cut" size="2x" />,
         },
         {
           divider: true,
         },
         {
           name: "Paste",
-          // icon: <FontAwesomeIcon icon="paste" size="2x" />,
+          icon: <FontAwesomeIcon icon="paste" size="2x" />,
         },
         {
           name: "Delete",

@@ -12,6 +12,7 @@ const MenuItem: FunctionComponent<MenuItemModel> = ({
   disabled,
 }) => {
   const handleClick = () => {
+    alert("koja");
     onClick?.(id);
   };
 

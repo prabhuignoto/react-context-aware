@@ -19,11 +19,12 @@ const useContextMenu: useContextMenuFunction = ({
   target,
   contextMenuOptions,
   toolbar,
+  placeholder,
 }) => {
   // Create a ref to store the HTML string of the context menu
   const menuHTMLstring = useRef<string>();
   // Create a ref to store a placeholder div element
-  const placeholder = useRef<HTMLDivElement>(document.createElement("div"));
+  // const placeholder = useRef<HTMLDivElement>(document.createElement("div"));
 
   // Create a state to track whether the context menu is open or not
   const [contextMenuOpen, setContextMenuOpen] = useState(false);
@@ -97,14 +98,14 @@ const useContextMenu: useContextMenuFunction = ({
     if (_placeholder && contextMenuOptions && _target) {
       _placeholder.style.zIndex = "9999";
       menuHTMLstring.current = renderToString(
-        <Menu {...contextMenuOptions} onSelect={onSelect} toolbar={toolbar} />,
+        <Menu {...contextMenuOptions} onSelect={onSelect} toolbar={toolbar} />
       );
 
       if (!_target.contains(_placeholder)) {
         _target.append(_placeholder);
       }
     }
-  }, [target]);
+  }, [target, placeholder]);
 
   // Update the placeholder class when the context menu state changes
   useEffect(() => {
@@ -122,10 +123,13 @@ const useContextMenu: useContextMenuFunction = ({
   }, [contextMenuOpen]);
 
   // Close the context menu when the user clicks outside of it
-  const handleClose = () => {
+  const handleClose = (ev: MouseEvent) => {
     const _placeholder = placeholder.current;
+    const target = ev.target as HTMLElement;
 
-    if (_placeholder) {
+    const isMenuItemSelected = placeholder.current?.contains(target);
+
+    if (_placeholder && !isMenuItemSelected) {
       setContextMenuOpen(false);
     }
   };

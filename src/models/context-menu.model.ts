@@ -14,6 +14,8 @@ type UseContextMenuProps = {
   contextMenuOptions?: ContextMenuOptions;
 
   containerRect?: DOMRect;
+
+  placeholder: RefObject<HTMLDivElement>;
 } & Pick<Props, "toolbar">;
 
 /**

@@ -91,7 +91,6 @@ const useMousePointer: MousePointerFunction = ({
         display: none;
         fill: var(--rc-context-menu-primary);
         color: var(--rc-context-menu-primary);
-        user-select: none;
         padding: 0;
         `;
 
