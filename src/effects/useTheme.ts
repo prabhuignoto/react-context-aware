@@ -4,9 +4,10 @@ import { Theme } from "../theme";
 type useThemeProps = {
   target?: HTMLElement;
   theme: Theme;
+  darkMode?: boolean;
 };
 
-const useTheme: (p: useThemeProps) => void = ({ target, theme }) => {
+const useTheme: (p: useThemeProps) => void = ({ target, theme, darkMode }) => {
   useEffect(() => {
     if (target && theme) {
       const element = target;
@@ -20,8 +21,19 @@ const useTheme: (p: useThemeProps) => void = ({ target, theme }) => {
         "--rc-context-menu-font-size",
         theme.fontSize || "1rem",
       );
+
+      if (theme.menuBackgroundColor) {
+        element.style.setProperty(
+          "--rc-context-menu-background",
+          theme.menuBackgroundColor,
+        );
+      }
+
+      if (theme.menuColor) {
+        element.style.setProperty("--rc-context-menu-color", theme.menuColor);
+      }
     }
-  }, [target, theme]);
+  }, [target, theme, darkMode]);
 };
 
 export { useTheme };

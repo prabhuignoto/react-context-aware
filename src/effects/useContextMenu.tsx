@@ -30,6 +30,8 @@ const useContextMenu: useContextMenuFunction = ({
   // Create a ref to track whether this is the first render of the component
   const isFirstRender = useRef(true);
 
+  const contextMenuDim = useRef<{ width: number; height: number }>({});
+
   // Handle the context menu event
   const handleContextMenu = (ev: MouseEvent) => {
     ev.preventDefault();
@@ -40,22 +42,37 @@ const useContextMenu: useContextMenuFunction = ({
 
     if (_target && _placeholder && !contextMenuOpen) {
       const { clientX, clientY } = ev;
-      const { offsetLeft, offsetTop } = _target;
+      const { offsetLeft, offsetTop, clientHeight } = _target;
       const calcTop = clientY - offsetTop;
       const calcLeft = clientX - offsetLeft;
+      const { height: menuHeight } = contextMenuDim.current;
 
       _placeholder.innerHTML = menuHTMLstring.current || "";
       _placeholder.classList.add(styles.context_menu_placeholder);
-      _placeholder.style.top = `${calcTop}px`;
-      _placeholder.style.left = `${calcLeft}px`;
+
+      if (calcTop + menuHeight > clientHeight) {
+        //flip here
+        _placeholder.style.left = `${calcLeft}px`;
+        _placeholder.style.top = `${calcTop - menuHeight}px`;
+      } else {
+        _placeholder.style.left = `${calcLeft}px`;
+        _placeholder.style.top = `${calcTop}px`;
+      }
 
       setContextMenuOpen(true);
     }
   };
 
   // Handle the transition end event
-  const handleTransitionEnd = () => {
+  const handleTransitionEnd = (ev: TransitionEvent) => {
     const _placeholder = placeholder.current;
+
+    const target = ev.target as HTMLElement;
+
+    contextMenuDim.current = {
+      width: target.clientWidth,
+      height: target.clientHeight,
+    };
 
     if (_placeholder) {
       if (contextMenuOpen) {
@@ -113,6 +130,8 @@ const useContextMenu: useContextMenuFunction = ({
   // Add event listeners to the target element
   useEffect(() => {
     const element = target.current;
+
+    if (!element) return;
 
     element?.addEventListener("contextmenu", handleContextMenu);
     element?.addEventListener("mousedown", handleClose);

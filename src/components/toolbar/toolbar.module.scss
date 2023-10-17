@@ -22,9 +22,16 @@
   padding: 0.25rem;
   place-items: center;
   width: var(--rc-context-menu-icon-size);
-}
+  border: 1px solid transparent;
 
-.icon svg {
-  height: 100%;
-  width: 100%;
+  &:hover {
+    background: #fff;
+    color: var(--rc-context-menu-primary);
+    border: 1px solid var(--rc-context-menu-primary);
+  }
+
+  svg {
+    height: 100%;
+    width: 100%;
+  }
 }

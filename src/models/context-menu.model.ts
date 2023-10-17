@@ -12,6 +12,8 @@ type UseContextMenuProps = {
    * An optional object containing options for the context menu.
    */
   contextMenuOptions?: ContextMenuOptions;
+
+  containerRect?: DOMRect;
 } & Pick<Props, "toolbar">;
 
 /**

@@ -3,6 +3,8 @@ export type Theme = {
   secondary: string;
   iconSize?: string;
   fontSize?: string;
+  menuBackgroundColor?: string;
+  menuColor?: string;
 };
 
 export const BlueTheme: Theme = {
