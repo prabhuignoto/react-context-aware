@@ -22,6 +22,9 @@ export type PointerStatus =
 /**
  * Props interface for the core component.
  */
+/**
+ * Props for the core component.
+ */
 export interface Props {
   /**
    * Options for the context menu.
@@ -54,14 +57,23 @@ export interface Props {
    * Theme for the component.
    */
   theme?: Theme;
+  /**
+   * Toolbar options for the component.
+   */
   toolbar?: {
     icons: {
       name: string;
       icon: ReactNode;
     }[];
-    onSelect: (name: string) => void;
   };
+  /**
+   * Whether to use dark mode.
+   */
   darkMode?: boolean;
+  /**
+   * Callback function to be called when a context menu item is selected.
+   */
+  onContextMenuSelected?: (p: { id: string; name: string }) => void;
 }
 
 export interface SelectionStyle {

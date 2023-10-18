@@ -7,22 +7,16 @@ const MenuItem: FunctionComponent<MenuItemModel> = ({
   name,
   id,
   icon,
-  onClick,
   divider,
   disabled,
 }) => {
-  const handleClick = () => {
-    alert("koja");
-    onClick?.(id);
-  };
-
   const itemClass = cls(style.menu_item, {
     [style.divider]: divider,
     [style.disabled]: disabled,
   });
 
   return (
-    <li className={itemClass} onClick={handleClick}>
+    <li className={itemClass} data-name={name} data-id={id} data-type="menu">
       {divider ? (
         <hr className={style.divider} />
       ) : (

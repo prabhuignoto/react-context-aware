@@ -1,3 +1,4 @@
+import { ContextMenuOptions } from "./../models/core.model";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   MouseSelectionDimensions,
@@ -30,6 +31,7 @@ const useMouseSelection: MouseSelectionFunction = ({
   icons = defaultIcons,
   toolbar,
   darkMode,
+  onContextMenuSelected,
 }) => {
   const pressed = useRef(false);
   const targetElement = useRef<HTMLElement>();
@@ -40,7 +42,7 @@ const useMouseSelection: MouseSelectionFunction = ({
   });
   const [isSelected, setIsSelected] = useState(false);
   const contextMenuPlaceholder = useRef<HTMLDivElement>(
-    document.createElement("div")
+    document.createElement("div"),
   );
 
   const [dimensions, setDimensions] = useState<MouseSelectionDimensions>({
@@ -56,6 +58,7 @@ const useMouseSelection: MouseSelectionFunction = ({
     contextMenuOptions: contextMenu,
     toolbar,
     placeholder: contextMenuPlaceholder,
+    onContextMenuSelected,
   });
 
   const {
@@ -129,7 +132,7 @@ const useMouseSelection: MouseSelectionFunction = ({
         }
       }
     },
-    [mouseX, mouseY]
+    [mouseX, mouseY],
   );
 
   /**

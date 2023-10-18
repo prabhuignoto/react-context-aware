@@ -4,7 +4,7 @@
  * @packageDocumentation
  */
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { renderToString } from "react-dom/server";
 import { Menu } from "../components/menu";
 import { useContextMenuFunction } from "../models/context-menu.model";
@@ -19,15 +19,17 @@ const useContextMenu: useContextMenuFunction = ({
   target,
   contextMenuOptions,
   toolbar,
-  placeholder,
+  onContextMenuSelected,
+  // placeholder,
 }) => {
   // Create a ref to store the HTML string of the context menu
   const menuHTMLstring = useRef<string>();
   // Create a ref to store a placeholder div element
-  // const placeholder = useRef<HTMLDivElement>(document.createElement("div"));
+  const placeholder = useRef<HTMLDivElement>(document.createElement("div"));
 
   // Create a state to track whether the context menu is open or not
   const [contextMenuOpen, setContextMenuOpen] = useState(false);
+
   // Create a ref to track whether this is the first render of the component
   const isFirstRender = useRef(true);
 
@@ -35,6 +37,17 @@ const useContextMenu: useContextMenuFunction = ({
     height: 0,
     width: 0,
   });
+
+  const selectionHandler = useCallback((ev: MouseEvent) => {
+    const target = ev.currentTarget as HTMLElement;
+
+    const name = target.getAttribute("data-name");
+    const id = target.getAttribute("data-id");
+
+    if (name && id) {
+      onContextMenuSelected?.({ name, id });
+    }
+  }, []);
 
   // Handle the context menu event
   const handleContextMenu = (ev: MouseEvent) => {
@@ -53,6 +66,12 @@ const useContextMenu: useContextMenuFunction = ({
 
       _placeholder.innerHTML = menuHTMLstring.current || "";
       _placeholder.classList.add(styles.context_menu_placeholder);
+
+      setTimeout(() => {
+        _placeholder.querySelectorAll("li").forEach((li) => {
+          li.addEventListener("click", selectionHandler);
+        });
+      }, 0);
 
       if (calcTop + menuHeight > clientHeight) {
         //flip here
@@ -87,9 +106,6 @@ const useContextMenu: useContextMenuFunction = ({
     }
   };
 
-  // Handle the select event
-  const onSelect = () => {};
-
   // Update the menu HTML string when the context menu options change
   useEffect(() => {
     const _placeholder = placeholder.current;
@@ -98,14 +114,14 @@ const useContextMenu: useContextMenuFunction = ({
     if (_placeholder && contextMenuOptions && _target) {
       _placeholder.style.zIndex = "9999";
       menuHTMLstring.current = renderToString(
-        <Menu {...contextMenuOptions} onSelect={onSelect} toolbar={toolbar} />
+        <Menu {...contextMenuOptions} toolbar={toolbar} />,
       );
 
       if (!_target.contains(_placeholder)) {
         _target.append(_placeholder);
       }
     }
-  }, [target, placeholder]);
+  }, [target]);
 
   // Update the placeholder class when the context menu state changes
   useEffect(() => {
@@ -136,17 +152,18 @@ const useContextMenu: useContextMenuFunction = ({
 
   // Add event listeners to the target element
   useEffect(() => {
-    const element = target.current;
+    const targetElement = target.current;
 
-    if (!element) return;
+    if (!targetElement) return;
 
-    element?.addEventListener("contextmenu", handleContextMenu);
-    element?.addEventListener("mousedown", handleClose);
-    element?.addEventListener("transitionend", handleTransitionEnd);
+    targetElement?.addEventListener("contextmenu", handleContextMenu);
+    targetElement?.addEventListener("mousedown", handleClose);
+    targetElement?.addEventListener("transitionend", handleTransitionEnd);
 
     return () => {
-      element?.removeEventListener("contextmenu", handleContextMenu);
-      element?.removeEventListener("mousedown", handleClose);
+      targetElement?.removeEventListener("contextmenu", handleContextMenu);
+      targetElement?.removeEventListener("mousedown", handleClose);
+      targetElement?.removeEventListener("transitionend", handleTransitionEnd);
     };
   }, [target]);
 

@@ -29,7 +29,7 @@ library.add(
   faEarth,
   faGear,
   faSave,
-  faTrash
+  faTrash,
 );
 
 function App() {
@@ -67,9 +67,9 @@ function App() {
           icon: <FontAwesomeIcon icon="area-chart" size="2x" />,
         },
       ],
-      onSelect: (item) => {
-        console.log(item);
-      },
+    },
+    onContextMenuSelected: (item) => {
+      console.log(item);
     },
     contextMenu: {
       items: [

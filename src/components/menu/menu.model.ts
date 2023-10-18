@@ -5,7 +5,6 @@ export interface MenuItemModel {
   id?: string;
   name?: string;
   icon?: ReactNode;
-  onClick?: (id?: string) => void;
   selected?: boolean;
   divider?: boolean;
   disabled?: boolean;
@@ -13,5 +12,4 @@ export interface MenuItemModel {
 
 export type MenuModel = {
   items: MenuItemModel[];
-  onSelect: (item: MenuItemModel) => void;
 } & Pick<Props, "toolbar">;
