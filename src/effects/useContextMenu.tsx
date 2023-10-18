@@ -47,6 +47,8 @@ const useContextMenu: useContextMenuFunction = ({
     if (name && id) {
       onContextMenuSelected?.({ name, id });
     }
+
+    setContextMenuOpen(false);
   }, []);
 
   // Handle the context menu event
@@ -114,7 +116,7 @@ const useContextMenu: useContextMenuFunction = ({
     if (_placeholder && contextMenuOptions && _target) {
       _placeholder.style.zIndex = "9999";
       menuHTMLstring.current = renderToString(
-        <Menu {...contextMenuOptions} toolbar={toolbar} />,
+        <Menu {...contextMenuOptions} toolbar={toolbar} />
       );
 
       if (!_target.contains(_placeholder)) {
@@ -164,6 +166,9 @@ const useContextMenu: useContextMenuFunction = ({
       targetElement?.removeEventListener("contextmenu", handleContextMenu);
       targetElement?.removeEventListener("mousedown", handleClose);
       targetElement?.removeEventListener("transitionend", handleTransitionEnd);
+      placeholder.current.querySelectorAll("li").forEach((li) => {
+        li.removeEventListener("click", selectionHandler);
+      });
     };
   }, [target]);
 

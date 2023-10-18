@@ -15,11 +15,11 @@ const useTheme: (p: useThemeProps) => void = ({ target, theme, darkMode }) => {
       element.style.setProperty("--rc-context-menu-secondary", theme.secondary);
       element.style.setProperty(
         "--rc-context-menu-icon-size",
-        theme.iconSize || "1.25rem",
+        theme.iconSize || "1.25rem"
       );
       element.style.setProperty(
         "--rc-context-menu-font-size",
-        theme.fontSize || "1rem",
+        theme.fontSize || "1rem"
       );
 
       if (theme.darkMode || theme.defaultMode) {
@@ -28,13 +28,19 @@ const useTheme: (p: useThemeProps) => void = ({ target, theme, darkMode }) => {
         ) as MenuTheme;
         element.style.setProperty(
           "--rc-context-menu-background",
-          menuBackgroundColor,
+          menuBackgroundColor
         );
         element.style.setProperty("--rc-context-menu-color", menuColor);
         element.style.setProperty(
           "--rc-context-menu-item-hover-color",
-          menuItemHoverColor || menuColor,
+          menuItemHoverColor || menuColor
         );
+      }
+
+      if (darkMode) {
+        element.style.setProperty("--rc-context-menu-divider", "#555");
+      } else {
+        element.style.setProperty("--rc-context-menu-divider", "#e8e8e8");
       }
     }
   }, [target]);

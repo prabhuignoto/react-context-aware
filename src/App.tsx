@@ -29,7 +29,7 @@ library.add(
   faEarth,
   faGear,
   faSave,
-  faTrash,
+  faTrash
 );
 
 function App() {
@@ -41,15 +41,15 @@ function App() {
       color: "blue",
       size: 20,
     },
-    // darkMode: true,
+    darkMode: true,
     theme: {
       primary: "#007FFF",
       secondary: "#6495ED",
-      iconSize: "1.1rem",
+      iconSize: "1rem",
       darkMode: {
         menuBackgroundColor: "#1E1E1E",
         menuColor: "#fff",
-        menuItemHoverColor: "#444",
+        menuItemHoverColor: "#333",
       },
       defaultMode: {
         menuBackgroundColor: "#fff",

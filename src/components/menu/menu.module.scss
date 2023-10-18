@@ -55,15 +55,15 @@
   }
 
   &:not(.divider) {
-    padding-bottom: 0.25rem;
+    padding-bottom: 0.2rem;
     padding-left: 0.25rem;
-    padding-top: 0.25rem;
+    padding-top: 0.2rem;
     width: calc(100% - 0.25rem);
   }
 }
 
 .divider {
-  background: #e2e2e2;
+  background: var(--rc-context-menu-divider);
   border: 0;
   height: 1px;
   margin: 0.5rem 0;
