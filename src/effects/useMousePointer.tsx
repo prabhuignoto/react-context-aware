@@ -6,6 +6,17 @@ import { useMouseWheel } from "./useMouseWheel";
 
 export type MousePointerFunction = (props: MousePointerProps) => void;
 
+/**
+ * A custom hook that returns a function to render a mouse pointer.
+ * @param container - The container element where the mouse pointer will be rendered.
+ * @param mouseX - The x-coordinate of the mouse pointer.
+ * @param mouseY - The y-coordinate of the mouse pointer.
+ * @param isActive - A boolean indicating whether the mouse pointer is active.
+ * @param pointerStyle - An object containing the style properties for the mouse pointer.
+ * @param status - A string indicating the status of the mouse pointer.
+ * @param icons - An object containing the icons for the mouse pointer.
+ * @param isBeingSelected - A boolean indicating whether the mouse pointer is being selected.
+ */
 const useMousePointer: MousePointerFunction = ({
   container,
   mouseX,
