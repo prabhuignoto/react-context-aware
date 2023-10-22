@@ -1,85 +1,39 @@
-import {
-  CSSProperties,
-  FunctionComponent,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  MouseEvent
-} from "react";
+import { nanoid } from "nanoid";
+import { useCallback, useEffect, useRef } from "react";
 import { renderToString } from "react-dom/server";
-
-type usePopupProps = {
-  containerElement: HTMLElement;
-};
-
-type ContentType = "image" | "text";
-
-type PopupProps = {
-  type: ContentType;
-  data: string;
-  position: string;
-  targetElementRect: {
-    x: number;
-    y: number;
-  };
-  popupDimensions?: {
-    height: number;
-    width: number;
-  };
-};
-
-const Popup: FunctionComponent<PopupProps> = ({
-  type,
-  data,
-  position,
-  targetElementRect,
-  popupDimensions = {
-    height: 200,
-    width: 300,
-  },
-}) => {
-  const style = useMemo(
-    () =>
-      ({
-        position: "fixed",
-        left: targetElementRect.x,
-        top: targetElementRect.y - popupDimensions.height,
-        zIndex: 9999,
-        border: "1px solid red",
-      } as CSSProperties),
-    [position, targetElementRect, popupDimensions]
-  );
-
-  return (
-    <div className="popup" style={style}>
-      {type === "image" ? <img src={data} /> : null}
-      {type === "text" ? <span>{data}</span> : null}
-    </div>
-  );
-};
+import { Popup, createPopupPlaceholder } from "../components/popup";
+import { ContentType, usePopupProps } from "../models/popup.model";
 
 const usePopup: (props: usePopupProps) => void = (props) => {
   const { containerElement } = props;
 
-  const targetsRef = useRef<HTMLElement[] | null>();
+  const targetsRef = useRef<Element[] | null>();
+  const activePlaceholderId = useRef("");
 
-  const handleMouseEnter = useCallback((ev: MouseEvent) => {
+  // handles mouse FileSystemEntry, shows the poup on mouse enter
+  const handleMouseEnter = useCallback((ev: Event) => {
+    // const { height: popupHeight, width: popupWidth } = popupDimensions;
     const target = ev.target as HTMLElement;
     const targetRect = target.getBoundingClientRect();
+    const container = containerElement.current;
 
     const type = target.getAttribute("data-type");
     const position = target.getAttribute("data-position");
     const data = target.getAttribute("data-data");
+    const id = `placeholder-${nanoid()}`;
+    const popupHeight = parseInt(target.getAttribute("data-popup-height") + "");
+    const popupWidth = parseInt(target.getAttribute("data-popup-width") + "");
+    activePlaceholderId.current = id;
 
-    if (data && type && position) {
-      const placeholder = document.createElement("div");
-      placeholder.style.cssText = `
-        position: fixed;
-        z-index: 9999;
-        height: 200px;
-        width: 400px;
-      `;
+    if (data && type && position && container) {
+      const placeholder = createPopupPlaceholder({
+        id,
+        target,
+        height: popupHeight,
+        width: popupWidth,
+        position: "bottom",
+      });
+
       const popupString = renderToString(
         <Popup
           type={type as ContentType}
@@ -89,22 +43,43 @@ const usePopup: (props: usePopupProps) => void = (props) => {
             x: targetRect.x,
             y: targetRect.y,
           }}
-        />
+        />,
       );
       placeholder.innerHTML = popupString;
-      containerElement.appendChild(placeholder);
+      container.appendChild(placeholder);
     }
   }, []);
 
+  const handleMouseLeave = useCallback(() => {
+    const placeholder = activePlaceholderId.current;
+    if (placeholder) {
+      const placeholderElement = document.getElementById(placeholder);
+      if (placeholderElement) {
+        placeholderElement.remove();
+      }
+    }
+  }, []);
+
+  const handleClick = useCallback((ev: Event) => {
+    ev.preventDefault();
+    ev.stopPropagation();
+  }, []);
+
   useEffect(() => {
-    if (containerElement) {
-      const targets = Array.from(containerElement.querySelectorAll("[data-popup='true]")) as HTMLElement[];
+    const element = containerElement.current;
+
+    if (element) {
+      const targets = Array.from(
+        element.querySelectorAll("[data-popup='true']"),
+      ) as Element[];
 
       if (targets.length) {
         targetsRef.current = targets;
 
         targets.forEach((target) => {
           target.addEventListener("mouseenter", handleMouseEnter);
+          target.addEventListener("mouseleave", handleMouseLeave);
+          target.addEventListener("click", handleClick);
         });
       }
     }
@@ -117,6 +92,8 @@ const usePopup: (props: usePopupProps) => void = (props) => {
       if (targets?.length) {
         targets.forEach((target) => {
           target.removeEventListener("mouseenter", handleMouseEnter);
+          target.removeEventListener("mouseleave", handleMouseLeave);
+          target.removeEventListener("click", handleClick);
         });
       }
     };

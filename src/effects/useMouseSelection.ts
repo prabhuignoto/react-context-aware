@@ -1,4 +1,3 @@
-import { ContextMenuOptions } from "./../models/core.model";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   MouseSelectionDimensions,
@@ -9,8 +8,9 @@ import { useContextMenu } from "./useContextMenu";
 import { useMousePointer } from "./useMousePointer";
 import { useMousePosition } from "./useMousePosition";
 import { useMouseWheel } from "./useMouseWheel";
+import { usePopup } from "./usePopup";
 import { useTheme } from "./useTheme";
-import { getSelectionDiv } from "./utils";
+import { getSelectionDiv, isTagTypeSpecial } from "./utils";
 
 /**
  * A custom hook that enables mouse selection on a target element.
@@ -80,6 +80,10 @@ const useMouseSelection: MouseSelectionFunction = ({
     darkMode,
   });
 
+  usePopup({
+    containerElement: targetRef,
+  });
+
   // Update mouse pointer style.
   useMousePointer({
     container: targetRef,
@@ -98,15 +102,7 @@ const useMouseSelection: MouseSelectionFunction = ({
     targetRef,
   });
 
-  const isSpecialTag = useCallback((el: HTMLElement) => {
-    const { tagName } = el;
-    return (
-      tagName === "INPUT" ||
-      tagName === "TEXTAREA" ||
-      tagName === "BUTTON" ||
-      tagName === "A"
-    );
-  }, []);
+  const isSpecialTag = useCallback(isTagTypeSpecial, []);
 
   /**
    * A callback function that handles the mouse down event.

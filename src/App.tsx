@@ -29,7 +29,7 @@ library.add(
   faEarth,
   faGear,
   faSave,
-  faTrash
+  faTrash,
 );
 
 function App() {
@@ -130,6 +130,17 @@ function App() {
       }}
       ref={ref}
     >
+      <a
+        href="https://google.com"
+        data-popup="true"
+        data-type="text"
+        data-data="This is a google site"
+        data-position="top"
+        data-popup-width="200"
+        data-popup-height="200"
+      >
+        Google
+      </a>
       <input type="text" />
       <button onClick={() => alert("red")}>Click me</button>
       <textarea name="" id="" cols={30} rows={10}></textarea>

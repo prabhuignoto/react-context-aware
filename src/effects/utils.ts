@@ -51,4 +51,14 @@ const getSelectionDiv = (
   return span;
 };
 
-export { getDirection, getSelectionDiv };
+const isTagTypeSpecial = (el: HTMLElement) => {
+  const { tagName } = el;
+  return (
+    tagName === "INPUT" ||
+    tagName === "TEXTAREA" ||
+    tagName === "BUTTON" ||
+    tagName === "A"
+  );
+};
+
+export { getDirection, getSelectionDiv, isTagTypeSpecial };

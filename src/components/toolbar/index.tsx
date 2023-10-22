@@ -14,7 +14,7 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({ items = [] }) => {
     items.map((item) => ({
       ...item,
       id: nanoid(),
-    }))
+    })),
   );
 
   return (
