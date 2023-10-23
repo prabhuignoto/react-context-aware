@@ -2,6 +2,7 @@ import cx from "classnames";
 import { FunctionComponent } from "react";
 import { PopupProps } from "../../models/popup.model";
 import styles from "./popup.module.scss";
+import { styleobjectToCssText } from "../../effects/utils";
 
 type PopupPlaceholderProps = {
   id: string;
@@ -28,16 +29,28 @@ const createPopupPlaceholder = ({
   // Create the placeholder element
   const placeholder = document.createElement("div");
   placeholder.id = id;
-  placeholder.style.cssText = `
-    position: fixed;
-    z-index: 9999;
-    left: ${
+  // placeholder.style.cssText = `
+  //   position: fixed;
+  //   z-index: 9999;
+  //   left: ${
+  //     targetRect.x - Math.round(width / 2) + Math.round(targetRect.width / 2)
+  //   }px;
+  //   top: ${targetRect.y + (position === "top" ? -height : targetRect.height)}px;
+  //   height: ${height}px;
+  //   width: ${width}px;
+  // `;
+  placeholder.style.cssText = styleobjectToCssText({
+    position: "fixed",
+    zIndex: "9999",
+    left: `${
       targetRect.x - Math.round(width / 2) + Math.round(targetRect.width / 2)
-    }px;
-    top: ${targetRect.y + (position === "top" ? -height : targetRect.height)}px;
-    height: ${height}px;
-    width: ${width}px;
-  `;
+    }px`,
+    top: `${
+      targetRect.y + (position === "top" ? -height : targetRect.height)
+    }px`,
+    height: `${height}px`,
+    width: `${width}px`,
+  });
   return placeholder;
 };
 

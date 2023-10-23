@@ -40,25 +40,25 @@ const getSelectionDiv = (
 ) => {
   const span = document.createElement("span");
   const { backgroundColor, borderColor, borderStyle, borderWidth } = style;
-  span.style.cssText = `
-        position: absolute;
-        z-index: 99999;
-        display: block;
-        background: ${backgroundColor};
-        border: ${borderWidth}px ${borderStyle} ${borderColor};
-      `;
+  span.style.cssText = styleobjectToCssText({
+    position: "absolute",
+    zIndex: 99999,
+    display: "block",
+    background: backgroundColor,
+    border: `${borderWidth}px ${borderStyle} ${borderColor}`,
+  });
 
   return span;
 };
 
 const getPointerImageWrapperDiv = () => {
   const imageWrapper = document.createElement("span");
-  imageWrapper.style.cssText = `
-    position: absolute;
-    display: block;
-    width: 100%;
-    height: 100%;
-  `;
+  imageWrapper.style.cssText = styleobjectToCssText({
+    position: "absolute",
+    display: "block",
+    width: "100%",
+    height: "100%",
+  });
 
   return imageWrapper;
 };
@@ -73,9 +73,16 @@ const isTagTypeSpecial = (el: HTMLElement) => {
   );
 };
 
+const styleobjectToCssText = (style: any) => {
+  return Object.keys(style).reduce((acc, key) => {
+    return `${acc}${key}:${style[key]};`;
+  }, "");
+};
+
 export {
   getDirection,
   getPointerImageWrapperDiv,
   getSelectionDiv,
   isTagTypeSpecial,
+  styleobjectToCssText
 };
