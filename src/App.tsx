@@ -29,7 +29,7 @@ library.add(
   faEarth,
   faGear,
   faSave,
-  faTrash,
+  faTrash
 );
 
 function App() {
@@ -137,7 +137,7 @@ function App() {
         data-data="This is a google site"
         data-position="top"
         data-popup-width="200"
-        data-popup-height="200"
+        data-popup-height="100"
       >
         Google
       </a>

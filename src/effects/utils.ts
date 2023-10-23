@@ -3,7 +3,7 @@ import { MouseMovementDirection } from "../models/mouse-position.model";
 
 const getDirection: (x: number, y: number) => MouseMovementDirection = (
   movX,
-  movY,
+  movY
 ) => {
   // If the mouse movement is zero, return null
   if (movX === 0 && movY === 0) {
@@ -36,7 +36,7 @@ const getSelectionDiv = (
     borderColor: "rgba(0, 123, 255, 0.5)",
     borderStyle: "dotted",
     borderWidth: 1,
-  },
+  }
 ) => {
   const span = document.createElement("span");
   const { backgroundColor, borderColor, borderStyle, borderWidth } = style;
@@ -51,6 +51,18 @@ const getSelectionDiv = (
   return span;
 };
 
+const getPointerImageWrapperDiv = () => {
+  const imageWrapper = document.createElement("span");
+  imageWrapper.style.cssText = `
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+  `;
+
+  return imageWrapper;
+};
+
 const isTagTypeSpecial = (el: HTMLElement) => {
   const { tagName } = el;
   return (
@@ -61,4 +73,9 @@ const isTagTypeSpecial = (el: HTMLElement) => {
   );
 };
 
-export { getDirection, getSelectionDiv, isTagTypeSpecial };
+export {
+  getDirection,
+  getPointerImageWrapperDiv,
+  getSelectionDiv,
+  isTagTypeSpecial,
+};

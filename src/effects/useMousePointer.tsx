@@ -3,6 +3,7 @@ import ReactDOMServer from "react-dom/server";
 import { MousePointerProps } from "../models/mouse-pointer.model";
 import { defaultIcons, pointerStyleDefaults } from "./default";
 import { useMouseWheel } from "./useMouseWheel";
+import { getPointerImageWrapperDiv } from "./utils";
 
 export type MousePointerFunction = (props: MousePointerProps) => void;
 
@@ -69,8 +70,12 @@ const useMousePointer: MousePointerFunction = ({
 
   useEffect(() => {
     const pointerElement = pointerRef.current;
+    console.log(status);
     if (status && pointerElement && getSVG) {
-      pointerElement.innerHTML = ReactDOMServer.renderToString(getSVG);
+      const imageWrapper = getPointerImageWrapperDiv();
+      imageWrapper.innerHTML = ReactDOMServer.renderToString(getSVG);
+      pointerElement.innerHTML = "";
+      pointerElement.appendChild(imageWrapper);
     }
   }, [status, getSVG]);
 
@@ -88,13 +93,15 @@ const useMousePointer: MousePointerFunction = ({
     const { size } = pointerStyle;
 
     if (parent && size && getSVG) {
-      const element = document.createElement("span");
-      element.innerHTML = ReactDOMServer.renderToString(getSVG);
+      const imageWrapper = getPointerImageWrapperDiv();
+      imageWrapper.innerHTML = ReactDOMServer.renderToString(getSVG);
+      const element = document.createElement("div");
+
       pointerRef.current = element;
       element.style.cssText = `
         position: absolute;
-        top: ${mouseY > -1 ? mouseY - size : 0}px;
-        left: ${mouseX > -1 ? mouseX - size : 0}px;
+        top: ${mouseY > -1 ? mouseY - size / 2 : 0}px;
+        left: ${mouseX > -1 ? mouseX - size / 2 : 0}px;
         width: ${size}px;
         height: ${size}px;
         z-index: 999999;
@@ -103,8 +110,10 @@ const useMousePointer: MousePointerFunction = ({
         fill: var(--rc-context-menu-primary);
         color: var(--rc-context-menu-primary);
         padding: 0;
-        `;
+        // border: 1px solid red;
+      `;
 
+      element.appendChild(imageWrapper);
       parent.appendChild(element);
     }
   }, [container]);
