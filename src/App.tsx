@@ -144,7 +144,16 @@ function App() {
       <input type="text" />
       <button onClick={() => alert("red")}>Click me</button>
       <textarea name="" id="" cols={30} rows={10}></textarea>
-      <a href="https://google.com">Google</a>
+      <a
+        data-popup="true"
+        data-type="image"
+        data-data="https://cdn.pixabay.com/photo/2023/10/13/14/39/book-8312948_1280.jpg"
+        data-position="top"
+        data-popup-width="400"
+        data-popup-height="300"
+      >
+        show image
+      </a>
     </div>
   );
 }

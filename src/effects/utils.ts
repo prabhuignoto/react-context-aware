@@ -1,6 +1,10 @@
 import { SelectionStyle } from "../models/core.model";
 import { MouseMovementDirection } from "../models/mouse-position.model";
 
+type PopupPlaceholderProps = {
+  id: string;
+};
+
 const getDirection: (x: number, y: number) => MouseMovementDirection = (
   movX,
   movY
@@ -79,10 +83,43 @@ const styleobjectToCssText = (style: any) => {
   }, "");
 };
 
+/**
+ * Creates a placeholder element for a popup component.
+ * @param {PopupPlaceholderProps} props - The props object containing the id, target, height, width, and position of the popup.
+ * @returns {HTMLDivElement} - The created placeholder element.
+ */
+const createPopupPlaceholder = ({
+  id,
+}: PopupPlaceholderProps): HTMLDivElement => {
+  // const targetRect = target.getBoundingClientRect();
+
+  // Create the placeholder element
+  const placeholder = document.createElement("div");
+  placeholder.id = id;
+  placeholder.style.cssText = styleobjectToCssText({
+    position: "fixed",
+    zIndex: "9999",
+  });
+  return placeholder;
+};
+
+const getAllHtmlAttrValues: (props: {
+  ele: HTMLElement;
+  names: string[];
+}) => (string | null)[] = ({ ele, names }) => {
+  if (ele) {
+    return names.map((name) => ele.getAttribute(`data-${name}`));
+  } else {
+    return [];
+  }
+};
+
 export {
+  createPopupPlaceholder,
+  getAllHtmlAttrValues,
   getDirection,
   getPointerImageWrapperDiv,
   getSelectionDiv,
   isTagTypeSpecial,
-  styleobjectToCssText
+  styleobjectToCssText,
 };

@@ -3,7 +3,7 @@ const SvgComponent = () => (
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
     style={{
-      transform: "rotate(-5deg)",
+      // transform: "rotate(-5deg)",
       padding: 0,
       width: "100%",
       height: "100%",

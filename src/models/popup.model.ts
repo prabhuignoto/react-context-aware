@@ -9,9 +9,11 @@ export type ContentType = "image" | "text";
 export type PopupProps = {
   type: ContentType;
   data: string;
-  position: string;
-  targetElementRect: {
-    x: number;
-    y: number;
-  };
 };
+
+export type popupDimensions = {
+  width: number;
+  height: number;
+};
+
+export type PopupPosition = "top" | "bottom";

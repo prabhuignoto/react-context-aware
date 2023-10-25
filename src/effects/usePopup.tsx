@@ -1,14 +1,68 @@
 import { nanoid } from "nanoid";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { renderToString } from "react-dom/server";
-import { Popup, createPopupPlaceholder } from "../components/popup";
-import { ContentType, usePopupProps } from "../models/popup.model";
+import { Popup } from "../components/popup";
+import {
+  ContentType,
+  PopupPosition,
+  popupDimensions,
+  usePopupProps,
+} from "../models/popup.model";
+import { createPopupPlaceholder, getAllHtmlAttrValues } from "./utils";
 
 const usePopup: (props: usePopupProps) => void = (props) => {
   const { containerElement } = props;
 
   const targetsRef = useRef<Element[] | null>();
   const activePlaceholderId = useRef("");
+  const placeHolderRef = useRef<HTMLElement | null>(null);
+
+  // this tracks the current active popup type
+  const [activePopupType, setActivePopupType] = useState<ContentType>("text");
+
+  // this tracks the current active popup data
+  const [activePopupData, setActivePopupData] = useState<string>("");
+  const [activePopupDimensions, setActivePopupDimensions] =
+    useState<popupDimensions>({
+      height: 0,
+      width: 0,
+    });
+
+  const [activeTargetRect, setActiveTargetRect] = useState<{
+    x: number;
+    y: number;
+    width: number;
+  }>({
+    x: 0,
+    y: 0,
+    width: 0,
+  });
+
+  const [activePopupPosition, setActivePopupPosition] =
+    useState<PopupPosition>("bottom");
+
+  useEffect(() => {
+    // create the placeholder element
+    const id = `placeholder-${nanoid()}`;
+
+    const placeholder = createPopupPlaceholder({
+      id,
+    });
+
+    // insert it into the container element
+    if (placeholder) {
+      placeHolderRef.current = placeholder;
+      containerElement.current?.appendChild(placeholder);
+    }
+  }, []);
+
+  const getPopupString = useMemo(() => {
+    const popupString = renderToString(
+      <Popup type={activePopupType as ContentType} data={activePopupData} />
+    );
+
+    return popupString;
+  }, [activePopupData, activePopupType]);
 
   // handles mouse FileSystemEntry, shows the poup on mouse enter
   const handleMouseEnter = useCallback((ev: Event) => {
@@ -17,46 +71,77 @@ const usePopup: (props: usePopupProps) => void = (props) => {
     const targetRect = target.getBoundingClientRect();
     const container = containerElement.current;
 
-    const type = target.getAttribute("data-type");
-    const position = target.getAttribute("data-position");
-    const data = target.getAttribute("data-data");
+    const [type, position, data, popupHeight, popupWidth] =
+      getAllHtmlAttrValues({
+        ele: target,
+        names: ["type", "position", "data", "popup-height", "popup-width"],
+      });
+
     const id = `placeholder-${nanoid()}`;
-    const popupHeight = parseInt(target.getAttribute("data-popup-height") + "");
-    const popupWidth = parseInt(target.getAttribute("data-popup-width") + "");
     activePlaceholderId.current = id;
 
     if (data && type && position && container) {
-      const placeholder = createPopupPlaceholder({
-        id,
-        target,
-        height: popupHeight,
-        width: popupWidth,
-        position: "bottom",
+      setActivePopupData(data);
+      setActivePopupType(type as ContentType);
+      setActivePopupPosition(position as "top" | "bottom");
+      setActiveTargetRect({
+        x: targetRect.x,
+        y: targetRect.y,
+        width: targetRect.width,
       });
-
-      const popupString = renderToString(
-        <Popup
-          type={type as ContentType}
-          data={data}
-          position={position}
-          targetElementRect={{
-            x: targetRect.x,
-            y: targetRect.y,
-          }}
-        />,
-      );
-      placeholder.innerHTML = popupString;
-      container.appendChild(placeholder);
+      setActivePopupDimensions({
+        height: Number(popupHeight),
+        width: Number(popupWidth),
+      });
     }
   }, []);
 
-  const handleMouseLeave = useCallback(() => {
-    const placeholder = activePlaceholderId.current;
-    if (placeholder) {
-      const placeholderElement = document.getElementById(placeholder);
-      if (placeholderElement) {
-        placeholderElement.remove();
+  useEffect(() => {
+    if (getPopupString) {
+      const placeholder = placeHolderRef.current;
+      if (placeholder) {
+        placeholder.innerHTML = getPopupString;
       }
+    }
+  }, [getPopupString]);
+
+  useEffect(() => {
+    const { width, height } = activePopupDimensions;
+    const { x, y, width: targetWidth } = activeTargetRect;
+    const placeholder = placeHolderRef.current;
+
+    if (placeholder) {
+      placeholder.style.cssText += `
+        position: fixed;
+        z-index: 9999;
+        left: ${x - Math.round(width / 2) + targetWidth / 2}px;
+        top: ${y + (activePopupPosition === "top" ? -height : y)}px;
+        height: ${height}px;
+        width: ${width}px;
+      `;
+    }
+  }, [
+    activePopupDimensions,
+    activePopupPosition,
+    activeTargetRect.x,
+    activeTargetRect.y,
+  ]);
+
+  const handleMouseLeave = useCallback(() => {
+    const placeHolder = placeHolderRef.current;
+
+    if (placeHolder) {
+      placeHolder.innerHTML = "";
+      setActivePopupData("");
+      setActivePopupDimensions({
+        height: 0,
+        width: 0,
+      });
+      setActiveTargetRect({
+        x: 0,
+        y: 0,
+        width: 0,
+      });
     }
   }, []);
 
@@ -70,7 +155,7 @@ const usePopup: (props: usePopupProps) => void = (props) => {
 
     if (element) {
       const targets = Array.from(
-        element.querySelectorAll("[data-popup='true']"),
+        element.querySelectorAll("[data-popup='true']")
       ) as Element[];
 
       if (targets.length) {
