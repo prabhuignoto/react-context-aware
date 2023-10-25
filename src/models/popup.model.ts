@@ -17,3 +17,10 @@ export type popupDimensions = {
 };
 
 export type PopupPosition = "top" | "bottom";
+
+export type TargetRect = {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
+}

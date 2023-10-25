@@ -5,6 +5,7 @@ import { Popup } from "../components/popup";
 import {
   ContentType,
   PopupPosition,
+  TargetRect,
   popupDimensions,
   usePopupProps,
 } from "../models/popup.model";
@@ -28,14 +29,11 @@ const usePopup: (props: usePopupProps) => void = (props) => {
       width: 0,
     });
 
-  const [activeTargetRect, setActiveTargetRect] = useState<{
-    x: number;
-    y: number;
-    width: number;
-  }>({
+  const [activeTargetRect, setActiveTargetRect] = useState<TargetRect>({
     x: 0,
     y: 0,
     width: 0,
+    height: 0,
   });
 
   const [activePopupPosition, setActivePopupPosition] =
@@ -88,6 +86,7 @@ const usePopup: (props: usePopupProps) => void = (props) => {
         x: targetRect.x,
         y: targetRect.y,
         width: targetRect.width,
+        height: targetRect.height,
       });
       setActivePopupDimensions({
         height: Number(popupHeight),
@@ -107,7 +106,7 @@ const usePopup: (props: usePopupProps) => void = (props) => {
 
   useEffect(() => {
     const { width, height } = activePopupDimensions;
-    const { x, y, width: targetWidth } = activeTargetRect;
+    const { x, y, width: targetWidth, height: targetHeight } = activeTargetRect;
     const placeholder = placeHolderRef.current;
 
     if (placeholder) {
@@ -115,7 +114,7 @@ const usePopup: (props: usePopupProps) => void = (props) => {
         position: fixed;
         z-index: 9999;
         left: ${x - Math.round(width / 2) + targetWidth / 2}px;
-        top: ${y + (activePopupPosition === "top" ? -height : y)}px;
+        top: ${y + (activePopupPosition === "top" ? -height : targetHeight)}px;
         height: ${height}px;
         width: ${width}px;
       `;
@@ -141,6 +140,7 @@ const usePopup: (props: usePopupProps) => void = (props) => {
         x: 0,
         y: 0,
         width: 0,
+        height: 0,
       });
     }
   }, []);
