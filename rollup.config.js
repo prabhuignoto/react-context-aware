@@ -9,7 +9,7 @@ import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import postcss from "rollup-plugin-postcss";
 import typescript from "rollup-plugin-typescript2";
 import pkg from "./package.json" assert { type: "json" };
-import rollupDelete from "rollup-plugin-delete";
+import pluginDelete from "rollup-plugin-delete";
 
 const postcssPlugins = [autoprefixer];
 const name = pkg.name;
@@ -41,6 +41,7 @@ export default {
     // },
   ],
   plugins: [
+    pluginDelete({ targets: "dist/*" }),
     replace({
       "process.env.NODE_ENV": JSON.stringify("development"),
     }),
@@ -73,7 +74,7 @@ export default {
     }),
     postcss({
       modules: true,
-      extract: true,
+      extract: `${name}.css`,
       sourceMap: true,
       plugins: postcssPlugins,
       use: ["sass"],
