@@ -29,7 +29,7 @@ library.add(
   faEarth,
   faGear,
   faSave,
-  faTrash
+  faTrash,
 );
 
 function App() {
@@ -147,8 +147,8 @@ function App() {
         data-type="image"
         data-content="https://cdn.pixabay.com/photo/2023/10/13/14/39/book-8312948_1280.jpg"
         data-position="left"
-        data-width="400"
-        data-height="300"
+        data-width="900"
+        data-height="700"
       >
         show image
       </a>

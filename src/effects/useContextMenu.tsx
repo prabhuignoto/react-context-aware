@@ -24,6 +24,7 @@ const useContextMenu: useContextMenuFunction = ({
 }) => {
   // Create a ref to store the HTML string of the context menu
   const menuHTMLstring = useRef<string>();
+
   // Create a ref to store a placeholder div element
   const placeholder = useRef<HTMLDivElement>(document.createElement("div"));
 

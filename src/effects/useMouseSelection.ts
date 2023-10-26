@@ -83,7 +83,7 @@ const useMouseSelection: MouseSelectionFunction = ({
 
   usePopup({
     containerElement: targetRef,
-    popupGap
+    popupGap,
   });
 
   // Update mouse pointer style.

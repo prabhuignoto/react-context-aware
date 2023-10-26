@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "target": "es2022",
+    "module": "esnext",
+    "jsx": "react-jsx",
+    "moduleResolution": "node",
+    "strictNullChecks": true,
+    "importHelpers": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "lib": ["ES6", "DOM"],
+    "declaration": true,
+    "declarationDir": "dist/types",
+    "outDir": "dist",
+    "rootDir": "src",
+    "allowSyntheticDefaultImports": true,
+    "types": [
+      "react",
+      "./declaration.d.ts"
+    ]
+  },
+  "include": [
+    "src/components/**/*",
+    "src/effects/**/*",
+    "src/models/**/*",
+    "src/theme/**/*",
+    "src/icons/**/*",
+    "src/theme/**/*",
+    "src/react-context.ts"
+  ],
+  "exclude": ["node_modules", "dist"]
+}

@@ -60,7 +60,7 @@ const usePopup: (props: usePopupProps) => void = (props) => {
 
   const getPopupString = useMemo(() => {
     const popupString = renderToString(
-      <Popup type={activePopupType as ContentType} data={activePopupData} />
+      <Popup type={activePopupType as ContentType} data={activePopupData} />,
     );
 
     return popupString;
@@ -122,7 +122,11 @@ const usePopup: (props: usePopupProps) => void = (props) => {
       activePopupPosition === "left" ||
       activePopupPosition === "right"
     ) {
-      left = x + (activePopupPosition === "left" ? -(width + popupGap) : targetWidth + popupGap);
+      left =
+        x +
+        (activePopupPosition === "left"
+          ? -(width + popupGap)
+          : targetWidth + popupGap);
       top = y - Math.round(height / 2) + targetHeight / 2;
     }
 
@@ -172,7 +176,7 @@ const usePopup: (props: usePopupProps) => void = (props) => {
 
     if (element) {
       const targets = Array.from(
-        element.querySelectorAll("[data-popup='true']")
+        element.querySelectorAll("[data-popup='true']"),
       ) as Element[];
 
       if (targets.length) {

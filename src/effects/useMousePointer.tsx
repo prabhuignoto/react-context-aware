@@ -70,7 +70,6 @@ const useMousePointer: MousePointerFunction = ({
 
   useEffect(() => {
     const pointerElement = pointerRef.current;
-    console.log(status);
     if (status && pointerElement && getSVG) {
       const imageWrapper = getPointerImageWrapperDiv();
       imageWrapper.innerHTML = ReactDOMServer.renderToString(getSVG);
@@ -110,7 +109,6 @@ const useMousePointer: MousePointerFunction = ({
         fill: var(--rc-context-menu-primary);
         color: var(--rc-context-menu-primary);
         padding: 0;
-        // border: 1px solid red;
       `;
 
       element.appendChild(imageWrapper);
