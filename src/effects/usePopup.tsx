@@ -12,7 +12,7 @@ import {
 import { createPopupPlaceholder, getAllHtmlAttrValues } from "./utils";
 
 const usePopup: (props: usePopupProps) => void = (props) => {
-  const { containerElement } = props;
+  const { containerElement, popupGap = 0 } = props;
 
   const targetsRef = useRef<Element[] | null>();
   const activePlaceholderId = useRef("");
@@ -23,12 +23,15 @@ const usePopup: (props: usePopupProps) => void = (props) => {
 
   // this tracks the current active popup data
   const [activePopupData, setActivePopupData] = useState<string>("");
+
+  // this tracks the current active popup dimensions
   const [activePopupDimensions, setActivePopupDimensions] =
     useState<popupDimensions>({
       height: 0,
       width: 0,
     });
 
+  // this tracks the current active target rect
   const [activeTargetRect, setActiveTargetRect] = useState<TargetRect>({
     x: 0,
     y: 0,
@@ -36,6 +39,7 @@ const usePopup: (props: usePopupProps) => void = (props) => {
     height: 0,
   });
 
+  // this tracks the current active popup position
   const [activePopupPosition, setActivePopupPosition] =
     useState<PopupPosition>("bottom");
 
@@ -69,17 +73,17 @@ const usePopup: (props: usePopupProps) => void = (props) => {
     const targetRect = target.getBoundingClientRect();
     const container = containerElement.current;
 
-    const [type, position, data, popupHeight, popupWidth] =
+    const [type, position, content, popupHeight, popupWidth] =
       getAllHtmlAttrValues({
         ele: target,
-        names: ["type", "position", "data", "popup-height", "popup-width"],
+        names: ["type", "position", "content", "height", "width"],
       });
 
     const id = `placeholder-${nanoid()}`;
     activePlaceholderId.current = id;
 
-    if (data && type && position && container) {
-      setActivePopupData(data);
+    if (content && type && position && container) {
+      setActivePopupData(content);
       setActivePopupType(type as ContentType);
       setActivePopupPosition(position as "top" | "bottom");
       setActiveTargetRect({
@@ -108,13 +112,26 @@ const usePopup: (props: usePopupProps) => void = (props) => {
     const { width, height } = activePopupDimensions;
     const { x, y, width: targetWidth, height: targetHeight } = activeTargetRect;
     const placeholder = placeHolderRef.current;
+    let left = 0;
+    let top = 0;
+
+    if (activePopupPosition === "top" || activePopupPosition === "bottom") {
+      left = x - Math.round(width / 2) + targetWidth / 2;
+      top = y + (activePopupPosition === "top" ? -height : targetHeight);
+    } else if (
+      activePopupPosition === "left" ||
+      activePopupPosition === "right"
+    ) {
+      left = x + (activePopupPosition === "left" ? -(width + popupGap) : targetWidth + popupGap);
+      top = y - Math.round(height / 2) + targetHeight / 2;
+    }
 
     if (placeholder) {
       placeholder.style.cssText += `
         position: fixed;
         z-index: 9999;
-        left: ${x - Math.round(width / 2) + targetWidth / 2}px;
-        top: ${y + (activePopupPosition === "top" ? -height : targetHeight)}px;
+        left: ${left}px;
+        top: ${top}px;
         height: ${height}px;
         width: ${width}px;
       `;

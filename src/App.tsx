@@ -135,20 +135,20 @@ function App() {
         type="text"
         data-popup="true"
         data-type="text"
-        data-data="This is a google site"
-        data-position="top"
-        data-popup-width="200"
-        data-popup-height="100"
+        data-content="This is a google site"
+        data-position="right"
+        data-width="200"
+        data-height="100"
       />
       <button onClick={() => alert("red")}>Click me</button>
       <textarea name="" id="" cols={30} rows={10}></textarea>
       <a
         data-popup="true"
         data-type="image"
-        data-data="https://cdn.pixabay.com/photo/2023/10/13/14/39/book-8312948_1280.jpg"
-        data-position="bottom"
-        data-popup-width="400"
-        data-popup-height="300"
+        data-content="https://cdn.pixabay.com/photo/2023/10/13/14/39/book-8312948_1280.jpg"
+        data-position="left"
+        data-width="400"
+        data-height="300"
       >
         show image
       </a>

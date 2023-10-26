@@ -32,6 +32,7 @@ const useMouseSelection: MouseSelectionFunction = ({
   toolbar,
   darkMode,
   onContextMenuSelected,
+  popupGap = 10,
 }) => {
   const pressed = useRef(false);
   const targetElement = useRef<HTMLElement>();
@@ -82,6 +83,7 @@ const useMouseSelection: MouseSelectionFunction = ({
 
   usePopup({
     containerElement: targetRef,
+    popupGap
   });
 
   // Update mouse pointer style.

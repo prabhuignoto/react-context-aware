@@ -1,8 +1,9 @@
 import { RefObject } from "react";
+import { Props } from "./core.model";
 
 export type usePopupProps = {
   containerElement: RefObject<HTMLElement>;
-};
+} & Pick<Props, "popupGap">;
 
 export type ContentType = "image" | "text";
 
@@ -23,4 +24,4 @@ export type TargetRect = {
   y: number;
   width: number;
   height: number;
-}
+};

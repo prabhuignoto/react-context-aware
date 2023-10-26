@@ -74,6 +74,8 @@ export interface Props {
    * Callback function to be called when a context menu item is selected.
    */
   onContextMenuSelected?: (p: { id: string; name: string }) => void;
+
+  popupGap?: number;
 }
 
 export interface SelectionStyle {
