@@ -37,8 +37,8 @@
   "files": [
     "dist"
   ],
-  "main": "dist/react-context-aware.esm.js",
-  "module": "dist/react-context-aware.esm.js",
+  "main": "dist/react-context-aware.js",
+  "module": "dist/react-context-aware.js",
   "umd": "dist/react-context-aware.umd.js",
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.18.6",
@@ -56,7 +56,9 @@
     "@rollup/plugin-terser": "^0.4.4",
     "@testing-library/dom": "^9.3.3",
     "@testing-library/jest-dom": "^6.1.4",
+    "@testing-library/react": "^14.0.0",
     "@testing-library/react-hooks": "^8.0.1",
+    "@testing-library/user-event": "^14.5.1",
     "@types/debounce": "^1.2.3",
     "@types/json-stringify-safe": "^5.0.2",
     "@types/react": "^18.2.33",

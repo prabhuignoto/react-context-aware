@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useThrottledCallback } from "use-debounce";
 import { PointerStatus } from "../models/core.model";
 import {
   MousePositionFunction,
@@ -29,7 +30,7 @@ const useMousePosition: MousePositionFunction = (props) => {
    * Handles the mousemove event and updates the position state.
    * @param ev - The mousemove event.
    */
-  const handleMouseMove = (ev: MouseEvent) => {
+  const handleMouseMove = useThrottledCallback((ev: MouseEvent) => {
     const target = targetRef.current;
 
     if (target) {
@@ -44,7 +45,7 @@ const useMousePosition: MousePositionFunction = (props) => {
         isActive: true,
       }));
     }
-  };
+  }, 5);
 
   /**
    * Handles the mouseenter event and sets the isActive state to true.

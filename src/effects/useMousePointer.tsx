@@ -66,7 +66,7 @@ const useMousePointer: MousePointerFunction = ({
       default:
         return icons?.pointer;
     }
-  }, [status, icons, isBeingSelected]);
+  }, [status, icons, isBeingSelected])
 
   useEffect(() => {
     const pointerElement = pointerRef.current;
@@ -91,7 +91,7 @@ const useMousePointer: MousePointerFunction = ({
     const parent = container.current;
     const { size } = pointerStyle;
 
-    if (parent && size && getSVG) {
+    if (parent && size && getSVG && mouseX && mouseY) {
       const imageWrapper = getPointerImageWrapperDiv();
       imageWrapper.innerHTML = ReactDOMServer.renderToString(getSVG);
       const element = document.createElement("div");

@@ -29,7 +29,7 @@ library.add(
   faEarth,
   faGear,
   faSave,
-  faTrash,
+  faTrash
 );
 
 function App() {
@@ -110,7 +110,8 @@ function App() {
       ],
     },
     selectionStyle: {
-      backgroundColor: "rgba(0, 123, 255, 0.1)",
+      backgroundColor:
+        "linear-gradient(45deg, rgba(255, 87, 51, 0.3), rgba(110, 69, 226, 0.2))",
       borderColor: "rgba(0, 123, 255, 0.5)",
       borderStyle: "solid",
       borderWidth: 0,

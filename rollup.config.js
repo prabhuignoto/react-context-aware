@@ -18,7 +18,7 @@ export default {
   input: "src/react-context.ts",
   output: [
     {
-      file: `dist/${name}.esm.js`,
+      file: `dist/${name}.js`,
       format: "es",
       sourcemap: true,
     },

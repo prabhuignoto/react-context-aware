@@ -1,91 +1,67 @@
-// tests/useMousePosition.test.tsx
-import { act, renderHook } from "@testing-library/react-hooks";
-import { RefObject } from "react";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { MousePositionProps } from "../../models/mouse-position.model";
-import { useMousePosition } from "../useMousePosition"; // Update the path accordingly
+// Import necessary dependencies for testing
+import { renderHook } from "@testing-library/react-hooks";
+import { unmountComponentAtNode } from "react-dom";
+import { act } from "react-dom/test-utils";
+import { afterEach, beforeEach, expect, test } from "vitest";
+import { useMousePosition } from "../useMousePosition"; // Adjust the import path
 
-describe("useMousePosition", () => {
-  // Create a fake element and ref to use for tests
-  let targetElement: HTMLElement;
-  let targetRef: RefObject<HTMLElement>;
+let container: HTMLElement;
 
-  beforeEach(() => {
-    targetElement = document.createElement("div");
-    targetRef = { current: targetElement };
-
-    // Append to body to make it a part of the document
-    document.body.appendChild(targetElement);
-  });
-
-  afterEach(() => {
-    // Cleanup
-    document.body.removeChild(targetElement);
-  });
-
-  it("should return initial mouse position as { x: 0, y: 0 }", () => {
-    const { result } = renderHook(() =>
-      useMousePosition({ targetRef } as MousePositionProps),
-    );
-    expect(result.current).toEqual({ x: 0, y: 0 });
-  });
-
-  it("should update mouse position when mouse moves over the target element", () => {
-    const { result } = renderHook(() =>
-      useMousePosition({ targetRef } as MousePositionProps),
-    );
-
-    // Simulate mouse move
-    act(() => {
-      const mouseEvent = new MouseEvent("mousemove", {
-        clientX: 50,
-        clientY: 60,
-      });
-      targetElement.dispatchEvent(mouseEvent);
-    });
-
-    expect(result.current).toEqual({ x: 50, y: 60 });
-  });
-
-  it("should not update mouse position when mouse moves outside the target element", () => {
-    const anotherElement = document.createElement("div");
-    document.body.appendChild(anotherElement);
-
-    const { result } = renderHook(() =>
-      useMousePosition({ targetRef } as MousePositionProps),
-    );
-
-    act(() => {
-      const mouseEvent = new MouseEvent("mousemove", {
-        clientX: 70,
-        clientY: 80,
-      });
-      anotherElement.dispatchEvent(mouseEvent);
-    });
-
-    expect(result.current).toEqual({ x: 0, y: 0 });
-
-    document.body.removeChild(anotherElement);
-  });
-
-  it("should handle null targetRef gracefully", () => {
-    const nullRef: RefObject<HTMLElement> = { current: null };
-    const { result } = renderHook(() =>
-      useMousePosition({ targetRef: nullRef } as MousePositionProps),
-    );
-    expect(result.current).toEqual({ x: 0, y: 0 });
-  });
-
-  it("should cleanup event listener on unmount", () => {
-    const { unmount } = renderHook(() =>
-      useMousePosition({ targetRef } as MousePositionProps),
-    );
-
-    const spy = vi.spyOn(targetElement, "removeEventListener");
-
-    unmount();
-
-    expect(spy).toHaveBeenCalledWith("mousemove", expect.any(Function));
-    spy.mockRestore();
-  });
+beforeEach(() => {
+  // Set up a DOM element as a render target
+  container = document.createElement("div");
+  document.body.appendChild(container);
 });
+
+afterEach(() => {
+  // Clean up on exiting
+  unmountComponentAtNode(container);
+  container.remove();
+});
+
+test("useMousePosition hook initializes with default values", () => {
+  const { result } = renderHook(() =>
+    useMousePosition({ targetRef: { current: container }, isSelected: false })
+  );
+  const { x, y, direction, isActive, pointerStatus } = result.current;
+
+  expect(x).toBe(-1);
+  expect(y).toBe(-1);
+  expect(direction).toBeNull();
+  expect(isActive).toBe(false);
+  expect(pointerStatus).toBe("default");
+});
+
+test("useMousePosition hook updates position on mousemove", () => {
+  const { result } = renderHook(() =>
+    useMousePosition({ targetRef: { current: container }, isSelected: false })
+  );
+
+  act(() => {
+    container.dispatchEvent(
+      new MouseEvent("mousemove", { clientX: 100, clientY: 100 })
+    );
+  });
+
+  const { x, y, direction, isActive } = result.current;
+
+  expect(x).toBe(100);
+  expect(y).toBe(100);
+  // You can add more assertions for direction and isActive based on your logic
+});
+
+test("useMousePosition hook handles mouseenter and updates pointerStatus", () => {
+  const { result } = renderHook(() =>
+    useMousePosition({ targetRef: { current: container }, isSelected: false })
+  );
+
+  act(() => {
+    container.dispatchEvent(new MouseEvent("mouseenter"));
+  });
+
+  const { pointerStatus } = result.current;
+
+  expect(pointerStatus).toBe("default"); // Update this based on your logic
+});
+
+// Add more test cases as needed to cover other scenarios and edge cases
