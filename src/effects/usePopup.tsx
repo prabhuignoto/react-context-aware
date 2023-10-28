@@ -60,11 +60,15 @@ const usePopup: (props: usePopupProps) => void = (props) => {
 
   const getPopupString = useMemo(() => {
     const popupString = renderToString(
-      <Popup type={activePopupType as ContentType} data={activePopupData} />,
+      <Popup
+        type={activePopupType as ContentType}
+        data={activePopupData}
+        position={activePopupPosition}
+      />
     );
 
     return popupString;
-  }, [activePopupData, activePopupType]);
+  }, [activePopupData, activePopupType, activePopupPosition]);
 
   // handles mouse FileSystemEntry, shows the poup on mouse enter
   const handleMouseEnter = useCallback((ev: Event) => {
@@ -176,7 +180,7 @@ const usePopup: (props: usePopupProps) => void = (props) => {
 
     if (element) {
       const targets = Array.from(
-        element.querySelectorAll("[data-popup='true']"),
+        element.querySelectorAll("[data-popup='true']")
       ) as Element[];
 
       if (targets.length) {

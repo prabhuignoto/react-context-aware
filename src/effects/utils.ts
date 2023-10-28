@@ -7,7 +7,7 @@ type PopupPlaceholderProps = {
 
 const getDirection: (x: number, y: number) => MouseMovementDirection = (
   movX,
-  movY,
+  movY
 ) => {
   // If the mouse movement is zero, return null
   if (movX === 0 && movY === 0) {
@@ -40,7 +40,7 @@ const getSelectionDiv = (
     borderColor: "rgba(0, 123, 255, 0.5)",
     borderStyle: "dotted",
     borderWidth: 1,
-  },
+  }
 ) => {
   const span = document.createElement("span");
   const { backgroundColor, borderColor, borderStyle, borderWidth } = style;

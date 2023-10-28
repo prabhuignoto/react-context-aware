@@ -1,5 +1,5 @@
 import cx from "classnames";
-import { FunctionComponent } from "react";
+import { FunctionComponent, useMemo } from "react";
 import { styleobjectToCssText } from "../../effects/utils";
 import { PopupProps } from "../../models/popup.model";
 import styles from "./popup.module.scss";
@@ -26,11 +26,22 @@ const createPopupPlaceholder = ({
   return placeholder;
 };
 
-const Popup: FunctionComponent<PopupProps> = ({ type, data }) => {
+const Popup: FunctionComponent<PopupProps> = ({ type, data, position }) => {
+  const triangleClass = useMemo(
+    () =>
+      cx(styles.triangle, {
+        [styles[position]]: true,
+      }),
+    [position]
+  );
+
+  console.log(position);
+
   return (
-    <div className={cx(styles.wrapper)}>
+    <div className={styles.wrapper}>
       {type === "image" ? <img src={data} /> : null}
       {type === "text" ? <span>{data}</span> : null}
+      <span className={triangleClass}></span>
     </div>
   );
 };

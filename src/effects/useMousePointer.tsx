@@ -66,7 +66,7 @@ const useMousePointer: MousePointerFunction = ({
       default:
         return icons?.pointer;
     }
-  }, [status, icons, isBeingSelected])
+  }, [status, icons, isBeingSelected]);
 
   useEffect(() => {
     const pointerElement = pointerRef.current;

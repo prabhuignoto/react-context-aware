@@ -19,4 +19,40 @@
   }
 }
 
+.triangle {
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent; /* Adjust the size as needed */
+  border-bottom: 10px solid transparent; /* Adjust the size as needed */
+  border-left: 10px solid var(--rc-popup-background); /* Adjust the color and height as needed */
+  position: absolute;
 
+  &.left,
+  &.right {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &.top,
+  &.bottom {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  &.left {
+    right: -10px;
+  }
+
+  &.right {
+    left: -10px;
+    transform: rotate(-180deg);
+  }
+
+  &.top {
+    top: -10px;
+  }
+
+  &.bottom {
+    bottom: -10px;
+  }
+}

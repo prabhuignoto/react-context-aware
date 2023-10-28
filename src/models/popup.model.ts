@@ -10,6 +10,7 @@ export type ContentType = "image" | "text";
 export type PopupProps = {
   type: ContentType;
   data: string;
+  position: "top" | "bottom" | "left" | "right";
 };
 
 export type popupDimensions = {
