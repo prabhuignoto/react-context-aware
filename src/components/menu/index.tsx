@@ -11,7 +11,7 @@ const Menu: FunctionComponent<MenuModel> = ({ items, toolbar }) => {
   );
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} data-testid="context-menu">
       <div className={styles.toolbar_wrapper}>
         {toolbar ? <Toolbar items={toolbar.icons} /> : null}
       </div>

@@ -23,7 +23,7 @@ type UseContextMenuProps = {
   /**
    * A ref to a placeholder element that will be used to position the context menu.
    */
-  placeholder: RefObject<HTMLDivElement>;
+  // placeholder: RefObject<HTMLDivElement>;
 
   /**
    * A callback function that will be called when a menu item is selected.
