@@ -58,7 +58,7 @@ const useMouseSelection: MouseSelectionFunction = ({
     target: targetRef,
     contextMenuOptions: contextMenu,
     toolbar,
-    placeholder: contextMenuPlaceholder,
+    // placeholder: contextMenuPlaceholder,
     onContextMenuSelected,
   });
 
@@ -91,7 +91,7 @@ const useMouseSelection: MouseSelectionFunction = ({
     container: targetRef,
     mouseX,
     mouseY,
-    direction,
+    // direction,
     pointerStyle,
     isActive,
     status: pointerStatus,

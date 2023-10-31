@@ -8,16 +8,9 @@ import {
 import { getDirection } from "./utils";
 
 /**
- * Returns the current position of the mouse relative to the target element.
- * @param props - The props object.
- * @param props.targetRef - The ref object for the target element.
- * @returns An object containing the current position of the mouse and whether the mouse is active or not.
+ * A custom React hook that provides the current mouse position and status relative to a target element.
  */
-const useMousePosition: MousePositionFunction = (props) => {
-  const { targetRef, isSelected } = props;
-  const [isActive, setIsActive] = useState(false);
-  const activePointerStatus = useRef<PointerStatus>("default");
-
+const useMousePosition: MousePositionFunction = ({ targetRef, isSelected }) => {
   const [position, setPosition] = useState<MousePositionType>({
     x: -1,
     y: -1,
@@ -25,76 +18,88 @@ const useMousePosition: MousePositionFunction = (props) => {
     isActive: false,
     pointerStatus: "default",
   });
+  const [isActive, setIsActive] = useState(false);
+  const activePointerStatus = useRef<PointerStatus>("default");
 
-  /**
-   * Handles the mousemove event and updates the position state.
-   * @param ev - The mousemove event.
-   */
+  // Event handlers are now individual functions, improving modularity
+  const updatePosition = useCallback(
+    (x: number, y: number, movX: number, movY: number) => {
+      const direction = getDirection(movX, movY);
+      setPosition({
+        x,
+        y,
+        direction,
+        isActive: true,
+        pointerStatus: activePointerStatus.current,
+      });
+    },
+    []
+  );
+
+  const updatePointerStatus = useCallback((pointerStatus: PointerStatus) => {
+    activePointerStatus.current = pointerStatus;
+    setPosition((prev) => ({ ...prev, pointerStatus }));
+  }, []);
+
+  // Wrap the logic for mouse movement in a throttled callback
   const handleMouseMove = useThrottledCallback((ev: MouseEvent) => {
     const target = targetRef.current;
-
     if (target) {
-      const movX = ev.movementX;
-      const movY = ev.movementY;
-      const { offsetLeft, offsetTop } = target;
-      setPosition((prev) => ({
-        ...prev,
-        x: ev.clientX - offsetLeft,
-        y: ev.clientY - offsetTop,
-        direction: getDirection(movX, movY),
-        isActive: true,
-      }));
+      const { clientX, clientY, movementX, movementY } = ev;
+      const { offsetLeft, offsetTop } = target; // Access offset properties from the target element
+      updatePosition(
+        clientX - offsetLeft,
+        clientY - offsetTop,
+        movementX,
+        movementY
+      );
     }
   }, 5);
 
-  /**
-   * Handles the mouseenter event and sets the isActive state to true.
-   */
-  const handleMouseEnter = (ev: MouseEvent) => {
-    const target = ev.target as HTMLElement;
+  // Set up modular functions for mouse enter and leave
+  const determinePointerStatus = useCallback(
+    (target: HTMLElement): PointerStatus => {
+      if (target.tagName === "A" || target.tagName === "BUTTON") {
+        return "hyperlink";
+      } else if (target.tagName === "INPUT" || target.tagName === "TEXTAREA") {
+        return "text";
+      }
+      return "default";
+    },
+    []
+  );
 
-    if (isSelected) {
-      return;
-    }
+  const handleMouseEnter = useCallback(
+    (ev: MouseEvent) => {
+      if (isSelected) return;
 
-    if (target.tagName === "A" || target.tagName === "BUTTON") {
-      activePointerStatus.current = "hyperlink";
-      setPosition((prev) => ({ ...prev, pointerStatus: "hyperlink" }));
-    } else if (target.tagName === "INPUT" || target.tagName === "TEXTAREA") {
-      setPosition((prev) => ({ ...prev, pointerStatus: "text" }));
-      activePointerStatus.current = "text";
-    } else {
-      setPosition((prev) => ({ ...prev, pointerStatus: "default" }));
-      activePointerStatus.current = "default";
-    }
+      const pointerStatus = determinePointerStatus(ev.target as HTMLElement);
+      updatePointerStatus(pointerStatus);
+      setIsActive(true);
+    },
+    [isSelected, determinePointerStatus, updatePointerStatus]
+  );
 
-    setIsActive(true);
-  };
-
-  /**
-   * Handles the mouseleave event and sets the isActive state to false.
-   */
   const handleMouseLeave = useCallback(() => {
     setIsActive(false);
+    setPosition((prev) => ({ ...prev, isActive: false }));
   }, []);
 
+  // Attach event listeners in an effect hook
   useEffect(() => {
     const element = targetRef.current;
-
-    if (!element) {
-      return;
-    }
+    if (!element) return;
 
     element.addEventListener("mousemove", handleMouseMove);
-    element.addEventListener("mouseover", handleMouseEnter);
-    element.addEventListener("mouseout", handleMouseLeave);
+    element.addEventListener("mouseenter", handleMouseEnter);
+    element.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {
       element.removeEventListener("mousemove", handleMouseMove);
-      element.removeEventListener("mouseover", handleMouseEnter);
-      element.removeEventListener("mouseout", handleMouseLeave);
+      element.removeEventListener("mouseenter", handleMouseEnter);
+      element.removeEventListener("mouseleave", handleMouseLeave);
     };
-  }, [targetRef]);
+  }, [handleMouseMove, handleMouseEnter, handleMouseLeave]);
 
   return { ...position, isActive };
 };
