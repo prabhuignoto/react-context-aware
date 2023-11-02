@@ -1,5 +1,10 @@
 import { SelectionStyle } from "../models/core.model";
 import { MouseMovementDirection } from "../models/mouse-position.model";
+import {
+  PopupDimensions,
+  PopupPosition,
+  TargetRect,
+} from "../models/popup.model";
 
 type PopupPlaceholderProps = {
   id: string;
@@ -123,3 +128,43 @@ export {
   isTagTypeSpecial,
   styleobjectToCssText,
 };
+
+// Helper function to calculate popup position
+export function calculatePopupPosition(
+  position: PopupPosition,
+  targetRect: TargetRect,
+  dimensions: PopupDimensions,
+  popupGap: number
+): { top: number; left: number } {
+  let left = 0;
+  let top = 0;
+  const { x, y, width: targetWidth, height: targetHeight } = targetRect;
+
+  // Calculate the popup position
+  switch (position) {
+    case "top":
+      top = y - dimensions.height;
+      break;
+    case "bottom":
+      top = y + targetHeight;
+      break;
+    case "left":
+      left = x - dimensions.width - popupGap;
+      break;
+    case "right":
+      left = x + targetWidth + popupGap;
+      break;
+  }
+
+  // Center the popup horizontally for top and bottom positions
+  if (position === "top" || position === "bottom") {
+    left = x + targetWidth / 2 - dimensions.width / 2;
+  }
+
+  // Center the popup vertically for left and right positions
+  if (position === "left" || position === "right") {
+    top = y + targetHeight / 2 - dimensions.height / 2;
+  }
+
+  return { top, left };
+}

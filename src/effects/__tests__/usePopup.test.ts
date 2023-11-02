@@ -54,7 +54,4 @@ describe("usePopup Hook", () => {
     const popup = containerElement.current?.querySelector('[role="dialog"]');
     assert.ok(popup === null, "Popup should be hidden");
   });
-
-  // Add more test cases for edge cases and error conditions
-  // ...
 });
