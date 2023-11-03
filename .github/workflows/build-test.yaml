@@ -2,27 +2,26 @@ name: Build & Test
 
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16.x, 18.x, 'latest']
+        node-version: [18.x]
     steps:
       - uses: actions/checkout@v3
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 'latest'
+          version: 7
       - run: pnpm install
       - run: pnpm rollup
 
@@ -31,17 +30,16 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [16.x, 18.x, 'latest']
+        node-version: [18.x]
     steps:
       - uses: actions/checkout@v3
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'pnpm'
       - name: Setup pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 'latest'
+          version: 7
       - run: pnpm install
       - run: pnpm test
