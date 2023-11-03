@@ -4,40 +4,12 @@
 <!-- ![React-Context Logo](path-to-your-logo) -->
 
 <!-- License Badge -->
+
 ![GitHub](https://img.shields.io/github/license/prabhuignoto/react-pointer-plus)
 
 <!-- Coverage -->
+
 [![Coverage Status](https://coveralls.io/repos/github/prabhuignoto/react-pointer-plus/badge.svg)](https://coveralls.io/github/prabhuignoto/react-pointer-plus)
-
-<!-- Version Badge -->
-<!-- ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/prabhuignoto/react-pointer-plus) -->
-
-<!-- Build Status Badge -->
-<!-- ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/prabhuignoto/repo/workflow-name) -->
-
-<!-- Code Coverage Badge -->
-<!-- ![Coverage](https://img.shields.io/codecov/c/github/prabhuignoto/react-pointer-plus) -->
-
-<!-- Code Quality Badge -->
-<!-- ![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/prabhuignoto/react-pointer-plus) -->
-
-<!-- Dependency Status Badge -->
-<!-- ![David](https://img.shields.io/david/prabhuignoto/repo) -->
-
-<!-- Open Issues Badge -->
-<!-- ![GitHub issues](https://img.shields.io/github/issues/username/repo) -->
-
-<!-- Pull Requests Badge -->
-<!-- ![GitHub pull requests](https://img.shields.io/github/issues-pr/username/repo) -->
-
-<!-- Downloads Badge -->
-<!-- ![GitHub downloads](https://img.shields.io/github/downloads/username/repo/total) -->
-
-<!-- Stars Badge -->
-<!-- ![GitHub stars](https://img.shields.io/github/stars/username/repo) -->
-
-<!-- Forks Badge -->
-<!-- ![GitHub forks](https://img.shields.io/github/forks/username/repo) -->
 
 <!-- Twitter Follow Badge -->
 <!-- ![Twitter Follow](https://img.shields.io/twitter/follow/yourhandle?style=social) -->
@@ -56,6 +28,7 @@ React-Context is a powerful and customizable library designed to enhance the use
 - 🌗 Full support for light and dark themes.
 - 🛠️ Extendable with custom icons and toolbar options.
 - 📐 Easy to use with clear and concise API.
+- ⚡ Lightweight and performant.
 
 ## Installation 🔧
 
@@ -76,8 +49,8 @@ yarn add react-context
 Here's a quick example to get you started:
 
 ```jsx
-import React, { useRef } from 'react';
-import { useMouseSelection } from 'react-context';
+import React, { useRef } from "react";
+import { useMouseSelection } from "react-context";
 
 function App() {
   const ref = useRef();
@@ -112,8 +85,8 @@ function App() {
 ### Basic Example
 
 ```jsx
-import React, { useRef } from 'react';
-import { useMouseSelection } from 'react-context';
+import React, { useRef } from "react";
+import { useMouseSelection } from "react-context";
 
 function BasicExample() {
   const ref = useRef();
@@ -130,8 +103,8 @@ function BasicExample() {
 ### Custom Pointer Style
 
 ```jsx
-import React, { useRef } from 'react';
-import { useMouseSelection } from 'react-context';
+import React, { useRef } from "react";
+import { useMouseSelection } from "react-context";
 
 function CustomPointerExample() {
   const ref = useRef();
@@ -139,8 +112,8 @@ function CustomPointerExample() {
   useMouseSelection({
     targetRef: ref,
     pointerStyle: {
-      color: 'red',
-      size: 25
+      color: "red",
+      size: 25,
     },
   });
 
@@ -151,8 +124,8 @@ function CustomPointerExample() {
 ### Custom Selection Style
 
 ```jsx
-import React, { useRef } from 'react';
-import { useMouseSelection } from 'react-context';
+import React, { useRef } from "react";
+import { useMouseSelection } from "react-context";
 
 function CustomSelectionExample() {
   const ref = useRef();
@@ -160,10 +133,10 @@ function CustomSelectionExample() {
   useMouseSelection({
     targetRef: ref,
     selectionStyle: {
-      backgroundColor: 'rgba(0, 123, 255, 0.2)',
-      borderColor: 'blue',
-      borderStyle: 'dashed',
-      borderWidth: 2
+      backgroundColor: "rgba(0, 123, 255, 0.2)",
+      borderColor: "blue",
+      borderStyle: "dashed",
+      borderWidth: 2,
     },
   });
 
@@ -174,8 +147,8 @@ function CustomSelectionExample() {
 ### Dark Mode with Custom Theme
 
 ```jsx
-import React, { useRef } from 'react';
-import { useMouseSelection } from 'react-context';
+import React, { useRef } from "react";
+import { useMouseSelection } from "react-context";
 
 function DarkModeExample() {
   const ref = useRef();
@@ -184,28 +157,38 @@ function DarkModeExample() {
     targetRef: ref,
     darkMode: true,
     theme: {
-      primary: '#007FFF',
-      secondary: '#6495ED',
-      iconSize: '1rem',
+      primary: "#007FFF",
+      secondary: "#6495ED",
+      iconSize: "1rem",
       darkMode: {
-        menuBackgroundColor: '#1E1E1E',
-        menuColor: '#fff',
-        menuItemHoverColor: '#333'
-      }
+        menuBackgroundColor: "#1E1E1E",
+        menuColor: "#fff",
+        menuItemHoverColor: "#333",
+      },
     },
   });
 
-  return <div ref={ref} style={{ backgroundColor: '#333', color: '#fff' }}>Dark mode is cool!</div>;
+  return (
+    <div ref={ref} style={{ backgroundColor: "#333", color: "#fff" }}>
+      Dark mode is cool!
+    </div>
+  );
 }
 ```
 
 ### Advanced Usage with Toolbar and Custom Context Menu
 
 ```jsx
-import React, { useRef } from 'react';
-import { useMouseSelection } from 'react-context';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCopy, faCut, faPaste, faTrashAlt, faSave } from '@fortawesome/free-solid-svg-icons';
+import React, { useRef } from "react";
+import { useMouseSelection } from "react-context";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faCopy,
+  faCut,
+  faPaste,
+  faTrashAlt,
+  faSave,
+} from "@fortawesome/free-solid-svg-icons";
 
 function AdvancedExample() {
   const ref = useRef();
@@ -217,35 +200,69 @@ function AdvancedExample() {
         { name: "copy", icon: <FontAwesomeIcon icon={faCopy} size="2x" /> },
         { name: "cut", icon: <FontAwesomeIcon icon={faCut} size="2x" /> },
         { name: "paste", icon: <FontAwesomeIcon icon={faPaste} size="2x" /> },
-        { name: "delete", icon: <FontAwesomeIcon icon={faTrashAlt} size="2x" /> },
+        {
+          name: "delete",
+          icon: <FontAwesomeIcon icon={faTrashAlt} size="2x" />,
+        },
         { name: "save", icon: <FontAwesomeIcon icon={faSave} size="2x" /> },
       ],
     },
     contextMenu: {
       items: [
-        { name: "Copy", icon: <FontAwesomeIcon icon={faCopy} />, action: () => console.log("Copy action") },
-        { name: "Cut", icon: <FontAwesomeIcon icon={faCut} />, action: () => console.log("Cut action") },
+        {
+          name: "Copy",
+          icon: <FontAwesomeIcon icon={faCopy} />,
+          action: () => console.log("Copy action"),
+        },
+        {
+          name: "Cut",
+          icon: <FontAwesomeIcon icon={faCut} />,
+          action: () => console.log("Cut action"),
+        },
         { divider: true },
-        { name: "Paste", icon: <FontAwesomeIcon icon={faPaste} />, action: () => console.log("Paste action") },
-        { name: "Delete", icon: <FontAwesomeIcon icon={faTrashAlt} />, action: () => console.log("Delete action") },
+        {
+          name: "Paste",
+          icon: <FontAwesomeIcon icon={faPaste} />,
+          action: () => console.log("Paste action"),
+        },
+        {
+          name: "Delete",
+          icon: <FontAwesomeIcon icon={faTrashAlt} />,
+          action: () => console.log("Delete action"),
+        },
         { divider: true },
-        { name: "Select All", action: () => console.log("Select All action"), disabled: true },
-        { name: "Save", icon: <FontAwesomeIcon icon={faSave} />, action: () => console.log("Save action") },
-        { name: "Discard", icon: <FontAwesomeIcon icon={faTrashAlt} />, action: () => console.log("Discard action") },
+        {
+          name: "Select All",
+          action: () => console.log("Select All action"),
+          disabled: true,
+        },
+        {
+          name: "Save",
+          icon: <FontAwesomeIcon icon={faSave} />,
+          action: () => console.log("Save action"),
+        },
+        {
+          name: "Discard",
+          icon: <FontAwesomeIcon icon={faTrashAlt} />,
+          action: () => console.log("Discard action"),
+        },
       ],
     },
     onContextMenuSelected: (item) => {
-      console.log(item.name + ' selected');
+      console.log(item.name + " selected");
     },
   });
 
   return (
-    <div ref={ref} style={{ width: '100%', height: '100%', border: '1px solid #ccc' }}>
-      Right-click or select content in this area to see the custom context menu and toolbar.
+    <div
+      ref={ref}
+      style={{ width: "100%", height: "100%", border: "1px solid #ccc" }}
+    >
+      Right-click or select content in this area to see the custom context menu
+      and toolbar.
     </div>
   );
 }
-
 ```
 
 ## License 📜
