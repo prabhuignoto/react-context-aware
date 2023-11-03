@@ -6,8 +6,11 @@
 <!-- License Badge -->
 ![GitHub](https://img.shields.io/github/license/prabhuignoto/react-pointer-plus)
 
+<!-- Coverage -->
+[![Coverage Status](https://coveralls.io/repos/github/prabhuignoto/react-pointer-plus/badge.svg)](https://coveralls.io/github/prabhuignoto/react-pointer-plus)
+
 <!-- Version Badge -->
-![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/prabhuignoto/react-pointer-plus)
+<!-- ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/prabhuignoto/react-pointer-plus) -->
 
 <!-- Build Status Badge -->
 <!-- ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/prabhuignoto/repo/workflow-name) -->
@@ -19,7 +22,7 @@
 <!-- ![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/prabhuignoto/react-pointer-plus) -->
 
 <!-- Dependency Status Badge -->
-![David](https://img.shields.io/david/prabhuignoto/repo)
+<!-- ![David](https://img.shields.io/david/prabhuignoto/repo) -->
 
 <!-- Open Issues Badge -->
 <!-- ![GitHub issues](https://img.shields.io/github/issues/username/repo) -->
