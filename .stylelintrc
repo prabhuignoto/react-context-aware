@@ -1,0 +1,21 @@
+{
+  "extends": "stylelint-config-standard-scss",
+  "customSyntax": "postcss-scss",
+  "rules": {
+    "color-no-invalid-hex": true,
+    "selector-class-pattern": "^[a-z0-9_]+$",
+    "font-family-no-duplicate-names": true,
+    "property-no-unknown": true,
+    "block-no-empty": true,
+    "comment-no-empty": true,
+    "no-duplicate-selectors": true,
+    "declaration-block-no-duplicate-properties": true,
+    "declaration-block-no-shorthand-property-overrides": true,
+    "selector-pseudo-class-no-unknown": true,
+    "selector-pseudo-element-no-unknown": true,
+    "selector-type-no-unknown": true,
+    "media-feature-name-no-unknown": true,
+    "no-empty-source": true,
+    "function-url-no-scheme-relative": true
+  }
+}

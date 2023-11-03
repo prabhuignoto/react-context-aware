@@ -5,17 +5,31 @@ import replace from "@rollup/plugin-replace";
 import strip from "@rollup/plugin-strip";
 import terser from "@rollup/plugin-terser";
 import autoprefixer from "autoprefixer";
+import cssNano from "cssnano";
+import postcssPreset from "postcss-preset-env";
+import pluginDelete from "rollup-plugin-delete";
 import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import postcss from "rollup-plugin-postcss";
 import typescript from "rollup-plugin-typescript2";
+import stylelint from "stylelint";
 import pkg from "./package.json" assert { type: "json" };
-import pluginDelete from "rollup-plugin-delete";
 
-const postcssPlugins = [autoprefixer];
+const postcssPlugins = [
+  autoprefixer,
+  cssNano({
+    preset: "default",
+  }),
+  stylelint({
+    quiet: true,
+  }),
+  postcssPreset({
+    stage: 2,
+  }),
+];
 const name = pkg.name;
 
 export default {
-  input: "src/react-context.ts",
+  input: "src/react-pointer-plus.ts",
   output: [
     {
       file: `dist/${name}.js`,

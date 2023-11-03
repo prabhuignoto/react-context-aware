@@ -3,9 +3,41 @@
 <!-- Placeholder for the library logo -->
 <!-- ![React-Context Logo](path-to-your-logo) -->
 
-![npm](https://img.shields.io/npm/v/react-context)
-![downloads](https://img.shields.io/npm/dm/react-context)
-![license](https://img.shields.io/npm/l/react-context)
+<!-- License Badge -->
+![GitHub](https://img.shields.io/github/license/prabhuignoto/repo)
+
+<!-- Version Badge -->
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/prabhuignoto/repo)
+
+<!-- Build Status Badge -->
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/prabhuignoto/repo/workflow-name)
+
+<!-- Code Coverage Badge -->
+![Coverage](https://img.shields.io/codecov/c/github/prabhuignoto/repo)
+
+<!-- Code Quality Badge -->
+![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/prabhuignoto/repo)
+
+<!-- Dependency Status Badge -->
+![David](https://img.shields.io/david/prabhuignoto/repo)
+
+<!-- Open Issues Badge -->
+<!-- ![GitHub issues](https://img.shields.io/github/issues/username/repo) -->
+
+<!-- Pull Requests Badge -->
+<!-- ![GitHub pull requests](https://img.shields.io/github/issues-pr/username/repo) -->
+
+<!-- Downloads Badge -->
+<!-- ![GitHub downloads](https://img.shields.io/github/downloads/username/repo/total) -->
+
+<!-- Stars Badge -->
+<!-- ![GitHub stars](https://img.shields.io/github/stars/username/repo) -->
+
+<!-- Forks Badge -->
+<!-- ![GitHub forks](https://img.shields.io/github/forks/username/repo) -->
+
+<!-- Twitter Follow Badge -->
+<!-- ![Twitter Follow](https://img.shields.io/twitter/follow/yourhandle?style=social) -->
 
 Customize the mouse pointer, mouse selection, and context menu in React applications with ease using React-Context.
 

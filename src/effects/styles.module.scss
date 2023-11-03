@@ -4,7 +4,6 @@
   position: absolute;
   left: 0;
   top: 0;
-
   display: flex;
   place-content: center;
   place-items: center;
@@ -22,9 +21,8 @@
   place-items: flex-start;
   justify-items: flex-start;
   padding: 0.5rem;
-
   border-radius: 8px; /* Rounded borders */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+  box-shadow: 0 4px 8px rgb(0 0 0 / 20%); /* Shadow effect */
   transition: transform 0.1s ease-in-out, opacity 0.1s ease;
   background: var(--rc-context-menu-background);
 }
