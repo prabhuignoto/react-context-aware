@@ -4,19 +4,19 @@
 <!-- ![React-Context Logo](path-to-your-logo) -->
 
 <!-- License Badge -->
-![GitHub](https://img.shields.io/github/license/prabhuignoto/repo)
+![GitHub](https://img.shields.io/github/license/prabhuignoto/react-pointer-plus)
 
 <!-- Version Badge -->
-![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/prabhuignoto/repo)
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/prabhuignoto/react-pointer-plus)
 
 <!-- Build Status Badge -->
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/prabhuignoto/repo/workflow-name)
+<!-- ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/prabhuignoto/repo/workflow-name) -->
 
 <!-- Code Coverage Badge -->
-![Coverage](https://img.shields.io/codecov/c/github/prabhuignoto/repo)
+<!-- ![Coverage](https://img.shields.io/codecov/c/github/prabhuignoto/react-pointer-plus) -->
 
 <!-- Code Quality Badge -->
-![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/prabhuignoto/repo)
+<!-- ![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/prabhuignoto/react-pointer-plus) -->
 
 <!-- Dependency Status Badge -->
 ![David](https://img.shields.io/david/prabhuignoto/repo)

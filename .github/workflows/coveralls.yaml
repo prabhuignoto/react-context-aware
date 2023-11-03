@@ -1,0 +1,26 @@
+# .github/workflows/coveralls.yml
+
+name: Test Coveralls
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  coveralls:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      # Add steps to set up your Node.js environment and to run your test suite
+      # to produce the LCOV coverage report file here
+
+      - name: Coveralls GitHub Action
+        uses: coverallsapp/github-action@v2.2.3
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          # If you have specific files to upload, specify them here:
+          files: "coverage/lcov.info"
