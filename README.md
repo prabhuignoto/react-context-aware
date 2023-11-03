@@ -5,39 +5,8 @@
 
 <!-- License Badge -->
 ![GitHub](https://img.shields.io/github/license/prabhuignoto/react-pointer-plus)
-
 <!-- Coverage -->
 [![Coverage Status](https://coveralls.io/repos/github/prabhuignoto/react-pointer-plus/badge.svg)](https://coveralls.io/github/prabhuignoto/react-pointer-plus)
-
-<!-- Version Badge -->
-<!-- ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/prabhuignoto/react-pointer-plus) -->
-
-<!-- Build Status Badge -->
-<!-- ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/prabhuignoto/repo/workflow-name) -->
-
-<!-- Code Coverage Badge -->
-<!-- ![Coverage](https://img.shields.io/codecov/c/github/prabhuignoto/react-pointer-plus) -->
-
-<!-- Code Quality Badge -->
-<!-- ![Code Climate maintainability](https://img.shields.io/codeclimate/maintainability/prabhuignoto/react-pointer-plus) -->
-
-<!-- Dependency Status Badge -->
-<!-- ![David](https://img.shields.io/david/prabhuignoto/repo) -->
-
-<!-- Open Issues Badge -->
-<!-- ![GitHub issues](https://img.shields.io/github/issues/username/repo) -->
-
-<!-- Pull Requests Badge -->
-<!-- ![GitHub pull requests](https://img.shields.io/github/issues-pr/username/repo) -->
-
-<!-- Downloads Badge -->
-<!-- ![GitHub downloads](https://img.shields.io/github/downloads/username/repo/total) -->
-
-<!-- Stars Badge -->
-<!-- ![GitHub stars](https://img.shields.io/github/stars/username/repo) -->
-
-<!-- Forks Badge -->
-<!-- ![GitHub forks](https://img.shields.io/github/forks/username/repo) -->
 
 <!-- Twitter Follow Badge -->
 <!-- ![Twitter Follow](https://img.shields.io/twitter/follow/yourhandle?style=social) -->
@@ -56,6 +25,7 @@ React-Context is a powerful and customizable library designed to enhance the use
 - 🌗 Full support for light and dark themes.
 - 🛠️ Extendable with custom icons and toolbar options.
 - 📐 Easy to use with clear and concise API.
+- ⚡ Lightweight and performant.
 
 ## Installation 🔧
 
