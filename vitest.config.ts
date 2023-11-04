@@ -15,6 +15,12 @@ export default defineConfig({
       provider: 'v8',
       reporter: ['lcov', 'clover'],
       reportsDirectory: './coverage',
+      include: [
+        './src/components/**/*.{tsx,ts}',
+        './src/effects/**/*.{tsx,ts}',
+        './src/models/**/*.{tsx,ts}',
+        './src/theme/**/*.{tsx,ts}',
+      ],
     },
     environment: 'jsdom',
     globals: true,
