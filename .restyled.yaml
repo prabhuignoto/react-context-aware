@@ -22,13 +22,13 @@ restylers:
 # - name: markdown
 
 # Configure restyled to auto-create pull requests for restyled changes
-pull_requests:
-  labels:
-    - restyled
-  title: "Restyle {{ .Head.Ref }}"
-  body: |
-    This PR restyles the code in `{{ .Head.Ref }}` to match our code style.
-    Please review the changes and merge them if they're good.
+# pull_requests:
+#   labels:
+#     - restyled
+#   title: "Restyle {{ .Head.Ref }}"
+#   body: |
+#     This PR restyles the code in `{{ .Head.Ref }}` to match our code style.
+#     Please review the changes and merge them if they're good.
 
 # You can also customize how Restyled handles the creation of restyled pull requests
 # branch_name: restyled/{{ .Head.Ref }}
