@@ -18,9 +18,6 @@ include:
   - "**/*.jsx"
   - "**/*.ts"
   - "**/*.tsx"
-exclude:
-  - "**/node_modules/**"
-  - "**/dist/**"
 
 # You can specify additional restylers if you use other languages or tools
 # - name: eslint
