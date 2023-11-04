@@ -1,0 +1,51 @@
+version: 2
+
+restylers:
+  - name: prettier
+    arguments:
+      - --semi
+      - --trailing-comma=es5
+      - --single-quote
+      - --print-width=80
+      - --tab-width=2
+      - --jsx-bracket-same-line=false
+      - --arrow-parens=always
+      - --end-of-line=lf
+
+# Optionally, you can specify which files to include or exclude
+include:
+  - "**/*.js"
+  - "**/*.jsx"
+  - "**/*.ts"
+  - "**/*.tsx"
+exclude:
+  - "**/node_modules/**"
+  - "**/dist/**"
+
+# You can specify additional restylers if you use other languages or tools
+# - name: eslint
+#   enabled: true
+# - name: json
+# - name: markdown
+
+# Configure restyled to auto-create pull requests for restyled changes
+pull_requests:
+  labels:
+    - restyled
+  title: "Restyle {{ .Head.Ref }}"
+  body: |
+    This PR restyles the code in `{{ .Head.Ref }}` to match our code style.
+    Please review the changes and merge them if they're good.
+
+# You can also customize how Restyled handles the creation of restyled pull requests
+# branch_name: restyled/{{ .Head.Ref }}
+# commit_message: "Restyle {{ .Head.Ref }}"
+# auto_merge_enabled: false
+# auto_merge_requires_approval: false
+# auto_merge_strategy: merge
+
+# Setting up remote for pushing restyled branches and creating PRs
+remote: origin
+
+# Control restyled's commenting behavior
+comments: true

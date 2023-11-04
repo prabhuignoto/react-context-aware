@@ -389,21 +389,21 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { nanoid } from "nanoid";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { renderToString } from "react-dom/server";
-import { Popup } from "../components/popup";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { nanoid } from 'nanoid';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { renderToString } from 'react-dom/server';
+import { Popup } from '../components/popup';
 import {
   ActivePopupState,
   ContentType,
   PopupPosition,
   UsePopupProps,
-} from "../models/popup.model";
+} from '../models/popup.model';
 import {
   calculatePopupPosition,
   createPopupPlaceholder,
   getAllHtmlAttrValues,
-} from "./utils";
+} from './utils';
 &nbsp;
 // Custom hook for managing popups
 const usePopup = (props: UsePopupProps) =&gt; {
@@ -415,10 +415,10 @@ const usePopup = (props: UsePopupProps) =&gt; {
 &nbsp;
   // State to manage the active popup's properties
   const [activePopup, setActivePopup] = useState&lt;ActivePopupState&gt;({
-    type: "text",
-    data: "",
+    type: 'text',
+    data: '',
     dimensions: { height: 0, width: 0 },
-    position: "bottom",
+    position: 'bottom',
     targetRect: { x: 0, y: 0, width: 0, height: 0 },
   });
 &nbsp;
@@ -438,7 +438,7 @@ const usePopup = (props: UsePopupProps) =&gt; {
 <span class="cstat-no" title="statement not covered" >    const [type, position, content, popupHeight, popupWidth] =</span>
 <span class="cstat-no" title="statement not covered" >      getAllHtmlAttrValues({</span>
 <span class="cstat-no" title="statement not covered" >        ele: target,</span>
-<span class="cstat-no" title="statement not covered" >        names: ["type", "position", "content", "height", "width"],</span>
+<span class="cstat-no" title="statement not covered" >        names: ['type', 'position', 'content', 'height', 'width'],</span>
 <span class="cstat-no" title="statement not covered" >      });</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    if (content &amp;&amp; type &amp;&amp; position &amp;&amp; popupHeight &amp;&amp; popupWidth) {</span>
@@ -464,10 +464,10 @@ const usePopup = (props: UsePopupProps) =&gt; {
   const clearActivePopup = useCallback(() =&gt; {
 <span class="cstat-no" title="statement not covered" >    const placeholder = placeHolderRef.current;</span>
 <span class="cstat-no" title="statement not covered" >    if (placeholder) {</span>
-<span class="cstat-no" title="statement not covered" >      placeholder.innerHTML = "";</span>
+<span class="cstat-no" title="statement not covered" >      placeholder.innerHTML = '';</span>
 <span class="cstat-no" title="statement not covered" >      setActivePopup((prevState) =&gt; ({</span>
 <span class="cstat-no" title="statement not covered" >        ...prevState,</span>
-<span class="cstat-no" title="statement not covered" >        data: "",</span>
+<span class="cstat-no" title="statement not covered" >        data: '',</span>
 <span class="cstat-no" title="statement not covered" >        dimensions: { height: 0, width: 0 },</span>
 <span class="cstat-no" title="statement not covered" >        targetRect: { x: 0, y: 0, width: 0, height: 0 },</span>
 <span class="cstat-no" title="statement not covered" >      }));</span>
@@ -527,11 +527,11 @@ const usePopup = (props: UsePopupProps) =&gt; {
       if (targets.length) <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
 <span class="cstat-no" title="statement not covered" >        targetsRef.current = targets;</span>
 <span class="cstat-no" title="statement not covered" >        targets.forEach((target) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >          target.addEventListener("mouseenter", (e) =&gt;</span>
+<span class="cstat-no" title="statement not covered" >          target.addEventListener('mouseenter', (e) =&gt;</span>
 <span class="cstat-no" title="statement not covered" >            updateActivePopup(e.target as HTMLElement)</span>
 <span class="cstat-no" title="statement not covered" >          );</span>
-<span class="cstat-no" title="statement not covered" >          target.addEventListener("mouseleave", clearActivePopup);</span>
-<span class="cstat-no" title="statement not covered" >          target.addEventListener("click", handleClick);</span>
+<span class="cstat-no" title="statement not covered" >          target.addEventListener('mouseleave', clearActivePopup);</span>
+<span class="cstat-no" title="statement not covered" >          target.addEventListener('click', handleClick);</span>
 <span class="cstat-no" title="statement not covered" >        });</span>
 <span class="cstat-no" title="statement not covered" >      }</span>
     }
@@ -539,11 +539,11 @@ const usePopup = (props: UsePopupProps) =&gt; {
     // Cleanup function to remove event listeners
     return () =&gt; {
       targetsRef.<span class="branch-0 cbranch-no" title="branch not covered" >current?.forEach((</span>target) =&gt; {
-<span class="cstat-no" title="statement not covered" >        target.removeEventListener("mouseenter", (e) =&gt;</span>
+<span class="cstat-no" title="statement not covered" >        target.removeEventListener('mouseenter', (e) =&gt;</span>
 <span class="cstat-no" title="statement not covered" >          updateActivePopup(e.target as HTMLElement)</span>
 <span class="cstat-no" title="statement not covered" >        );</span>
-<span class="cstat-no" title="statement not covered" >        target.removeEventListener("mouseleave", clearActivePopup);</span>
-<span class="cstat-no" title="statement not covered" >        target.removeEventListener("click", handleClick);</span>
+<span class="cstat-no" title="statement not covered" >        target.removeEventListener('mouseleave', clearActivePopup);</span>
+<span class="cstat-no" title="statement not covered" >        target.removeEventListener('click', handleClick);</span>
       });
     };
   }, [containerElement, updateActivePopup, clearActivePopup, handleClick]);
@@ -559,7 +559,7 @@ export { usePopup };
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-04T05:38:58.454Z
+                at 2023-11-04T06:06:11.866Z
             </div>
         <script src="../prettify.js"></script>
         <script>

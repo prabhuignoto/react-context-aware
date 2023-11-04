@@ -1,7 +1,7 @@
-import cls from "classnames";
-import { FunctionComponent } from "react";
-import { MenuItemModel } from "./menu.model";
-import style from "./menu.module.scss";
+import cls from 'classnames';
+import { FunctionComponent } from 'react';
+import { MenuItemModel } from './menu.model';
+import style from './menu.module.scss';
 
 const MenuItem: FunctionComponent<MenuItemModel> = ({
   name,

@@ -405,13 +405,13 @@
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { SelectionStyle } from "../models/core.model";
-import { MouseMovementDirection } from "../models/mouse-position.model";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { SelectionStyle } from '../models/core.model';
+import { MouseMovementDirection } from '../models/mouse-position.model';
 import {
   PopupDimensions,
   PopupPosition,
   TargetRect,
-} from "../models/popup.model";
+} from '../models/popup.model';
 &nbsp;
 type PopupPlaceholderProps = {
   id: string;
@@ -430,17 +430,17 @@ const getDirection: (x: number, y: number) =&gt; MouseMovementDirection = (
   const absMovX = Math.abs(movX);
   const absMovY = Math.abs(movY);
 &nbsp;
-  let direction = "";
+  let direction = '';
 &nbsp;
   // Determine the direction of the mouse movement
   direction =
     absMovX &gt; <span class="branch-0 cbranch-no" title="branch not covered" >absMovY</span>
 <span class="cstat-no" title="statement not covered" >      ? movX &lt; 0</span>
-<span class="cstat-no" title="statement not covered" >        ? "left"</span>
-<span class="cstat-no" title="statement not covered" >        : "right"</span>
+<span class="cstat-no" title="statement not covered" >        ? 'left'</span>
+<span class="cstat-no" title="statement not covered" >        : 'right'</span>
       : movY &lt; <span class="branch-0 cbranch-no" title="branch not covered" >0</span>
-<span class="cstat-no" title="statement not covered" >      ? "up"</span>
-      : "down";
+<span class="cstat-no" title="statement not covered" >      ? 'up'</span>
+      : 'down';
 &nbsp;
   // Return the direction
   return direction as MouseMovementDirection;
@@ -448,18 +448,18 @@ const getDirection: (x: number, y: number) =&gt; MouseMovementDirection = (
 &nbsp;
 const getSelectionDiv = <span class="fstat-no" title="function not covered" >(</span>
 <span class="cstat-no" title="statement not covered" >  style: SelectionStyle = {</span>
-<span class="cstat-no" title="statement not covered" >    backgroundColor: "rgba(0, 123, 255, 0.1)",</span>
-<span class="cstat-no" title="statement not covered" >    borderColor: "rgba(0, 123, 255, 0.5)",</span>
-<span class="cstat-no" title="statement not covered" >    borderStyle: "dotted",</span>
+<span class="cstat-no" title="statement not covered" >    backgroundColor: 'rgba(0, 123, 255, 0.1)',</span>
+<span class="cstat-no" title="statement not covered" >    borderColor: 'rgba(0, 123, 255, 0.5)',</span>
+<span class="cstat-no" title="statement not covered" >    borderStyle: 'dotted',</span>
 <span class="cstat-no" title="statement not covered" >    borderWidth: 1,</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 <span class="cstat-no" title="statement not covered" >) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  const span = document.createElement("span");</span>
+<span class="cstat-no" title="statement not covered" >  const span = document.createElement('span');</span>
 <span class="cstat-no" title="statement not covered" >  const { backgroundColor, borderColor, borderStyle, borderWidth } = style;</span>
 <span class="cstat-no" title="statement not covered" >  span.style.cssText = styleobjectToCssText({</span>
-<span class="cstat-no" title="statement not covered" >    position: "absolute",</span>
+<span class="cstat-no" title="statement not covered" >    position: 'absolute',</span>
 <span class="cstat-no" title="statement not covered" >    zIndex: 99999,</span>
-<span class="cstat-no" title="statement not covered" >    display: "block",</span>
+<span class="cstat-no" title="statement not covered" >    display: 'block',</span>
 <span class="cstat-no" title="statement not covered" >    background: backgroundColor,</span>
 <span class="cstat-no" title="statement not covered" >    border: `${borderWidth}px ${borderStyle} ${borderColor}`,</span>
 <span class="cstat-no" title="statement not covered" >  });</span>
@@ -468,12 +468,12 @@ const getSelectionDiv = <span class="fstat-no" title="function not covered" >(</
 <span class="cstat-no" title="statement not covered" >};</span>
 &nbsp;
 const getPointerImageWrapperDiv = () =&gt; {
-  const imageWrapper = document.createElement("span");
+  const imageWrapper = document.createElement('span');
   imageWrapper.style.cssText = styleobjectToCssText({
-    position: "absolute",
-    display: "block",
-    width: "100%",
-    height: "100%",
+    position: 'absolute',
+    display: 'block',
+    width: '100%',
+    height: '100%',
   });
 &nbsp;
   return imageWrapper;
@@ -482,10 +482,10 @@ const getPointerImageWrapperDiv = () =&gt; {
 const isTagTypeSpecial = <span class="fstat-no" title="function not covered" >(el: HTMLElement) =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >  const { tagName } = el;</span>
 <span class="cstat-no" title="statement not covered" >  return (</span>
-<span class="cstat-no" title="statement not covered" >    tagName === "INPUT" ||</span>
-<span class="cstat-no" title="statement not covered" >    tagName === "TEXTAREA" ||</span>
-<span class="cstat-no" title="statement not covered" >    tagName === "BUTTON" ||</span>
-<span class="cstat-no" title="statement not covered" >    tagName === "A"</span>
+<span class="cstat-no" title="statement not covered" >    tagName === 'INPUT' ||</span>
+<span class="cstat-no" title="statement not covered" >    tagName === 'TEXTAREA' ||</span>
+<span class="cstat-no" title="statement not covered" >    tagName === 'BUTTON' ||</span>
+<span class="cstat-no" title="statement not covered" >    tagName === 'A'</span>
 <span class="cstat-no" title="statement not covered" >  );</span>
 <span class="cstat-no" title="statement not covered" >};</span>
 &nbsp;
@@ -493,7 +493,7 @@ const isTagTypeSpecial = <span class="fstat-no" title="function not covered" >(e
 const styleobjectToCssText = (style: any) =&gt; {
   return Object.keys(style).reduce((acc, key) =&gt; {
     return `${acc}${key}:${style[key]};`;
-  }, "");
+  }, '');
 };
 &nbsp;
 /**
@@ -507,11 +507,11 @@ const createPopupPlaceholder = ({
   // const targetRect = target.getBoundingClientRect();
 &nbsp;
   // Create the placeholder element
-  const placeholder = document.createElement("div");
+  const placeholder = document.createElement('div');
   placeholder.id = id;
   placeholder.style.cssText = styleobjectToCssText({
-    position: "fixed",
-    zIndex: "9999",
+    position: 'fixed',
+    zIndex: '9999',
   });
   return placeholder;
 };
@@ -550,27 +550,27 @@ export function calculatePopupPosition(
 &nbsp;
   // Calculate the popup position
   switch (position) {
-<span class="branch-0 cbranch-no" title="branch not covered" >    case "top":</span>
+<span class="branch-0 cbranch-no" title="branch not covered" >    case 'top':</span>
 <span class="cstat-no" title="statement not covered" >      top = y - dimensions.height;</span>
 <span class="cstat-no" title="statement not covered" >      break;</span>
-    case "bottom":
+    case 'bottom':
       top = y + targetHeight;
       break;
-<span class="branch-0 cbranch-no" title="branch not covered" >    case "left":</span>
+<span class="branch-0 cbranch-no" title="branch not covered" >    case 'left':</span>
 <span class="cstat-no" title="statement not covered" >      left = x - dimensions.width - popupGap;</span>
 <span class="cstat-no" title="statement not covered" >      break;</span>
-<span class="branch-0 cbranch-no" title="branch not covered" >    case "right":</span>
+<span class="branch-0 cbranch-no" title="branch not covered" >    case 'right':</span>
 <span class="cstat-no" title="statement not covered" >      left = x + targetWidth + popupGap;</span>
 <span class="cstat-no" title="statement not covered" >      break;</span>
   }
 &nbsp;
   // Center the popup horizontally for top and bottom positions
-  if (position === "top" || position === "bottom") {
+  if (position === 'top' || position === 'bottom') {
     left = x + targetWidth / 2 - dimensions.width / 2;
   }
 &nbsp;
   // Center the popup vertically for left and right positions
-  if (position === "left" || position === "right") <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
+  if (position === 'left' || position === 'right') <span class="branch-0 cbranch-no" title="branch not covered" >{</span>
 <span class="cstat-no" title="statement not covered" >    top = y + targetHeight / 2 - dimensions.height / 2;</span>
 <span class="cstat-no" title="statement not covered" >  }</span>
 &nbsp;
@@ -583,7 +583,7 @@ export function calculatePopupPosition(
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-04T05:38:58.454Z
+                at 2023-11-04T06:06:11.866Z
             </div>
         <script src="../prettify.js"></script>
         <script>

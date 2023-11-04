@@ -1,5 +1,5 @@
-import { ReactNode } from "react";
-import { Props } from "../../models/core.model";
+import { ReactNode } from 'react';
+import { Props } from '../../models/core.model';
 
 export interface MenuItemModel {
   id?: string;
@@ -12,4 +12,4 @@ export interface MenuItemModel {
 
 export type MenuModel = {
   items: MenuItemModel[];
-} & Pick<Props, "toolbar">;
+} & Pick<Props, 'toolbar'>;

@@ -1,5 +1,5 @@
-import { ReactNode, RefObject } from "react";
-import { Props } from "./core.model";
+import { ReactNode, RefObject } from 'react';
+import { Props } from './core.model';
 
 export type MousePointerProps = {
   icon?: ReactNode;

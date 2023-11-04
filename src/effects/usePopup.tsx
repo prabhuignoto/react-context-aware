@@ -1,18 +1,18 @@
-import { nanoid } from "nanoid";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { renderToString } from "react-dom/server";
-import { Popup } from "../components/popup";
+import { nanoid } from 'nanoid';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { renderToString } from 'react-dom/server';
+import { Popup } from '../components/popup';
 import {
   ActivePopupState,
   ContentType,
   PopupPosition,
   UsePopupProps,
-} from "../models/popup.model";
+} from '../models/popup.model';
 import {
   calculatePopupPosition,
   createPopupPlaceholder,
   getAllHtmlAttrValues,
-} from "./utils";
+} from './utils';
 
 // Custom hook for managing popups
 const usePopup = (props: UsePopupProps) => {
@@ -24,10 +24,10 @@ const usePopup = (props: UsePopupProps) => {
 
   // State to manage the active popup's properties
   const [activePopup, setActivePopup] = useState<ActivePopupState>({
-    type: "text",
-    data: "",
+    type: 'text',
+    data: '',
     dimensions: { height: 0, width: 0 },
-    position: "bottom",
+    position: 'bottom',
     targetRect: { x: 0, y: 0, width: 0, height: 0 },
   });
 
@@ -47,7 +47,7 @@ const usePopup = (props: UsePopupProps) => {
     const [type, position, content, popupHeight, popupWidth] =
       getAllHtmlAttrValues({
         ele: target,
-        names: ["type", "position", "content", "height", "width"],
+        names: ['type', 'position', 'content', 'height', 'width'],
       });
 
     if (content && type && position && popupHeight && popupWidth) {
@@ -73,10 +73,10 @@ const usePopup = (props: UsePopupProps) => {
   const clearActivePopup = useCallback(() => {
     const placeholder = placeHolderRef.current;
     if (placeholder) {
-      placeholder.innerHTML = "";
+      placeholder.innerHTML = '';
       setActivePopup((prevState) => ({
         ...prevState,
-        data: "",
+        data: '',
         dimensions: { height: 0, width: 0 },
         targetRect: { x: 0, y: 0, width: 0, height: 0 },
       }));
@@ -136,11 +136,11 @@ const usePopup = (props: UsePopupProps) => {
       if (targets.length) {
         targetsRef.current = targets;
         targets.forEach((target) => {
-          target.addEventListener("mouseenter", (e) =>
+          target.addEventListener('mouseenter', (e) =>
             updateActivePopup(e.target as HTMLElement)
           );
-          target.addEventListener("mouseleave", clearActivePopup);
-          target.addEventListener("click", handleClick);
+          target.addEventListener('mouseleave', clearActivePopup);
+          target.addEventListener('click', handleClick);
         });
       }
     }
@@ -148,11 +148,11 @@ const usePopup = (props: UsePopupProps) => {
     // Cleanup function to remove event listeners
     return () => {
       targetsRef.current?.forEach((target) => {
-        target.removeEventListener("mouseenter", (e) =>
+        target.removeEventListener('mouseenter', (e) =>
           updateActivePopup(e.target as HTMLElement)
         );
-        target.removeEventListener("mouseleave", clearActivePopup);
-        target.removeEventListener("click", handleClick);
+        target.removeEventListener('mouseleave', clearActivePopup);
+        target.removeEventListener('click', handleClick);
       });
     };
   }, [containerElement, updateActivePopup, clearActivePopup, handleClick]);

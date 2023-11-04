@@ -1,1 +1,1 @@
-export { useMouseSelection as useContext } from "./effects/useMouseSelection";
+export { useMouseSelection as useContext } from './effects/useMouseSelection';

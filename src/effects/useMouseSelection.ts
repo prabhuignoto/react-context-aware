@@ -1,16 +1,16 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   MouseSelectionDimensions,
   MouseSelectionFunction,
-} from "../models/mouse-selection.model";
-import { defaultIcons, defaultTheme, selectionStyleDefaults } from "./default";
-import { useContextMenu } from "./useContextMenu";
-import { useMousePointer } from "./useMousePointer";
-import { useMousePosition } from "./useMousePosition";
-import { useMouseWheel } from "./useMouseWheel";
-import { usePopup } from "./usePopup";
-import { useTheme } from "./useTheme";
-import { getSelectionDiv, isTagTypeSpecial } from "./utils";
+} from '../models/mouse-selection.model';
+import { defaultIcons, defaultTheme, selectionStyleDefaults } from './default';
+import { useContextMenu } from './useContextMenu';
+import { useMousePointer } from './useMousePointer';
+import { useMousePosition } from './useMousePosition';
+import { useMouseWheel } from './useMouseWheel';
+import { usePopup } from './usePopup';
+import { useTheme } from './useTheme';
+import { getSelectionDiv, isTagTypeSpecial } from './utils';
 
 /**
  * A custom hook that enables mouse selection on a target element.
@@ -23,9 +23,9 @@ import { getSelectionDiv, isTagTypeSpecial } from "./utils";
  */
 const useMouseSelection: MouseSelectionFunction = ({
   targetRef,
-  pointerStyle = { color: "#000", size: 20 },
+  pointerStyle = { color: '#000', size: 20 },
   selectionStyle = selectionStyleDefaults,
-  status = "default",
+  status = 'default',
   contextMenu,
   theme = defaultTheme,
   icons = defaultIcons,
@@ -43,7 +43,7 @@ const useMouseSelection: MouseSelectionFunction = ({
   });
   const [isSelected, setIsSelected] = useState(false);
   const contextMenuPlaceholder = useRef<HTMLDivElement>(
-    document.createElement("div"),
+    document.createElement('div')
   );
 
   const [dimensions, setDimensions] = useState<MouseSelectionDimensions>({
@@ -115,7 +115,7 @@ const useMouseSelection: MouseSelectionFunction = ({
       const element = ev.target as HTMLElement;
       setIsSelected(true);
 
-      if (status === "default" && !isSpecialTag(element)) {
+      if (status === 'default' && !isSpecialTag(element)) {
         ev.preventDefault();
         pressed.current = true;
         const { clientX, clientY } = ev;
@@ -130,7 +130,7 @@ const useMouseSelection: MouseSelectionFunction = ({
         }
       }
     },
-    [mouseX, mouseY],
+    [mouseX, mouseY]
   );
 
   /**
@@ -192,16 +192,16 @@ const useMouseSelection: MouseSelectionFunction = ({
     if (targetRef.current) {
       const element = targetRef.current as HTMLElement;
       targetElement.current = element;
-      element.style.position = "relative";
+      element.style.position = 'relative';
 
-      element.addEventListener("mousedown", handleMouseDown);
-      element.addEventListener("mouseup", handleMouseUp);
+      element.addEventListener('mousedown', handleMouseDown);
+      element.addEventListener('mouseup', handleMouseUp);
 
-      element.style.cursor = "none";
+      element.style.cursor = 'none';
 
-      element.querySelectorAll("a, input, textarea, button").forEach((el) => {
+      element.querySelectorAll('a, input, textarea, button').forEach((el) => {
         const ele = el as HTMLElement;
-        ele.style.cursor = "none";
+        ele.style.cursor = 'none';
       });
 
       const span = getSelectionDiv({
@@ -217,8 +217,8 @@ const useMouseSelection: MouseSelectionFunction = ({
     return () => {
       if (targetElement) {
         const element = targetElement.current as HTMLElement;
-        element?.removeEventListener("mousedown", handleMouseDown);
-        element?.removeEventListener("mouseup", handleMouseUp);
+        element?.removeEventListener('mousedown', handleMouseDown);
+        element?.removeEventListener('mouseup', handleMouseUp);
       }
     };
   }, [targetElement]);
@@ -231,8 +231,8 @@ const useMouseSelection: MouseSelectionFunction = ({
     if (selection && size) {
       selection.style.width = `${width}px`;
       selection.style.height = `${height}px`;
-      selection.style.left = (flipX ? x - width : x) + "px";
-      selection.style.top = (flipY ? y - height : y) + "px";
+      selection.style.left = (flipX ? x - width : x) + 'px';
+      selection.style.top = (flipY ? y - height : y) + 'px';
     }
   }, [dimensions, pointerStyle, selectionRef, startMousePosition, isActive]);
 

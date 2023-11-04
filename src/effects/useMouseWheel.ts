@@ -1,5 +1,5 @@
-import debounce from "debounce";
-import { useCallback, useEffect, useState } from "react";
+import debounce from 'debounce';
+import { useCallback, useEffect, useState } from 'react';
 
 type MouseWheelProps = {
   targetRef: React.RefObject<HTMLElement>;
@@ -41,11 +41,11 @@ const useMouseWheel = ({
     const target = targetRef.current;
 
     if (target) {
-      target.addEventListener("wheel", debouncedHandleWheelEvent);
+      target.addEventListener('wheel', debouncedHandleWheelEvent);
 
       // Cleanup function to remove the event listener
       return () => {
-        target.removeEventListener("wheel", debouncedHandleWheelEvent);
+        target.removeEventListener('wheel', debouncedHandleWheelEvent);
       };
     }
   }, [targetRef, debouncedHandleWheelEvent]);

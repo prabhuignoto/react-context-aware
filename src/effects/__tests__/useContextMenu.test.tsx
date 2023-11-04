@@ -1,29 +1,29 @@
-import { fireEvent, waitFor } from "@testing-library/dom";
-import { act, renderHook } from "@testing-library/react-hooks";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { ContextMenuOptions } from "../../models/core.model";
-import { useContextMenu } from "../useContextMenu"; // Update this import to your actual file path
+import { fireEvent, waitFor } from '@testing-library/dom';
+import { act, renderHook } from '@testing-library/react-hooks';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { ContextMenuOptions } from '../../models/core.model';
+import { useContextMenu } from '../useContextMenu'; // Update this import to your actual file path
 
-describe("useContextMenu hook", () => {
+describe('useContextMenu hook', () => {
   let target: React.RefObject<HTMLDivElement>;
   let contextMenuOptions: ContextMenuOptions; // Replace with your actual type
   let onContextMenuSelected = vi.fn();
 
   beforeEach(() => {
     target = {
-      current: document.createElement("div"),
+      current: document.createElement('div'),
     };
     document.body.appendChild(target.current!);
 
     contextMenuOptions = {
       items: [
         {
-          name: "testName",
-          id: "testId",
+          name: 'testName',
+          id: 'testId',
         },
         {
-          name: "testName2",
-          id: "testId2",
+          name: 'testName2',
+          id: 'testId2',
         },
       ],
     }; // Initialize with your default options
@@ -35,7 +35,7 @@ describe("useContextMenu hook", () => {
     document.body.removeChild(target.current!);
   });
 
-  it("should initialize properly", () => {
+  it('should initialize properly', () => {
     const { result } = renderHook(() =>
       useContextMenu({
         target,
@@ -46,7 +46,7 @@ describe("useContextMenu hook", () => {
     expect(result.current).toBeUndefined();
   });
 
-  it("should open on right-click", () => {
+  it('should open on right-click', () => {
     renderHook(() =>
       useContextMenu({
         target,
@@ -67,7 +67,7 @@ describe("useContextMenu hook", () => {
     expect(contextMenuIsOpen).toBeInTheDocument();
   });
 
-  it("should close on clicking outside", async () => {
+  it('should close on clicking outside', async () => {
     renderHook(() =>
       useContextMenu({
         target,
@@ -99,7 +99,7 @@ describe("useContextMenu hook", () => {
     );
   });
 
-  it("should call onContextMenuSelected when an item is selected", () => {
+  it('should call onContextMenuSelected when an item is selected', () => {
     renderHook(() =>
       useContextMenu({
         target,
@@ -116,7 +116,7 @@ describe("useContextMenu hook", () => {
     const contextMenu = document.querySelector("[data-testid='context-menu']");
 
     // Get the first `li` under the `ul` in the context menu
-    const firstMenuItem = contextMenu?.querySelector("ul > li:first-child");
+    const firstMenuItem = contextMenu?.querySelector('ul > li:first-child');
 
     act(() => {
       if (firstMenuItem) {
@@ -128,13 +128,13 @@ describe("useContextMenu hook", () => {
       expect(onContextMenuSelected).toHaveBeenCalledWith({
         // Provide the expected data that corresponds to the first menu item
         // This would depend on what data attributes you've set on the menu items
-        name: "testName",
-        id: "testId",
+        name: 'testName',
+        id: 'testId',
       });
     });
   });
 
-  it("should clean up event listeners on unmount", () => {
+  it('should clean up event listeners on unmount', () => {
     const { unmount } = renderHook(() =>
       useContextMenu({
         target,

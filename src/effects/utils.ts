@@ -1,10 +1,10 @@
-import { SelectionStyle } from "../models/core.model";
-import { MouseMovementDirection } from "../models/mouse-position.model";
+import { SelectionStyle } from '../models/core.model';
+import { MouseMovementDirection } from '../models/mouse-position.model';
 import {
   PopupDimensions,
   PopupPosition,
   TargetRect,
-} from "../models/popup.model";
+} from '../models/popup.model';
 
 type PopupPlaceholderProps = {
   id: string;
@@ -23,17 +23,17 @@ const getDirection: (x: number, y: number) => MouseMovementDirection = (
   const absMovX = Math.abs(movX);
   const absMovY = Math.abs(movY);
 
-  let direction = "";
+  let direction = '';
 
   // Determine the direction of the mouse movement
   direction =
     absMovX > absMovY
       ? movX < 0
-        ? "left"
-        : "right"
+        ? 'left'
+        : 'right'
       : movY < 0
-      ? "up"
-      : "down";
+      ? 'up'
+      : 'down';
 
   // Return the direction
   return direction as MouseMovementDirection;
@@ -41,18 +41,18 @@ const getDirection: (x: number, y: number) => MouseMovementDirection = (
 
 const getSelectionDiv = (
   style: SelectionStyle = {
-    backgroundColor: "rgba(0, 123, 255, 0.1)",
-    borderColor: "rgba(0, 123, 255, 0.5)",
-    borderStyle: "dotted",
+    backgroundColor: 'rgba(0, 123, 255, 0.1)',
+    borderColor: 'rgba(0, 123, 255, 0.5)',
+    borderStyle: 'dotted',
     borderWidth: 1,
   }
 ) => {
-  const span = document.createElement("span");
+  const span = document.createElement('span');
   const { backgroundColor, borderColor, borderStyle, borderWidth } = style;
   span.style.cssText = styleobjectToCssText({
-    position: "absolute",
+    position: 'absolute',
     zIndex: 99999,
-    display: "block",
+    display: 'block',
     background: backgroundColor,
     border: `${borderWidth}px ${borderStyle} ${borderColor}`,
   });
@@ -61,12 +61,12 @@ const getSelectionDiv = (
 };
 
 const getPointerImageWrapperDiv = () => {
-  const imageWrapper = document.createElement("span");
+  const imageWrapper = document.createElement('span');
   imageWrapper.style.cssText = styleobjectToCssText({
-    position: "absolute",
-    display: "block",
-    width: "100%",
-    height: "100%",
+    position: 'absolute',
+    display: 'block',
+    width: '100%',
+    height: '100%',
   });
 
   return imageWrapper;
@@ -75,10 +75,10 @@ const getPointerImageWrapperDiv = () => {
 const isTagTypeSpecial = (el: HTMLElement) => {
   const { tagName } = el;
   return (
-    tagName === "INPUT" ||
-    tagName === "TEXTAREA" ||
-    tagName === "BUTTON" ||
-    tagName === "A"
+    tagName === 'INPUT' ||
+    tagName === 'TEXTAREA' ||
+    tagName === 'BUTTON' ||
+    tagName === 'A'
   );
 };
 
@@ -86,7 +86,7 @@ const isTagTypeSpecial = (el: HTMLElement) => {
 const styleobjectToCssText = (style: any) => {
   return Object.keys(style).reduce((acc, key) => {
     return `${acc}${key}:${style[key]};`;
-  }, "");
+  }, '');
 };
 
 /**
@@ -100,11 +100,11 @@ const createPopupPlaceholder = ({
   // const targetRect = target.getBoundingClientRect();
 
   // Create the placeholder element
-  const placeholder = document.createElement("div");
+  const placeholder = document.createElement('div');
   placeholder.id = id;
   placeholder.style.cssText = styleobjectToCssText({
-    position: "fixed",
-    zIndex: "9999",
+    position: 'fixed',
+    zIndex: '9999',
   });
   return placeholder;
 };
@@ -143,27 +143,27 @@ export function calculatePopupPosition(
 
   // Calculate the popup position
   switch (position) {
-    case "top":
+    case 'top':
       top = y - dimensions.height;
       break;
-    case "bottom":
+    case 'bottom':
       top = y + targetHeight;
       break;
-    case "left":
+    case 'left':
       left = x - dimensions.width - popupGap;
       break;
-    case "right":
+    case 'right':
       left = x + targetWidth + popupGap;
       break;
   }
 
   // Center the popup horizontally for top and bottom positions
-  if (position === "top" || position === "bottom") {
+  if (position === 'top' || position === 'bottom') {
     left = x + targetWidth / 2 - dimensions.width / 2;
   }
 
   // Center the popup vertically for left and right positions
-  if (position === "left" || position === "right") {
+  if (position === 'left' || position === 'right') {
     top = y + targetHeight / 2 - dimensions.height / 2;
   }
 

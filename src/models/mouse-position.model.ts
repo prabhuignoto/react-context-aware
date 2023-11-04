@@ -1,5 +1,5 @@
-import React, { RefObject } from "react";
-import { PointerStatus } from "./core.model";
+import React, { RefObject } from 'react';
+import { PointerStatus } from './core.model';
 
 export interface MousePositionProps {
   targetRef: RefObject<HTMLElement>;
@@ -7,7 +7,7 @@ export interface MousePositionProps {
   menuPlaceholder?: React.RefObject<HTMLDivElement>;
 }
 
-export type MouseMovementDirection = "left" | "right" | "up" | "down" | null;
+export type MouseMovementDirection = 'left' | 'right' | 'up' | 'down' | null;
 
 export type MousePositionType = {
   x: number;
@@ -18,5 +18,5 @@ export type MousePositionType = {
 };
 
 export type MousePositionFunction = (
-  props: MousePositionProps,
+  props: MousePositionProps
 ) => MousePositionType;

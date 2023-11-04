@@ -1,14 +1,14 @@
-import { waitFor } from "@testing-library/dom";
-import { act, renderHook } from "@testing-library/react-hooks";
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { useMouseWheel } from "../useMouseWheel";
+import { waitFor } from '@testing-library/dom';
+import { act, renderHook } from '@testing-library/react-hooks';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { useMouseWheel } from '../useMouseWheel';
 
-describe("useMouseWheel hook", () => {
+describe('useMouseWheel hook', () => {
   let container: React.RefObject<HTMLDivElement>;
 
   beforeEach(() => {
     container = {
-      current: document.createElement("div"),
+      current: document.createElement('div'),
     };
     document.body.appendChild(container.current!);
   });
@@ -17,12 +17,12 @@ describe("useMouseWheel hook", () => {
     document.body.removeChild(container.current!);
   });
 
-  it("should handle mouse wheel events", async () => {
+  it('should handle mouse wheel events', async () => {
     const { result } = renderHook(() =>
       useMouseWheel({ targetRef: container })
     );
 
-    const event = new WheelEvent("wheel", { deltaY: 1 });
+    const event = new WheelEvent('wheel', { deltaY: 1 });
 
     act(() => {
       container.current?.dispatchEvent(event);
@@ -33,11 +33,11 @@ describe("useMouseWheel hook", () => {
     });
   });
 
-  it("should not exceed maxScaleFactor", async () => {
+  it('should not exceed maxScaleFactor', async () => {
     const { result } = renderHook(() =>
       useMouseWheel({ targetRef: container, maxScaleFactor: 1.2 })
     );
-    const event = new WheelEvent("wheel", { deltaY: 1 });
+    const event = new WheelEvent('wheel', { deltaY: 1 });
 
     act(() => {
       for (let i = 0; i < 5; i++) {
@@ -50,11 +50,11 @@ describe("useMouseWheel hook", () => {
     });
   });
 
-  it("should not go below minScaleFactor", async () => {
+  it('should not go below minScaleFactor', async () => {
     const { result } = renderHook(() =>
       useMouseWheel({ targetRef: container, minScaleFactor: 0.9 })
     );
-    const event = new WheelEvent("wheel", { deltaY: -1 });
+    const event = new WheelEvent('wheel', { deltaY: -1 });
 
     act(() => {
       for (let i = 0; i < 5; i++) {
@@ -66,7 +66,7 @@ describe("useMouseWheel hook", () => {
     });
   });
 
-  it("should clean up event listeners", () => {
+  it('should clean up event listeners', () => {
     const map: Record<string, EventListenerOrEventListenerObject> = {};
 
     // Mock addEventListener and removeEventListener
@@ -82,11 +82,11 @@ describe("useMouseWheel hook", () => {
       useMouseWheel({ targetRef: container })
     );
 
-    expect(map["wheel"]).toBeDefined();
+    expect(map['wheel']).toBeDefined();
 
     // Unmount the hook
     unmount();
 
-    expect(map["wheel"]).toBeUndefined();
+    expect(map['wheel']).toBeUndefined();
   });
 });
