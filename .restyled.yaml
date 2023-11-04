@@ -11,13 +11,11 @@ restylers:
       - --jsx-bracket-same-line=false
       - --arrow-parens=always
       - --end-of-line=lf
-
-# Optionally, you can specify which files to include or exclude
-include:
-  - "**/*.js"
-  - "**/*.jsx"
-  - "**/*.ts"
-  - "**/*.tsx"
+    include:
+      - "**/*.js"
+      - "**/*.jsx"
+      - "**/*.ts"
+      - "**/*.tsx"
 
 # You can specify additional restylers if you use other languages or tools
 # - name: eslint
@@ -41,8 +39,6 @@ pull_requests:
 # auto_merge_requires_approval: false
 # auto_merge_strategy: merge
 
-# Setting up remote for pushing restyled branches and creating PRs
-remote: origin
 
 # Control restyled's commenting behavior
 comments: true
