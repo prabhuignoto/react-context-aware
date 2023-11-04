@@ -1,6 +1,6 @@
 // Import necessary dependencies for testing
 import { renderHook } from "@testing-library/react-hooks";
-import { unmountComponentAtNode } from "react-dom";
+// import { unmountComponentAtNode } from "react-dom";
 import { act } from "react-dom/test-utils";
 import { afterEach, beforeEach, expect, test } from "vitest";
 import { useMousePosition } from "../useMousePosition"; // Adjust the import path
@@ -15,7 +15,7 @@ beforeEach(() => {
 
 afterEach(() => {
   // Clean up on exiting
-  unmountComponentAtNode(container);
+  // unmountComponentAtNode(container);
   container.remove();
 });
 
@@ -43,7 +43,7 @@ test("useMousePosition hook updates position on mousemove", () => {
     );
   });
 
-  const { x, y, direction, isActive } = result.current;
+  const { x, y } = result.current;
 
   expect(x).toBe(100);
   expect(y).toBe(100);

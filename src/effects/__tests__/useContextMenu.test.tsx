@@ -1,11 +1,12 @@
 import { fireEvent, waitFor } from "@testing-library/dom";
 import { act, renderHook } from "@testing-library/react-hooks";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { ContextMenuOptions } from "../../models/core.model";
 import { useContextMenu } from "../useContextMenu"; // Update this import to your actual file path
 
 describe("useContextMenu hook", () => {
   let target: React.RefObject<HTMLDivElement>;
-  let contextMenuOptions: any; // Replace with your actual type
+  let contextMenuOptions: ContextMenuOptions; // Replace with your actual type
   let onContextMenuSelected = vi.fn();
 
   beforeEach(() => {

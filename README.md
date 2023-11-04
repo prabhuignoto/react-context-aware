@@ -1,4 +1,4 @@
-# React-Context 🎨
+# React-Pointer-Plus 🖱️
 
 <!-- Placeholder for the library logo -->
 <!-- ![React-Context Logo](path-to-your-logo) -->
@@ -6,9 +6,6 @@
 <!-- License Badge -->
 
 ![GitHub](https://img.shields.io/github/license/prabhuignoto/react-pointer-plus)
-
-<!-- Coverage -->
-
 [![Coverage Status](https://coveralls.io/repos/github/prabhuignoto/react-pointer-plus/badge.svg)](https://coveralls.io/github/prabhuignoto/react-pointer-plus)
 
 <!-- Twitter Follow Badge -->

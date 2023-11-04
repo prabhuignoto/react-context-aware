@@ -41,7 +41,7 @@ function App() {
       color: "blue",
       size: 20,
     },
-    darkMode: true,
+    // darkMode: true,
     theme: {
       primary: "#007FFF",
       secondary: "#6495ED",

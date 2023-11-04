@@ -43,7 +43,7 @@ export const defaultIcons: Record<IconRecord, ReactElement> = {
   pointer: <Pointer />,
   text: <Text />,
   hyperlink: <HandUp />,
-  disabled: <img src="../assets/disabled.svg" className={styles.img} />,
+  disabled: <img src="../assets/disabled.svg" className={styles.img} alt="disabled"/>,
   busy: <Busy />,
-  error: <img src="../assets/error.svg" className={styles.img} />,
+  error: <img src="../assets/error.svg" className={styles.img} alt="error"/>,
 };

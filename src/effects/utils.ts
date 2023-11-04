@@ -82,6 +82,7 @@ const isTagTypeSpecial = (el: HTMLElement) => {
   );
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const styleobjectToCssText = (style: any) => {
   return Object.keys(style).reduce((acc, key) => {
     return `${acc}${key}:${style[key]};`;

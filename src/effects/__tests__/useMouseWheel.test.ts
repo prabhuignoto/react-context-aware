@@ -67,14 +67,14 @@ describe("useMouseWheel hook", () => {
   });
 
   it("should clean up event listeners", () => {
-    const map: any = {};
+    const map: Record<string, EventListenerOrEventListenerObject> = {};
 
     // Mock addEventListener and removeEventListener
     container.current!.addEventListener = vi.fn((event, callback) => {
       map[event] = callback;
     });
 
-    container.current!.removeEventListener = vi.fn((event, callback) => {
+    container.current!.removeEventListener = vi.fn((event) => {
       delete map[event];
     });
 

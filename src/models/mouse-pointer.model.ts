@@ -1,6 +1,5 @@
 import { ReactNode, RefObject } from "react";
 import { Props } from "./core.model";
-import { MouseMovementDirection } from "./mouse-position.model";
 
 export type MousePointerProps = {
   icon?: ReactNode;

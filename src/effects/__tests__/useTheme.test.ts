@@ -88,7 +88,7 @@ describe("useTheme hook", () => {
   });
 
   it("should apply styles to a new target when the target changes", () => {
-    let target = document.createElement("div");
+    const target = document.createElement("div");
     const { rerender } = renderHook(
       ({ target }) => useTheme({ target, theme: mockTheme }),
       {

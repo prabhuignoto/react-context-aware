@@ -65,7 +65,7 @@ const useMouseSelection: MouseSelectionFunction = ({
   const {
     x: mouseX,
     y: mouseY,
-    direction,
+    // direction,
     isActive,
     pointerStatus,
   } = useMousePosition({

@@ -21,19 +21,19 @@ const useMouseWheel = ({
   };
 
   // Debounced wheel event handler
-  const handleWheelEvent = (event: WheelEvent) => {
+  const handleWheelEvent = useCallback((event: WheelEvent) => {
     const delta = event.deltaY || -event.detail;
     setScaleFactor((prevScaleFactor) => {
       const newScale =
         delta > 0 ? prevScaleFactor + step : prevScaleFactor - step;
       return clampScale(newScale);
     });
-  };
+  }, []);
 
   // Debounced version of the wheel event handler
   const debouncedHandleWheelEvent = useCallback(
-    debounce(handleWheelEvent, 10),
-    [maxScaleFactor, minScaleFactor] // Dependencies that could change the behavior
+    () => debounce(handleWheelEvent, 10),
+    [handleWheelEvent] // Dependencies that could change the behavior
   );
 
   // Effect to attach the event listener to the target

@@ -52,8 +52,8 @@ describe("useMousePointer hook", () => {
   });
 
   it("should correctly change pointer styles based on status", () => {
-    const { result, rerender } = renderHook(
-      ({ status }) =>
+    const { rerender } = renderHook(
+      () =>
         useMousePointer({
           container,
           // status,

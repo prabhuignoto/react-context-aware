@@ -39,7 +39,7 @@ const Popup: FunctionComponent<PopupProps> = ({ type, data, position }) => {
 
   return (
     <div className={styles.wrapper}>
-      {type === "image" ? <img src={data} /> : null}
+      {type === "image" ? <img src={data} alt="" /> : null}
       {type === "text" ? <span>{data}</span> : null}
       <span className={triangleClass}></span>
     </div>
