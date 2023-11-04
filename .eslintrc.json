@@ -6,7 +6,7 @@
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
     "plugin:jsx-a11y/recommended",
-    "react/jsx-runtime"
+    "plugin:react/jsx-runtime"
   ],
   "parserOptions": {
     "ecmaVersion": 2021,
@@ -20,6 +20,14 @@
       "version": "detect"
     }
   },
+  "ignorePatterns": [
+    "node_modules/*",
+    "!.prettierrc.js",
+    "public/*",
+    "src/App.tsx",
+    "src/main.tsx",
+    "dist/*"
+  ],
   "env": {
     "browser": true,
     "node": true,
@@ -27,6 +35,8 @@
   },
   "rules": {
     // Add your custom rules here
+    "react/react-in-jsx-scope": "off",
+    "react-hooks/exhaustive-deps": "off"
   },
   "plugins": ["@typescript-eslint", "react"]
 }

@@ -1,9 +1,9 @@
-import { useEffect, useMemo, useRef } from "react";
-import ReactDOMServer from "react-dom/server";
-import { MousePointerProps } from "../models/mouse-pointer.model";
-import { defaultIcons, pointerStyleDefaults } from "./default";
-import { useMouseWheel } from "./useMouseWheel";
-import { getPointerImageWrapperDiv } from "./utils";
+import { useEffect, useMemo, useRef } from 'react';
+import ReactDOMServer from 'react-dom/server';
+import { MousePointerProps } from '../models/mouse-pointer.model';
+import { defaultIcons, pointerStyleDefaults } from './default';
+import { useMouseWheel } from './useMouseWheel';
+import { getPointerImageWrapperDiv } from './utils';
 
 export type MousePointerFunction = (props: MousePointerProps) => void;
 
@@ -24,7 +24,7 @@ const useMousePointer: MousePointerFunction = ({
   mouseY,
   isActive = false,
   pointerStyle = pointerStyleDefaults,
-  status = "default",
+  status = 'default',
   icons = defaultIcons,
   isBeingSelected,
 }) => {
@@ -45,9 +45,9 @@ const useMousePointer: MousePointerFunction = ({
     if (isActive) {
       pointer.style.top = `${mouseY}px`;
       pointer.style.left = `${mouseX}px`;
-      pointer.style.display = "block";
+      pointer.style.display = 'block';
     } else if (!isActive) {
-      pointer.style.display = "none";
+      pointer.style.display = 'none';
     }
   }, [mouseX, mouseY, isActive, pointerRef]);
 
@@ -57,11 +57,11 @@ const useMousePointer: MousePointerFunction = ({
     }
 
     switch (status) {
-      case "busy":
+      case 'busy':
         return icons?.busy;
-      case "text":
+      case 'text':
         return icons?.text;
-      case "hyperlink":
+      case 'hyperlink':
         return icons?.hyperlink;
       default:
         return icons?.pointer;
@@ -73,7 +73,7 @@ const useMousePointer: MousePointerFunction = ({
     if (status && pointerElement && getSVG) {
       const imageWrapper = getPointerImageWrapperDiv();
       imageWrapper.innerHTML = ReactDOMServer.renderToString(getSVG);
-      pointerElement.innerHTML = "";
+      pointerElement.innerHTML = '';
       pointerElement.appendChild(imageWrapper);
     }
   }, [status, getSVG]);
@@ -94,7 +94,7 @@ const useMousePointer: MousePointerFunction = ({
     if (parent && size && getSVG && mouseX && mouseY) {
       const imageWrapper = getPointerImageWrapperDiv();
       imageWrapper.innerHTML = ReactDOMServer.renderToString(getSVG);
-      const element = document.createElement("div");
+      const element = document.createElement('div');
 
       pointerRef.current = element;
       element.style.cssText = `

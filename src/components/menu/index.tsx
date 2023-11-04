@@ -1,13 +1,13 @@
-import { nanoid } from "nanoid";
-import { FunctionComponent, useState } from "react";
-import { Toolbar } from "../toolbar";
-import { MenuItem } from "./menu-item";
-import { MenuModel } from "./menu.model";
-import styles from "./menu.module.scss";
+import { nanoid } from 'nanoid';
+import { FunctionComponent, useState } from 'react';
+import { Toolbar } from '../toolbar';
+import { MenuItem } from './menu-item';
+import { MenuModel } from './menu.model';
+import styles from './menu.module.scss';
 
 const Menu: FunctionComponent<MenuModel> = ({ items, toolbar }) => {
   const [menuItems] = useState(() =>
-    items.map((item) => ({ ...item, isOpen: false, id: nanoid() })),
+    items.map((item) => ({ ...item, isOpen: false, id: nanoid() }))
   );
 
   return (

@@ -4,11 +4,11 @@
  * @packageDocumentation
  */
 
-import { useCallback, useEffect, useRef, useState } from "react";
-import { renderToString } from "react-dom/server";
-import { Menu } from "../components/menu";
-import { useContextMenuFunction } from "../models/context-menu.model";
-import styles from "./styles.module.scss";
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { renderToString } from 'react-dom/server';
+import { Menu } from '../components/menu';
+import { useContextMenuFunction } from '../models/context-menu.model';
+import styles from './styles.module.scss';
 
 /**
  * This hook allows you to easily create a context menu that appears when the user right-clicks on a target element.
@@ -26,7 +26,7 @@ const useContextMenu: useContextMenuFunction = ({
   const menuHTMLstring = useRef<string>();
 
   // Create a ref to store a placeholder div element
-  const placeholder = useRef<HTMLDivElement>(document.createElement("div"));
+  const placeholder = useRef<HTMLDivElement>(document.createElement('div'));
 
   // Create a state to track whether the context menu is open or not
   const [contextMenuOpen, setContextMenuOpen] = useState(false);
@@ -42,8 +42,8 @@ const useContextMenu: useContextMenuFunction = ({
   const selectionHandler = useCallback((ev: MouseEvent) => {
     const target = ev.currentTarget as HTMLElement;
 
-    const name = target.getAttribute("data-name");
-    const id = target.getAttribute("data-id");
+    const name = target.getAttribute('data-name');
+    const id = target.getAttribute('data-id');
 
     if (name && id) {
       onContextMenuSelected?.({ name, id });
@@ -67,12 +67,12 @@ const useContextMenu: useContextMenuFunction = ({
       const calcLeft = clientX - offsetLeft;
       const { height: menuHeight } = contextMenuDim.current;
 
-      _placeholder.innerHTML = menuHTMLstring.current || "";
+      _placeholder.innerHTML = menuHTMLstring.current || '';
       _placeholder.classList.add(styles.context_menu_placeholder);
 
       setTimeout(() => {
-        _placeholder.querySelectorAll("li").forEach((li) => {
-          li.addEventListener("click", selectionHandler);
+        _placeholder.querySelectorAll('li').forEach((li) => {
+          li.addEventListener('click', selectionHandler);
         });
       }, 0);
 
@@ -115,9 +115,9 @@ const useContextMenu: useContextMenuFunction = ({
     const _target = target.current;
 
     if (_placeholder && contextMenuOptions && _target) {
-      _placeholder.style.zIndex = "9999";
+      _placeholder.style.zIndex = '9999';
       menuHTMLstring.current = renderToString(
-        <Menu {...contextMenuOptions} toolbar={toolbar} />,
+        <Menu {...contextMenuOptions} toolbar={toolbar} />
       );
 
       if (!_target.contains(_placeholder)) {
@@ -159,16 +159,16 @@ const useContextMenu: useContextMenuFunction = ({
 
     if (!targetElement) return;
 
-    targetElement?.addEventListener("contextmenu", handleContextMenu);
-    targetElement?.addEventListener("mousedown", handleClose);
-    targetElement?.addEventListener("transitionend", handleTransitionEnd);
+    targetElement?.addEventListener('contextmenu', handleContextMenu);
+    targetElement?.addEventListener('mousedown', handleClose);
+    targetElement?.addEventListener('transitionend', handleTransitionEnd);
 
     return () => {
-      targetElement?.removeEventListener("contextmenu", handleContextMenu);
-      targetElement?.removeEventListener("mousedown", handleClose);
-      targetElement?.removeEventListener("transitionend", handleTransitionEnd);
-      placeholder.current.querySelectorAll("li").forEach((li) => {
-        li.removeEventListener("click", selectionHandler);
+      targetElement?.removeEventListener('contextmenu', handleContextMenu);
+      targetElement?.removeEventListener('mousedown', handleClose);
+      targetElement?.removeEventListener('transitionend', handleTransitionEnd);
+      placeholder.current.querySelectorAll('li').forEach((li) => {
+        li.removeEventListener('click', selectionHandler);
       });
     };
   }, [target]);

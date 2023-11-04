@@ -1,6 +1,6 @@
-import { ReactElement, ReactNode } from "react";
-import { MenuItemModel } from "../components/menu/menu.model";
-import { Theme } from "../theme";
+import { ReactElement, ReactNode } from 'react';
+import { MenuItemModel } from '../components/menu/menu.model';
+import { Theme } from '../theme';
 
 export interface ContextMenuOptions {
   items: MenuItemModel[];
@@ -12,12 +12,12 @@ export interface PointerStyle {
 }
 
 export type PointerStatus =
-  | "busy"
-  | "default"
-  | "disabled"
-  | "error"
-  | "hyperlink"
-  | "text";
+  | 'busy'
+  | 'default'
+  | 'disabled'
+  | 'error'
+  | 'hyperlink'
+  | 'text';
 
 /**
  * Props interface for the core component.
@@ -81,6 +81,6 @@ export interface Props {
 export interface SelectionStyle {
   backgroundColor: string;
   borderColor: string;
-  borderStyle: "dashed" | "dotted" | "solid";
+  borderStyle: 'dashed' | 'dotted' | 'solid';
   borderWidth?: number;
 }

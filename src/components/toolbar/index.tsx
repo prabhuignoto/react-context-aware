@@ -1,6 +1,6 @@
-import { nanoid } from "nanoid";
-import { FunctionComponent, ReactNode, useRef } from "react";
-import styles from "./toolbar.module.scss";
+import { nanoid } from 'nanoid';
+import { FunctionComponent, ReactNode, useRef } from 'react';
+import styles from './toolbar.module.scss';
 
 export type ToolbarProps = {
   items: {
@@ -14,7 +14,7 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({ items = [] }) => {
     items.map((item) => ({
       ...item,
       id: nanoid(),
-    })),
+    }))
   );
 
   return (

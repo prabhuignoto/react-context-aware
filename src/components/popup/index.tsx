@@ -1,8 +1,8 @@
-import cx from "classnames";
-import { FunctionComponent, useMemo } from "react";
-import { styleobjectToCssText } from "../../effects/utils";
-import { PopupProps } from "../../models/popup.model";
-import styles from "./popup.module.scss";
+import cx from 'classnames';
+import { FunctionComponent, useMemo } from 'react';
+import { styleobjectToCssText } from '../../effects/utils';
+import { PopupProps } from '../../models/popup.model';
+import styles from './popup.module.scss';
 
 type PopupPlaceholderProps = {
   id: string;
@@ -17,11 +17,11 @@ const createPopupPlaceholder = ({
   id,
 }: PopupPlaceholderProps): HTMLDivElement => {
   // Create the placeholder element
-  const placeholder = document.createElement("div");
+  const placeholder = document.createElement('div');
   placeholder.id = id;
   placeholder.style.cssText = styleobjectToCssText({
-    position: "fixed",
-    zIndex: "9999",
+    position: 'fixed',
+    zIndex: '9999',
   });
   return placeholder;
 };
@@ -39,8 +39,8 @@ const Popup: FunctionComponent<PopupProps> = ({ type, data, position }) => {
 
   return (
     <div className={styles.wrapper}>
-      {type === "image" ? <img src={data} /> : null}
-      {type === "text" ? <span>{data}</span> : null}
+      {type === 'image' ? <img src={data} alt="" /> : null}
+      {type === 'text' ? <span>{data}</span> : null}
       <span className={triangleClass}></span>
     </div>
   );

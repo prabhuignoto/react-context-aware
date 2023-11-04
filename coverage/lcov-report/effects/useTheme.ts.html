@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>80/80</span>
+                <span class='fraction'>82/82</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>80/80</span>
+                <span class='fraction'>82/82</span>
             </div>
         
             
@@ -143,7 +143,9 @@
 <a name='L78'></a><a href='#L78'>78</a>
 <a name='L79'></a><a href='#L79'>79</a>
 <a name='L80'></a><a href='#L80'>80</a>
-<a name='L81'></a><a href='#L81'>81</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -184,6 +186,8 @@
 <span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-yes">13x</span>
@@ -223,8 +227,8 @@
 <span class="cline-any cline-yes">14x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useEffect } from "react";
-import { MenuTheme, Theme } from "../theme";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { useEffect } from 'react';
+import { MenuTheme, Theme } from '../theme';
 &nbsp;
 type useThemeProps = {
   target?: HTMLElement;
@@ -253,49 +257,51 @@ const useTheme: (p: useThemeProps) =&gt; void = ({
     };
 &nbsp;
     // Setting the primary and secondary colors.
-    setStyleProperty("--rc-context-menu-primary", theme.primary);
-    setStyleProperty("--rc-context-menu-secondary", theme.secondary);
+    setStyleProperty('--rc-context-menu-primary', theme.primary);
+    setStyleProperty('--rc-context-menu-secondary', theme.secondary);
     // Setting default values for icon size and font size if not provided.
     setStyleProperty(
-      "--rc-context-menu-icon-size",
-      theme.iconSize || "1.25rem"
+      '--rc-context-menu-icon-size',
+      theme.iconSize || '1.25rem'
     );
-    setStyleProperty("--rc-context-menu-font-size", theme.fontSize || "1rem");
+    setStyleProperty('--rc-context-menu-font-size', theme.fontSize || '1rem');
 &nbsp;
     // Apply dark or default mode theme properties.
-    const modeTheme: MenuTheme | undefined = darkMode ? theme.darkMode : theme.defaultMode;
+    const modeTheme: MenuTheme | undefined = darkMode
+      ? theme.darkMode
+      : theme.defaultMode;
 &nbsp;
     if (modeTheme) {
       setStyleProperty(
-        "--rc-context-menu-background",
+        '--rc-context-menu-background',
         modeTheme.menuBackgroundColor
       );
-      setStyleProperty("--rc-context-menu-color", modeTheme.menuColor);
+      setStyleProperty('--rc-context-menu-color', modeTheme.menuColor);
       // Fallback to menuColor if menuItemHoverColor is not provided.
       setStyleProperty(
-        "--rc-context-menu-item-hover-color",
+        '--rc-context-menu-item-hover-color',
         modeTheme.menuItemHoverColor || modeTheme.menuColor
       );
     }
 &nbsp;
     // Apply different styles based on darkMode being true or false.
-    const dividerColor = darkMode ? "#555" : "#e8e8e8";
-    const popupBackgroundColor = darkMode ? "#555" : "#fff";
-    setStyleProperty("--rc-context-menu-divider", dividerColor);
-    setStyleProperty("--rc-popup-background", popupBackgroundColor);
+    const dividerColor = darkMode ? '#555' : '#e8e8e8';
+    const popupBackgroundColor = darkMode ? '#555' : '#fff';
+    setStyleProperty('--rc-context-menu-divider', dividerColor);
+    setStyleProperty('--rc-popup-background', popupBackgroundColor);
 &nbsp;
     // Cleanup function to reset custom properties when the component unmounts or target changes.
     return () =&gt; {
       const properties = [
-        "--rc-context-menu-primary",
-        "--rc-context-menu-secondary",
-        "--rc-context-menu-icon-size",
-        "--rc-context-menu-font-size",
-        "--rc-context-menu-background",
-        "--rc-context-menu-color",
-        "--rc-context-menu-item-hover-color",
-        "--rc-context-menu-divider",
-        "--rc-popup-background",
+        '--rc-context-menu-primary',
+        '--rc-context-menu-secondary',
+        '--rc-context-menu-icon-size',
+        '--rc-context-menu-font-size',
+        '--rc-context-menu-background',
+        '--rc-context-menu-color',
+        '--rc-context-menu-item-hover-color',
+        '--rc-context-menu-divider',
+        '--rc-popup-background',
       ];
       properties.forEach((property) =&gt; target.style.removeProperty(property));
     };
@@ -310,7 +316,7 @@ export { useTheme };
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-03T15:48:25.373Z
+                at 2023-11-04T06:06:11.866Z
             </div>
         <script src="../prettify.js"></script>
         <script>

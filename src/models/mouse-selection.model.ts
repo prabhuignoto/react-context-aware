@@ -1,5 +1,5 @@
-import { RefObject } from "react";
-import { Props } from "./core.model";
+import { RefObject } from 'react';
+import { Props } from './core.model';
 
 export interface MouseSelectionProps extends Props {
   targetRef: RefObject<HTMLElement>;
@@ -15,7 +15,7 @@ export type MouseSelectionReturnType = {
 };
 
 export type MouseSelectionDimensions = Partial<
-  Pick<MouseSelectionReturnType, "width" | "height" | "flipX" | "flipY">
+  Pick<MouseSelectionReturnType, 'width' | 'height' | 'flipX' | 'flipY'>
 >;
 
 export type MouseSelectionFunction = (props: MouseSelectionProps) => void;

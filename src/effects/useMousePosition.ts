@@ -1,11 +1,11 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import { useThrottledCallback } from "use-debounce";
-import { PointerStatus } from "../models/core.model";
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useThrottledCallback } from 'use-debounce';
+import { PointerStatus } from '../models/core.model';
 import {
   MousePositionFunction,
   MousePositionType,
-} from "../models/mouse-position.model";
-import { getDirection } from "./utils";
+} from '../models/mouse-position.model';
+import { getDirection } from './utils';
 
 /**
  * A custom React hook that provides the current mouse position and status relative to a target element.
@@ -16,10 +16,10 @@ const useMousePosition: MousePositionFunction = ({ targetRef, isSelected }) => {
     y: -1,
     direction: null,
     isActive: false,
-    pointerStatus: "default",
+    pointerStatus: 'default',
   });
   const [isActive, setIsActive] = useState(false);
-  const activePointerStatus = useRef<PointerStatus>("default");
+  const activePointerStatus = useRef<PointerStatus>('default');
 
   // Event handlers are now individual functions, improving modularity
   const updatePosition = useCallback(
@@ -59,12 +59,12 @@ const useMousePosition: MousePositionFunction = ({ targetRef, isSelected }) => {
   // Set up modular functions for mouse enter and leave
   const determinePointerStatus = useCallback(
     (target: HTMLElement): PointerStatus => {
-      if (target.tagName === "A" || target.tagName === "BUTTON") {
-        return "hyperlink";
-      } else if (target.tagName === "INPUT" || target.tagName === "TEXTAREA") {
-        return "text";
+      if (target.tagName === 'A' || target.tagName === 'BUTTON') {
+        return 'hyperlink';
+      } else if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA') {
+        return 'text';
       }
-      return "default";
+      return 'default';
     },
     []
   );
@@ -90,14 +90,14 @@ const useMousePosition: MousePositionFunction = ({ targetRef, isSelected }) => {
     const element = targetRef.current;
     if (!element) return;
 
-    element.addEventListener("mousemove", handleMouseMove);
-    element.addEventListener("mouseenter", handleMouseEnter);
-    element.addEventListener("mouseleave", handleMouseLeave);
+    element.addEventListener('mousemove', handleMouseMove);
+    element.addEventListener('mouseenter', handleMouseEnter);
+    element.addEventListener('mouseleave', handleMouseLeave);
 
     return () => {
-      element.removeEventListener("mousemove", handleMouseMove);
-      element.removeEventListener("mouseenter", handleMouseEnter);
-      element.removeEventListener("mouseleave", handleMouseLeave);
+      element.removeEventListener('mousemove', handleMouseMove);
+      element.removeEventListener('mouseenter', handleMouseEnter);
+      element.removeEventListener('mouseleave', handleMouseLeave);
     };
   }, [handleMouseMove, handleMouseEnter, handleMouseLeave]);
 

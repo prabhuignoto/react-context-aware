@@ -439,11 +439,11 @@
  * @packageDocumentation
  */
 &nbsp;
-import { useCallback, useEffect, useRef, useState } from "react";
-import { renderToString } from "react-dom/server";
-import { Menu } from "../components/menu";
-import { useContextMenuFunction } from "../models/context-menu.model";
-import styles from "./styles.module.scss";
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { renderToString } from 'react-dom/server';
+import { Menu } from '../components/menu';
+import { useContextMenuFunction } from '../models/context-menu.model';
+import styles from './styles.module.scss';
 &nbsp;
 /**
  * This hook allows you to easily create a context menu that appears when the user right-clicks on a target element.
@@ -461,7 +461,7 @@ const useContextMenu: useContextMenuFunction = ({
   const menuHTMLstring = useRef&lt;string&gt;();
 &nbsp;
   // Create a ref to store a placeholder div element
-  const placeholder = useRef&lt;HTMLDivElement&gt;(document.createElement("div"));
+  const placeholder = useRef&lt;HTMLDivElement&gt;(document.createElement('div'));
 &nbsp;
   // Create a state to track whether the context menu is open or not
   const [contextMenuOpen, setContextMenuOpen] = useState(false);
@@ -477,8 +477,8 @@ const useContextMenu: useContextMenuFunction = ({
   const selectionHandler = useCallback((ev: MouseEvent) =&gt; {
 <span class="cstat-no" title="statement not covered" >    const target = ev.currentTarget as HTMLElement;</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    const name = target.getAttribute("data-name");</span>
-<span class="cstat-no" title="statement not covered" >    const id = target.getAttribute("data-id");</span>
+<span class="cstat-no" title="statement not covered" >    const name = target.getAttribute('data-name');</span>
+<span class="cstat-no" title="statement not covered" >    const id = target.getAttribute('data-id');</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >    if (name &amp;&amp; id) {</span>
 <span class="cstat-no" title="statement not covered" >      onContextMenuSelected?.({ name, id });</span>
@@ -502,12 +502,12 @@ const useContextMenu: useContextMenuFunction = ({
       const calcLeft = clientX - offsetLeft;
       const { height: menuHeight } = contextMenuDim.current;
 &nbsp;
-      _placeholder.innerHTML = menuHTMLstring.<span class="branch-0 cbranch-no" title="branch not covered" >current || "";</span>
+      _placeholder.innerHTML = menuHTMLstring.<span class="branch-0 cbranch-no" title="branch not covered" >current || '';</span>
       _placeholder.classList.add(styles.context_menu_placeholder);
 &nbsp;
       setTimeout(() =&gt; {
-        _placeholder.querySelectorAll("li").forEach((li) =&gt; {
-          li.addEventListener("click", selectionHandler);
+        _placeholder.querySelectorAll('li').forEach((li) =&gt; {
+          li.addEventListener('click', selectionHandler);
         });
       }, 0);
 &nbsp;
@@ -550,9 +550,9 @@ const useContextMenu: useContextMenuFunction = ({
     const _target = target.current;
 &nbsp;
     if (_placeholder &amp;&amp; contextMenuOptions &amp;&amp; _target) {
-      _placeholder.style.zIndex = "9999";
+      _placeholder.style.zIndex = '9999';
       menuHTMLstring.current = renderToString(
-        &lt;Menu {...contextMenuOptions} toolbar={toolbar} /&gt;,
+        &lt;Menu {...contextMenuOptions} toolbar={toolbar} /&gt;
       );
 &nbsp;
       if (!_target.contains(_placeholder)) {
@@ -594,16 +594,16 @@ const useContextMenu: useContextMenuFunction = ({
 &nbsp;
     if (!targetElement) <span class="branch-0 cbranch-no" title="branch not covered" >return;</span>
 &nbsp;
-    targetElement?.addEventListener("contextmenu", handleContextMenu);
-    targetElement?.addEventListener("mousedown", handleClose);
-    targetElement?.addEventListener("transitionend", handleTransitionEnd);
+    targetElement?.addEventListener('contextmenu', handleContextMenu);
+    targetElement?.addEventListener('mousedown', handleClose);
+    targetElement?.addEventListener('transitionend', handleTransitionEnd);
 &nbsp;
     return () =&gt; {
-      targetElement?.removeEventListener("contextmenu", handleContextMenu);
-      targetElement?.removeEventListener("mousedown", handleClose);
-      targetElement?.removeEventListener("transitionend", handleTransitionEnd);
-      placeholder.current.querySelectorAll("li").forEach((li) =&gt; {
-        li.removeEventListener("click", selectionHandler);
+      targetElement?.removeEventListener('contextmenu', handleContextMenu);
+      targetElement?.removeEventListener('mousedown', handleClose);
+      targetElement?.removeEventListener('transitionend', handleTransitionEnd);
+      placeholder.current.querySelectorAll('li').forEach((li) =&gt; {
+        li.removeEventListener('click', selectionHandler);
       });
     };
   }, [target]);
@@ -625,7 +625,7 @@ export { useContextMenu };
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2023-11-03T15:48:25.373Z
+                at 2023-11-04T06:06:11.866Z
             </div>
         <script src="../prettify.js"></script>
         <script>
