@@ -20,11 +20,11 @@ const useMousePosition: MousePositionFunction = ({
     y: -1,
     direction: null,
     isActive: false,
-    pointerStatus: status || 'default',
+    pointerStatus: status ?? 'default',
   });
   const [isActive, setIsActive] = useState(false);
   const activePointerStatus = useRef<PointerStatus | undefined>(
-    status || 'default'
+    status ?? 'default'
   );
 
   // Event handlers are now individual functions, improving modularity
