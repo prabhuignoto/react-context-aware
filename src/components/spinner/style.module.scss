@@ -1,0 +1,31 @@
+.ringContainer {
+  position: relative;
+  width: var(--ring-size);
+  height: var(--ring-size);
+  border-radius: 50%;
+  animation: spin var(--animation-speed) linear infinite;
+  background: conic-gradient(from 0deg, var(--ring-colors));
+  overflow: hidden;
+  // Set up a default inset size and adjust it based on the --ring-size value
+  --inset-size: calc(var(--ring-size) / 15); // You can adjust the divisor for a different thickness
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: var(--inset-size);
+    right: var(--inset-size);
+    bottom: var(--inset-size);
+    left: var(--inset-size);
+    background: #fff;
+    border-radius: 50%;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -35,8 +35,6 @@ const Popup: FunctionComponent<PopupProps> = ({ type, data, position }) => {
     [position]
   );
 
-  console.log(position);
-
   return (
     <div className={styles.wrapper}>
       {type === 'image' ? <img src={data} alt="" /> : null}

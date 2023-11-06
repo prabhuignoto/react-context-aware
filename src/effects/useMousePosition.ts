@@ -10,16 +10,22 @@ import { getDirection } from './utils';
 /**
  * A custom React hook that provides the current mouse position and status relative to a target element.
  */
-const useMousePosition: MousePositionFunction = ({ targetRef, isSelected }) => {
+const useMousePosition: MousePositionFunction = ({
+  targetRef,
+  isSelected,
+  status,
+}) => {
   const [position, setPosition] = useState<MousePositionType>({
     x: -1,
     y: -1,
     direction: null,
     isActive: false,
-    pointerStatus: 'default',
+    pointerStatus: status || 'default',
   });
   const [isActive, setIsActive] = useState(false);
-  const activePointerStatus = useRef<PointerStatus>('default');
+  const activePointerStatus = useRef<PointerStatus | undefined>(
+    status || 'default'
+  );
 
   // Event handlers are now individual functions, improving modularity
   const updatePosition = useCallback(
@@ -64,9 +70,14 @@ const useMousePosition: MousePositionFunction = ({ targetRef, isSelected }) => {
       } else if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA') {
         return 'text';
       }
+
+      if (status === 'busy') {
+        return 'busy';
+      }
+
       return 'default';
     },
-    []
+    [status]
   );
 
   const handleMouseEnter = useCallback(
@@ -74,6 +85,7 @@ const useMousePosition: MousePositionFunction = ({ targetRef, isSelected }) => {
       if (isSelected) return;
 
       const pointerStatus = determinePointerStatus(ev.target as HTMLElement);
+
       updatePointerStatus(pointerStatus);
       setIsActive(true);
     },
@@ -88,16 +100,17 @@ const useMousePosition: MousePositionFunction = ({ targetRef, isSelected }) => {
   // Attach event listeners in an effect hook
   useEffect(() => {
     const element = targetRef.current;
+
     if (!element) return;
 
     element.addEventListener('mousemove', handleMouseMove);
-    element.addEventListener('mouseenter', handleMouseEnter);
-    element.addEventListener('mouseleave', handleMouseLeave);
+    element.addEventListener('mouseover', handleMouseEnter);
+    // element.addEventListener('mouseout', handleMouseLeave);
 
     return () => {
       element.removeEventListener('mousemove', handleMouseMove);
-      element.removeEventListener('mouseenter', handleMouseEnter);
-      element.removeEventListener('mouseleave', handleMouseLeave);
+      element.removeEventListener('mouseover', handleMouseEnter);
+      // element.removeEventListener('mouseout', handleMouseLeave);
     };
   }, [handleMouseMove, handleMouseEnter, handleMouseLeave]);
 
