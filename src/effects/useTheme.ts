@@ -33,9 +33,9 @@ const useTheme: (p: useThemeProps) => void = ({
     // Setting default values for icon size and font size if not provided.
     setStyleProperty(
       '--rc-context-menu-icon-size',
-      theme.iconSize || '1.25rem'
+      theme.iconSize ?? '1.25rem'
     );
-    setStyleProperty('--rc-context-menu-font-size', theme.fontSize || '1rem');
+    setStyleProperty('--rc-context-menu-font-size', theme.fontSize ?? '1rem');
 
     // Apply dark or default mode theme properties.
     const modeTheme: MenuTheme | undefined = darkMode

@@ -67,7 +67,7 @@ const useContextMenu: useContextMenuFunction = ({
       const calcLeft = clientX - offsetLeft;
       const { height: menuHeight } = contextMenuDim.current;
 
-      _placeholder.innerHTML = menuHTMLstring.current || '';
+      _placeholder.innerHTML = menuHTMLstring.current ?? '';
       _placeholder.classList.add(styles.context_menu_placeholder);
 
       setTimeout(() => {
@@ -177,7 +177,6 @@ const useContextMenu: useContextMenuFunction = ({
   useEffect(() => {
     if (isFirstRender.current) {
       isFirstRender.current = false;
-      return;
     }
   }, []);
 };
