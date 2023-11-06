@@ -39,6 +39,13 @@ const getDirection: (x: number, y: number) => MouseMovementDirection = (
   return direction as MouseMovementDirection;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const styleobjectToCssText = (style: any) => {
+  return Object.keys(style).reduce((acc, key) => {
+    return `${acc}${key}:${style[key]};`;
+  }, '');
+};
+
 const getSelectionDiv = (
   style: SelectionStyle = {
     backgroundColor: 'rgba(0, 123, 255, 0.1)',
@@ -80,13 +87,6 @@ const isTagTypeSpecial = (el: HTMLElement) => {
     tagName === 'BUTTON' ||
     tagName === 'A'
   );
-};
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const styleobjectToCssText = (style: any) => {
-  return Object.keys(style).reduce((acc, key) => {
-    return `${acc}${key}:${style[key]};`;
-  }, '');
 };
 
 /**
@@ -154,6 +154,8 @@ export function calculatePopupPosition(
       break;
     case 'right':
       left = x + targetWidth + popupGap;
+      break;
+    default:
       break;
   }
 

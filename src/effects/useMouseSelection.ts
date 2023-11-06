@@ -224,31 +224,18 @@ const useMouseSelection: MouseSelectionFunction = ({
     };
   }, [targetElement]);
 
-  useEffect(() => {
-    const selection = selectionRef.current;
-    const { size } = pointerStyle;
-    const { height, width, x, flipX, flipY, y } = returnValue;
-
-    if (selection && size) {
-      selection.style.width = `${width}px`;
-      selection.style.height = `${height}px`;
-      selection.style.left = (flipX ? x - width : x) + 'px';
-      selection.style.top = (flipY ? y - height : y) + 'px';
-    }
-  }, [dimensions, pointerStyle, selectionRef, startMousePosition, isActive]);
-
   const returnValue = useMemo(() => {
     const { width, height, flipX, flipY } = dimensions;
     const { x, y } = startMousePosition.current;
 
     if (isActive && width && width > 0 && height && height > 0) {
       return {
-        x: x,
-        y: y,
-        width: width,
-        height: height,
-        flipX: !!flipX,
-        flipY: !!flipY,
+        x,
+        y,
+        width,
+        height,
+        flipX: Boolean(flipX),
+        flipY: Boolean(flipY),
       };
     } else {
       return {
@@ -259,6 +246,19 @@ const useMouseSelection: MouseSelectionFunction = ({
       };
     }
   }, [dimensions, startMousePosition, isActive]);
+
+  useEffect(() => {
+    const selection = selectionRef.current;
+    const { size } = pointerStyle;
+    const { height, width, x, flipX, flipY, y } = returnValue;
+
+    if (selection && size) {
+      selection.style.width = `${width}px`;
+      selection.style.height = `${height}px`;
+      selection.style.left = `${flipX ? x - width : x}px`;
+      selection.style.top = `${flipY ? y - height : y}px`;
+    }
+  }, [dimensions, pointerStyle, selectionRef, startMousePosition, isActive]);
 };
 
 export { useMouseSelection };
