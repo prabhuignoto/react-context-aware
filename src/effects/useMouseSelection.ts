@@ -72,6 +72,7 @@ const useMouseSelection: MouseSelectionFunction = ({
     targetRef,
     isSelected,
     menuPlaceholder: contextMenuPlaceholder,
+    status,
   });
 
   // Apply theme to the target element.

@@ -7,6 +7,9 @@
 
 ![GitHub](https://img.shields.io/github/license/prabhuignoto/react-pointer-plus)
 [![Coverage Status](https://coveralls.io/repos/github/prabhuignoto/react-pointer-plus/badge.svg)](https://coveralls.io/github/prabhuignoto/react-pointer-plus)
+[![DeepSource](https://app.deepsource.com/gh/prabhuignoto/react-pointer-plus.svg/?label=active+issues&show_trend=true&token=lG2EAVNLotZZFKsu32GOfCAG)](https://app.deepsource.com/gh/prabhuignoto/react-pointer-plus/)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+![Code Size](https://img.shields.io/github/languages/code-size/prabhuignoto/react-pointer-plus.svg)
 
 <!-- Twitter Follow Badge -->
 <!-- ![Twitter Follow](https://img.shields.io/twitter/follow/yourhandle?style=social) -->

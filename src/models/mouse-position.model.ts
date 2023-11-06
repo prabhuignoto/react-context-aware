@@ -5,6 +5,7 @@ export interface MousePositionProps {
   targetRef: RefObject<HTMLElement>;
   isSelected?: boolean;
   menuPlaceholder?: React.RefObject<HTMLDivElement>;
+  status?: PointerStatus;
 }
 
 export type MouseMovementDirection = 'left' | 'right' | 'up' | 'down' | null;

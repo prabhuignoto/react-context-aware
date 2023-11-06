@@ -56,8 +56,8 @@ const usePopup = (props: UsePopupProps) => {
         data: content,
         position: position as PopupPosition,
         dimensions: {
-          height: parseInt(popupHeight) || 0,
-          width: parseInt(popupWidth) || 0,
+          height: parseInt(popupHeight) ?? 0,
+          width: parseInt(popupWidth) ?? 0,
         },
         targetRect: {
           x: targetRect.x,
@@ -94,7 +94,9 @@ const usePopup = (props: UsePopupProps) => {
 
   // Effect to update the placeholder inner HTML
   useEffect(() => {
-    placeHolderRef.current!.innerHTML = getPopupString;
+    if (placeHolderRef.current) {
+      placeHolderRef.current.innerHTML = getPopupString;
+    }
   }, [getPopupString]);
 
   // Effect to position the popup
