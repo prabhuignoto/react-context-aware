@@ -222,7 +222,7 @@ const useMouseSelection: MouseSelectionFunction = ({
         element?.removeEventListener('mouseup', handleMouseUp);
       }
     };
-  }, [targetElement]);
+  }, []);
 
   const returnValue = useMemo(() => {
     const { width, height, flipX, flipY } = dimensions;

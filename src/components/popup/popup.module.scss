@@ -25,32 +25,27 @@
   border-left: 10px solid var(--rc-popup-background); /* Adjust the color and height as needed */
   position: absolute;
 
-  &.left,
-  &.right {
+  &.left {
+    right: -10px;
     top: 50%;
     transform: translateY(-50%);
   }
 
-  &.top,
-  &.bottom {
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  &.left {
-    right: -10px;
-  }
-
   &.right {
     left: -10px;
-    transform: rotate(-180deg);
+    top: 50%;
+    transform: translateY(-50%) rotate(180deg);
   }
 
   &.top {
-    top: -10px;
+    bottom: -20px;
+    transform: rotate(90deg) translateX(-50%);
+    left: 50%;
   }
 
   &.bottom {
-    bottom: -10px;
+    top: -20px;
+    transform: rotate(-90deg) translateX(-50%);
+    left: 50%;
   }
 }

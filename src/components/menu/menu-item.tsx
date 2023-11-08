@@ -16,7 +16,7 @@ const MenuItem: FunctionComponent<MenuItemModel> = ({
   });
 
   return (
-    <li className={itemClass} data-name={name} data-id={id} data-type="menu">
+    <li className={itemClass} data-name={name} data-id={id} data-type="menu" role="menuitem">
       {divider ? (
         <hr className={style.divider} />
       ) : (
