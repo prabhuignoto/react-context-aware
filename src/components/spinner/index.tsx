@@ -27,6 +27,7 @@ const SpinningRing: React.FC<SpinningRingProps> = ({
           '--ring-colors': colors.join(', '),
         } as React.CSSProperties
       }
+      data-testid="spinning-ring"
     >
       <div className={styles.ring} />
     </div>
