@@ -26,42 +26,42 @@ describe('Menu component tests', () => {
     expect(uniqueIds.size).toBe(testItems.length);
   });
 
-    it('renders Toolbar when toolbar prop is provided', () => {
-      const { getByText } = render(
-        <Menu
-          items={testItems}
-          toolbar={{
-            icons: [
-              {
-                name: 'home',
-                icon: <span>home</span>,
-              },
-              {
-                name: 'settings',
-                icon: <span>settings</span>,
-              },
-              {
-                name: 'help',
-                icon: <span>help</span>,
-              },
-            ],
-          }}
-        />
-      );
-      expect(getByText('home')).toBeInTheDocument();
-      expect(getByText('settings')).toBeInTheDocument();
-    });
+  it('renders Toolbar when toolbar prop is provided', () => {
+    const { getByText } = render(
+      <Menu
+        items={testItems}
+        toolbar={{
+          icons: [
+            {
+              name: 'home',
+              icon: <span>home</span>,
+            },
+            {
+              name: 'settings',
+              icon: <span>settings</span>,
+            },
+            {
+              name: 'help',
+              icon: <span>help</span>,
+            },
+          ],
+        }}
+      />
+    );
+    expect(getByText('home')).toBeInTheDocument();
+    expect(getByText('settings')).toBeInTheDocument();
+  });
 
-    it('does not crash when items is an empty array', () => {
-      const { getByTestId } = render(<Menu items={[]} />);
-      expect(getByTestId('context-menu')).toBeInTheDocument();
-    });
+  it('does not crash when items is an empty array', () => {
+    const { getByTestId } = render(<Menu items={[]} />);
+    expect(getByTestId('context-menu')).toBeInTheDocument();
+  });
 
-    it('sets data-testid attribute for test identification', () => {
-      const { getByTestId } = render(<Menu items={testItems} />);
-      expect(getByTestId('context-menu')).toHaveAttribute(
-        'data-testid',
-        'context-menu'
-      );
-    });
+  it('sets data-testid attribute for test identification', () => {
+    const { getByTestId } = render(<Menu items={testItems} />);
+    expect(getByTestId('context-menu')).toHaveAttribute(
+      'data-testid',
+      'context-menu'
+    );
+  });
 });
