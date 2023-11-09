@@ -28,7 +28,7 @@ const SpinningRing: React.FC<SpinningRingProps> = ({
         } as React.CSSProperties
       }
     >
-      <div className={styles.ring}></div>
+      <div className={styles.ring} />
     </div>
   );
 };

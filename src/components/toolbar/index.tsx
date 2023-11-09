@@ -19,9 +19,9 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({ items = [] }) => {
 
   return (
     <ul className={styles.toolbar}>
-      {toolbarItems.current.map((item, index) => (
+      {toolbarItems.current.map((item) => (
         <li
-          key={index}
+          key={`${item.id}`}
           className={styles.toolbar_item}
           data-type="toolbar"
           data-name={item.name}

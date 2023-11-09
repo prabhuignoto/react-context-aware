@@ -144,10 +144,10 @@ export function calculatePopupPosition(
   // Calculate the popup position
   switch (position) {
     case 'top':
-      top = y - dimensions.height;
+      top = y - dimensions.height - popupGap;
       break;
     case 'bottom':
-      top = y + targetHeight;
+      top = y + targetHeight + popupGap;
       break;
     case 'left':
       left = x - dimensions.width - popupGap;
