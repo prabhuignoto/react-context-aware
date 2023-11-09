@@ -26,7 +26,11 @@ const createPopupPlaceholder = ({
   return placeholder;
 };
 
-const Popup: FunctionComponent<PopupProps> = ({ type, data, position }) => {
+const Popup: FunctionComponent<PopupProps> = ({
+  type = 'text',
+  data = '',
+  position = 'bottom',
+}) => {
   const triangleClass = useMemo(
     () =>
       cx(styles.triangle, {
@@ -35,11 +39,19 @@ const Popup: FunctionComponent<PopupProps> = ({ type, data, position }) => {
     [position]
   );
 
+  const canRender = useMemo(() => {
+    return (type === 'image' || type === 'text') && data !== '';
+  }, [type, data]);
+
   return (
     <div className={styles.wrapper}>
-      {type === 'image' ? <img src={data} alt="" /> : null}
-      {type === 'text' ? <span>{data}</span> : null}
-      <span className={triangleClass} />
+      {canRender ? (
+        <>
+          {type === 'image' ? <img src={data} alt="" /> : null}
+          {type === 'text' ? <span>{data}</span> : null}
+          <span className={triangleClass} />
+        </>
+      ) : null}
     </div>
   );
 };
