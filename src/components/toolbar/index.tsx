@@ -19,7 +19,7 @@ const Toolbar: FunctionComponent<ToolbarProps> = ({ items = [] }) => {
 
   return (
     <ul className={styles.toolbar}>
-      {toolbarItems.current.map((item, index) => (
+      {toolbarItems.current.map((item) => (
         <li
           key={`${item.id}`}
           className={styles.toolbar_item}
