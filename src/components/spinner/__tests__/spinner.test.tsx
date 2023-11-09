@@ -65,10 +65,10 @@ describe('SpinningRing component tests', () => {
     });
   });
 
-    it('applies the appropriate styles from style.module.scss', () => {
-      const { getByTestId } = render(<SpinningRing />);
-      const ringContainer = getByTestId('spinning-ring');
-      // This test assumes that there are some styles that can be directly tested from the style module
-      expect(ringContainer).toHaveClass(styles.ringContainer);
-    });
+  it('applies the appropriate styles from style.module.scss', () => {
+    const { getByTestId } = render(<SpinningRing />);
+    const ringContainer = getByTestId('spinning-ring');
+    // This test assumes that there are some styles that can be directly tested from the style module
+    expect(ringContainer).toHaveClass(styles.ringContainer);
+  });
 });
